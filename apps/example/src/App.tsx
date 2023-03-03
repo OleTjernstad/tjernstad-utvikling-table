@@ -1,5 +1,5 @@
 import { ColumnDef, TableState } from "@tanstack/react-table";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { TableRootStyle, TuTable } from "table";
 
 import BlockIcon from "@mui/icons-material/Block";
@@ -8,31 +8,43 @@ import CheckIcon from "@mui/icons-material/Check";
 import Container from "@mui/material/Container";
 import { TableKey } from "./contracts/keys";
 import { useTableState } from "./hooks/useTableState";
-import users from "./data.json";
+import usersData from "./data.json";
 
-const StatusCell = ({ isLocked }: { isLocked: boolean }) => {
-  if (isLocked) {
-    return <BlockIcon fontSize="small" />;
-  }
-
-  return <CheckIcon fontSize="small" />;
-};
+const currentUserId = 11;
 
 type Columns = {
   id: number;
   name: string;
   email: string;
-  isLocked: string;
+  phone: string;
+  isLocked: boolean;
 };
 
 export default function App() {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [users, setUsers] = useState<
+    {
+      id: number;
+      name: string;
+      email: string;
+      phone: string;
+      isLocked: boolean;
+    }[]
+  >([]);
+
+  useEffect(() => {
+    const load = async () => {
+      await new Promise((r) => setTimeout(r, 1000));
+      setUsers(usersData);
+      setIsLoading(false);
+    };
+    load();
+  }, []);
 
   const data = useMemo((): Columns[] => {
     return users.map((user) => {
       return {
         ...user,
-        isLocked: user.isLocked ? "Låst" : "",
       };
     });
   }, [users]);
@@ -64,11 +76,15 @@ export default function App() {
     []
   );
 
-  const [tableState, setTableState] = useTableState<TableState>(TableKey.user, {
-    columnVisibility: {},
-    expanded: {},
-    pagination: { pageIndex: 0, pageSize: 10 },
-  } as TableState);
+  const [tableState, setTableState] = useTableState<TableState>(
+    TableKey.user,
+    {
+      columnVisibility: {},
+      expanded: {},
+      pagination: { pageIndex: 0, pageSize: 10 },
+    } as TableState,
+    currentUserId
+  );
 
   return (
     <Container maxWidth="lg">
@@ -85,3 +101,11 @@ export default function App() {
     </Container>
   );
 }
+
+const StatusCell = ({ isLocked }: { isLocked: boolean }) => {
+  if (isLocked) {
+    return <BlockIcon fontSize="small" />;
+  }
+
+  return <CheckIcon fontSize="small" />;
+};

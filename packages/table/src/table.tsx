@@ -3,7 +3,6 @@ import {
   ExpandedState,
   FilterFn,
   GroupingState,
-  PaginationState,
   Row,
   SortingState,
   TableOptions,
@@ -28,11 +27,6 @@ import {
   useEffect,
   useState,
 } from "react";
-import {
-  RankingInfo,
-  compareItems,
-  rankItem,
-} from "@tanstack/match-sorter-utils";
 import { SxProps, Theme } from "@mui/material";
 
 import Box from "@mui/material/Box";
@@ -51,7 +45,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import { TableRow } from "./components/group";
 import TableRowMui from "@mui/material/TableRow";
-import { useDebounce } from "./hooks/useDebounce";
+import { rankItem } from "@tanstack/match-sorter-utils";
 
 const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
   // Rank the item
@@ -68,9 +62,6 @@ const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
 
 interface TableProperties<T extends Record<string, unknown>>
   extends Omit<TableOptions<T>, "getCoreRowModel"> {
-  //   tableKey: string;
-  //   defaultGrouping: string[];
-  //   defaultVisibilityState: Record<string, boolean>;
   children?: React.ReactNode;
   getRowStyling?: (row: Row<T>) => ColorStyleOptions | undefined;
   setSelected?: (rows: Row<T>[]) => void;
@@ -100,27 +91,6 @@ export function TuTable<T extends Record<string, unknown>>(
     tableState,
     tableContainerStyle,
   } = props;
-
-  const [{ pageIndex, pageSize }, setPagination] =
-    React.useState<PaginationState>({
-      pageIndex: 0,
-      pageSize: 10,
-    });
-
-  useEffect(() => {
-    setPagination(tableState.pagination);
-  }, []);
-
-  const debouncedStatement = useDebounce<PaginationState>(
-    { pageIndex, pageSize },
-    1000
-  );
-
-  useEffect(() => {
-    setTableState((prev) => {
-      return { ...prev, pagination: debouncedStatement };
-    });
-  }, [debouncedStatement]);
 
   const [globalFilter, setGlobalFilter] = React.useState("");
 
@@ -174,7 +144,7 @@ export function TuTable<T extends Record<string, unknown>>(
     },
     getCoreRowModel: getCoreRowModel(),
     autoResetExpanded: false,
-    state: { ...tableState, pagination: { pageIndex, pageSize }, globalFilter },
+    state: { ...tableState, globalFilter },
     enableRowSelection: true,
     enableMultiRowSelection: true,
     enableSubRowSelection: true,
@@ -188,7 +158,6 @@ export function TuTable<T extends Record<string, unknown>>(
     getExpandedRowModel: getExpandedRowModel(),
     getGroupedRowModel: getGroupedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
-    onPaginationChange: setPagination,
     getFilteredRowModel: getFilteredRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFacetedRowModel: getFacetedRowModel(),

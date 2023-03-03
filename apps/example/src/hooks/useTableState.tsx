@@ -6,7 +6,11 @@ import { useUpdateUserSetting, useUserSetting } from "../api/useUserSetting";
 import { TableKey } from "../contracts/keys";
 import { useDebounce } from "./useDebounce";
 
-export function useTableState<T>(key: TableKey, initialValue: T) {
+export function useTableState<T>(
+  key: TableKey,
+  initialValue: T,
+  userId: number
+) {
   const userSettingData = useUserSetting(key);
 
   // State to store our value
@@ -14,7 +18,7 @@ export function useTableState<T>(key: TableKey, initialValue: T) {
   const [storedValue, setStoredValue] = useState<T>(() => {
     try {
       // Parse stored json or if none return initialValue
-
+      console.log(JSON.parse(userSettingData?.value ?? "[]"));
       return userSettingData
         ? (JSON.parse(userSettingData.value) as T)
         : initialValue;
@@ -42,13 +46,14 @@ export function useTableState<T>(key: TableKey, initialValue: T) {
 
   const settingMutation = useUpdateUserSetting();
 
-  /**Save table settings to localStorage */
+  // /**Save table settings to localStorage */
   const debouncedState = useDebounce<T>(storedValue, 1500);
 
   function saveSetting(val: T) {
     settingMutation.updateUserSetting({
       key,
       value: JSON.stringify(val),
+      userId,
     });
   }
 
