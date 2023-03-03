@@ -81,7 +81,6 @@ export default function App() {
     {
       columnVisibility: {},
       expanded: {},
-      pagination: { pageIndex: 0, pageSize: 10 },
     } as TableState,
     currentUserId
   );
