@@ -18,7 +18,7 @@ export function useTableState<T>(
   const [storedValue, setStoredValue] = useState<T>(() => {
     try {
       // Parse stored json or if none return initialValue
-      console.log(JSON.parse(userSettingData?.value ?? "[]"));
+
       return userSettingData
         ? (JSON.parse(userSettingData.value) as T)
         : initialValue;

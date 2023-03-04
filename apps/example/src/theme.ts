@@ -10,6 +10,9 @@ const theme = createTheme({
     secondary: {
       main: "#19857b",
     },
+    info: {
+      main: "#eb34e5",
+    },
     error: {
       main: red.A400,
     },
