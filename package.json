@@ -4,13 +4,15 @@
   "private": true,
   "workspaces": [
     "apps/*",
-    "packages/*"
+    "packages/*",
+    "utils/*"
   ],
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "publish-packages": "turbo run build lint --filter @tjernstad-utvikling/* && changeset version && changeset publish"
   },
   "devDependencies": {
     "eslint-config-custom": "workspace:*",
@@ -20,6 +22,12 @@
   "engines": {
     "node": ">=14.0.0"
   },
-  "dependencies": {},
-  "packageManager": "pnpm@7.28.0"
+  "dependencies": {
+    "@changesets/cli": "^2.26.0"
+  },
+  "packageManager": "pnpm@7.28.0",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  }
 }

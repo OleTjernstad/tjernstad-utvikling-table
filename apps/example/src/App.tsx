@@ -1,6 +1,6 @@
 import { ColumnDef, TableState } from "@tanstack/react-table";
 import React, { useEffect, useMemo, useState } from "react";
-import { TableRootStyle, TuTable } from "table";
+import { TableRootStyle, TuTable } from "@tjernstad-utvikling/table";
 
 import BlockIcon from "@mui/icons-material/Block";
 import Box from "@mui/material/Box";

@@ -47,5 +47,9 @@
     "@mui/material": "*",
     "@tanstack/match-sorter-utils": "*",
     "@tanstack/react-table": "*"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
   }
 }
