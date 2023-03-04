@@ -135,7 +135,7 @@ function DebouncedInput({
         size="small"
         id={props.id}
         options={options ?? []}
-        onChange={(e, value) => {
+        onChange={(_, value) => {
           setValue(value ?? "");
         }}
         sx={{ width: 300 }}

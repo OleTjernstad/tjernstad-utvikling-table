@@ -1,12 +1,28 @@
 {
-  "extends": "tsconfig/viteReact.json",
-  "exclude": ["node_modules"],
-  "references": [{ "path": "./tsconfig.node.json" }],
+ "include": ["src"],
+  "exclude": ["node_modules", "dist", "example", "rollup.config.js"],
   "compilerOptions": {
-    "resolveJsonModule": true,
-    "baseUrl": ".",
-    "paths": {
-      "tu-table": ["src/index.ts"],
-    },
+    "declaration": true,
+    "declarationDir": "types",
+    "emitDeclarationOnly": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "importHelpers": true,
+    "jsx": "react",
+    "lib": [
+      "dom",
+      "esnext"
+    ],
+    "module": "esnext",
+    "moduleResolution": "node",
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "rootDir": "./src",
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strict": true,
+    "target": "ES6"
   }
 }

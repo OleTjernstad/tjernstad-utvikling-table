@@ -4,48 +4,55 @@
   "version": "0.0.0",
   "author": "Ole Tjernstad",
   "type": "module",
-  "module": "./dist/tu-table.es.js",
+  "module": "./dist/tu-table.esm.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/tu-table.es.js"
+      "import": "./dist/tu-table.esm.js"
     }
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
+    "build": "rm -rf dist && rollup -c"
   },
   "dependencies": {
     "@tanstack/match-sorter-utils": "^8.7.6",
     "@tanstack/react-table": "^8.7.6"
   },
   "devDependencies": {
+    "@babel/preset-react": "^7.18.6",
     "@mui/icons-material": "^5.11.0",
     "@mui/material": "^5.11.3",
+    "@rollup/plugin-babel": "^6.0.3",
+    "@rollup/plugin-node-resolve": "^15.0.1",
+    "@rollup/plugin-typescript": "^11.0.0",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
-    "@vitejs/plugin-react": "^3.1.0",
+    "babel-core": "^6.26.3",
+    "babel-runtime": "^6.26.0",
     "eslint": "7.32.0",
     "eslint-config-custom": "workspace:*",
-    "tsconfig": "workspace:*",
-    "typescript": "^4.9.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "vite": "^4.1.0",
-    "vite-plugin-dts": "^2.0.2",
-    "vite-tsconfig-paths": "^4.0.5"
+    "rollup": "^3.18.0",
+    "rollup-plugin-copy": "^3.4.0",
+    "rollup-plugin-dts": "^5.2.0",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-sass": "^1.12.18",
+    "rollup-plugin-typescript2": "^0.34.1",
+    "tslib": "^2.5.0",
+    "typescript": "^4.9.3"
   },
   "license": "MIT",
   "files": [
     "dist"
   ],
   "peerDependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
     "@mui/icons-material": "*",
     "@mui/material": "*",
     "@tanstack/match-sorter-utils": "*",
-    "@tanstack/react-table": "*"
+    "@tanstack/react-table": "*",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }
