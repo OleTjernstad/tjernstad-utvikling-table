@@ -12,7 +12,6 @@
     }
   },
   "scripts": {
-    "dev": "vite",
     "build": "rm -rf dist && rollup -c"
   },
   "dependencies": {
@@ -20,12 +19,14 @@
     "@tanstack/react-table": "^8.7.6"
   },
   "devDependencies": {
+    "@babel/core": "^7.21.0",
     "@babel/preset-react": "^7.18.6",
     "@mui/icons-material": "^5.11.0",
     "@mui/material": "^5.11.3",
     "@rollup/plugin-babel": "^6.0.3",
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-typescript": "^11.0.0",
+    "@size-limit/preset-small-lib": "^8.2.4",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "babel-core": "^6.26.3",
@@ -40,6 +41,7 @@
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-sass": "^1.12.18",
     "rollup-plugin-typescript2": "^0.34.1",
+    "size-limit": "^8.2.4",
     "tslib": "^2.5.0",
     "typescript": "^4.9.3"
   },
