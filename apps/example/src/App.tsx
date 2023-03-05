@@ -10,8 +10,6 @@ import { TuTable } from "@tjernstad-utvikling/table";
 import { useTableState } from "./hooks/useTableState";
 import usersData from "./data.json";
 
-const currentUserId = 11;
-
 type Columns = {
   id: number;
   name: string;
@@ -81,14 +79,10 @@ export default function App() {
     []
   );
 
-  const [tableState, setTableState] = useTableState<TableState>(
-    TableKey.user,
-    {
-      columnVisibility: {},
-      expanded: {},
-    } as TableState,
-    currentUserId
-  );
+  const [tableState, setTableState] = useTableState<TableState>(TableKey.user, {
+    columnVisibility: {},
+    expanded: {},
+  } as TableState);
 
   return (
     <Container maxWidth="lg">

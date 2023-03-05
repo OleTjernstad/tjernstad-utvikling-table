@@ -1,16 +1,12 @@
 // credits to https://usehooks.com/useLocalStorage/
 
 import { useEffect, useState } from "react";
-import { useUpdateUserSetting, useUserSetting } from "../api/useUserSetting";
 
 import { TableKey } from "../contracts/keys";
+import { UserSetting } from "../contracts/user";
 import { useDebounce } from "./useDebounce";
 
-export function useTableState<T>(
-  key: TableKey,
-  initialValue: T,
-  userId: number
-) {
+export function useTableState<T>(key: TableKey, initialValue: T) {
   const userSettingData = useUserSetting(key);
 
   // State to store our value
@@ -18,10 +14,7 @@ export function useTableState<T>(
   const [storedValue, setStoredValue] = useState<T>(() => {
     try {
       // Parse stored json or if none return initialValue
-
-      return userSettingData
-        ? (JSON.parse(userSettingData.value) as T)
-        : initialValue;
+      return userSettingData ? (userSettingData.value as T) : initialValue;
     } catch (error) {
       // If error also return initialValue
       console.log(error);
@@ -44,17 +37,11 @@ export function useTableState<T>(
     }
   };
 
-  const settingMutation = useUpdateUserSetting();
-
   // /**Save table settings to localStorage */
   const debouncedState = useDebounce<T>(storedValue, 1500);
 
   function saveSetting(val: T) {
-    settingMutation.updateUserSetting({
-      key,
-      value: JSON.stringify(val),
-      userId,
-    });
+    localStorage.setItem(key, JSON.stringify({ value: val, key }));
   }
 
   useEffect(() => {
@@ -65,4 +52,17 @@ export function useTableState<T>(
   }, [debouncedState, key]);
 
   return [storedValue, setValue] as const;
+}
+
+function useUserSetting(key: TableKey) {
+  const json = localStorage.getItem(key);
+
+  if (json !== undefined && json !== null && json !== "undefined") {
+    const data = json
+      ? (JSON.parse(json ?? "{}") as unknown as UserSetting)
+      : undefined;
+
+    return data;
+  }
+  return undefined;
 }
