@@ -1,7 +1,7 @@
 {
   "name": "@tjernstad-utvikling/table",
   "private": false,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "author": "Ole Tjernstad",
   "type": "module",
   "module": "./dist/tu-table.esm.js",
@@ -64,5 +64,16 @@
     "@tanstack/react-table": "*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
+  },
+  "keywords": [
+    "react-table",
+    "material-ui",
+    "material-table",
+    "tanstack table",
+    "data table"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
   }
 }
