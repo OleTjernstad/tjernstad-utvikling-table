@@ -1,5 +1,5 @@
-import { ColorStyleOptions, TableRootStyle } from "./style";
+import { ColorStyleOptions, OverrideColors } from "./style";
 
 import { TuTable } from "./table";
 
-export { TuTable, TableRootStyle, ColorStyleOptions };
+export { TuTable, ColorStyleOptions, OverrideColors };

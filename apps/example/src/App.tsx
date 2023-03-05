@@ -1,12 +1,12 @@
-import { ColumnDef, TableState } from "@tanstack/react-table";
+import { ColumnDef, Row, TableState } from "@tanstack/react-table";
 import React, { useEffect, useMemo, useState } from "react";
-import { TableRootStyle, TuTable } from "@tjernstad-utvikling/table";
 
 import BlockIcon from "@mui/icons-material/Block";
 import Box from "@mui/material/Box";
 import CheckIcon from "@mui/icons-material/Check";
 import Container from "@mui/material/Container";
 import { TableKey } from "./contracts/keys";
+import { TuTable } from "@tjernstad-utvikling/table";
 import { useTableState } from "./hooks/useTableState";
 import usersData from "./data.json";
 
@@ -41,6 +41,12 @@ export default function App() {
     load();
   }, []);
 
+  const [selected, setSelected] = useState<number[]>();
+
+  function updateSelected(rows: Row<Columns>[]) {
+    setSelected(rows.map((r) => r.getValue("id")));
+  }
+
   const data = useMemo((): Columns[] => {
     return users.map((user) => {
       return {
@@ -69,7 +75,6 @@ export default function App() {
       {
         header: "Locked User",
         accessorKey: "isLocked",
-        enableGrouping: false,
         cell: ({ cell }) => <StatusCell isLocked={cell.getValue<boolean>()} />,
       },
     ],
@@ -93,8 +98,11 @@ export default function App() {
           data={data}
           isLoading={isLoading}
           setTableState={setTableState}
-          tableContainerStyle={(theme) => TableRootStyle({ theme })}
           tableState={tableState}
+          selectedIds={selected}
+          setSelected={updateSelected}
+          preserveSelected
+          enableSelection
         />
       </Box>
     </Container>

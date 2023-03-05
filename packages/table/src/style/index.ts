@@ -1,6 +1,6 @@
 import { Theme } from "@mui/material";
 
-interface OverrideColors {
+export interface OverrideColors {
   disabled?: {
     bg: string;
     hover: string;
@@ -23,7 +23,7 @@ interface OverrideColors {
   };
 }
 interface TableRootStyleProps {
-  overrideColors?: OverrideColors;
+  overrideColors?: OverrideColors | undefined;
   theme: Theme;
 }
 export function TableRootStyle({ overrideColors, theme }: TableRootStyleProps) {

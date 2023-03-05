@@ -1,3 +1,4 @@
+import { ColorStyleOptions, OverrideColors, TableRootStyle } from "./style";
 import {
   ColumnFiltersState,
   ExpandedState,
@@ -27,11 +28,10 @@ import {
   useEffect,
   useState,
 } from "react";
-import { SxProps, Theme } from "@mui/material";
+import { SxProps, Theme, useTheme } from "@mui/material";
 
 import Box from "@mui/material/Box";
 import { CheckboxHeaderCell } from "./components/selection";
-import { ColorStyleOptions } from "./style";
 import { ColumnSelectRT } from "./utils";
 import { DebouncedInput } from "./components/input";
 import { HeaderCell } from "./components/header";
@@ -73,7 +73,8 @@ interface TableProperties<T extends Record<string, unknown>>
   setTableState: (
     value: TableState | ((val: TableState) => TableState)
   ) => void;
-  tableContainerStyle: SxProps<Theme>;
+  tableContainerStyle?: SxProps<Theme>;
+  overrideColors?: OverrideColors | undefined;
 }
 
 export function TuTable<T extends Record<string, unknown>>(
@@ -90,7 +91,10 @@ export function TuTable<T extends Record<string, unknown>>(
     setTableState,
     tableState,
     tableContainerStyle,
+    overrideColors,
   } = props;
+
+  const theme = useTheme();
 
   const [globalFilter, setGlobalFilter] = React.useState("");
 
@@ -264,7 +268,13 @@ export function TuTable<T extends Record<string, unknown>>(
 
   return (
     <>
-      <TableContainer component={Paper} sx={tableContainerStyle}>
+      <TableContainer
+        component={Paper}
+        sx={{
+          ...TableRootStyle({ theme, overrideColors }),
+          ...(tableContainerStyle ?? {}),
+        }}
+      >
         <Box sx={{ display: "flex", height: "4em" }}>
           <Box sx={{ padding: 2 }}>
             <DebouncedInput
