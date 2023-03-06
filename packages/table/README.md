@@ -8,3 +8,7 @@ This is a opinionated implementation of Tanstack table with Material UI table st
 ## Get Started
 
 Coming soon
+
+## Locales
+
+- Norwegian

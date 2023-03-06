@@ -4,6 +4,7 @@ import {
   ExpandedState,
   FilterFn,
   GroupingState,
+  PaginationState,
   Row,
   SortingState,
   TableOptions,
@@ -26,6 +27,7 @@ import {
   ReactElement,
   useCallback,
   useEffect,
+  useMemo,
   useState,
 } from "react";
 import { SxProps, Theme, useTheme } from "@mui/material";
@@ -75,6 +77,8 @@ interface TableProperties<T extends Record<string, unknown>>
   ) => void;
   tableContainerStyle?: SxProps<Theme>;
   overrideColors?: OverrideColors | undefined;
+  manualPagination?: boolean;
+  rowCount?: number;
 }
 
 export function TuTable<T extends Record<string, unknown>>(
@@ -92,9 +96,18 @@ export function TuTable<T extends Record<string, unknown>>(
     tableState,
     tableContainerStyle,
     overrideColors,
+    manualPagination,
+    rowCount,
   } = props;
 
   const theme = useTheme();
+
+  const pageCount = useMemo(() => {
+    if (rowCount) {
+      return Math.ceil(rowCount / tableState.pagination.pageSize);
+    }
+    return undefined;
+  }, [rowCount, tableState.pagination.pageSize]);
 
   const [globalFilter, setGlobalFilter] = React.useState("");
 
@@ -104,6 +117,26 @@ export function TuTable<T extends Record<string, unknown>>(
     setTableState((prev) => {
       return { ...prev, grouping };
     });
+  }
+
+  const [{ pageIndex, pageSize }, setPagination] = useState<PaginationState>({
+    pageIndex: 0,
+    pageSize: 20,
+  });
+
+  function updatePagination(update: Updater<PaginationState>) {
+    const pagination =
+      update instanceof Function ? update(tableState.pagination) : update;
+    if (manualPagination) {
+      setTableState((prev) => {
+        return {
+          ...prev,
+          pagination,
+        };
+      });
+    } else {
+      setPagination(pagination);
+    }
   }
 
   function updateColumnFilters(update: Updater<ColumnFiltersState>) {
@@ -148,7 +181,14 @@ export function TuTable<T extends Record<string, unknown>>(
     },
     getCoreRowModel: getCoreRowModel(),
     autoResetExpanded: false,
-    state: { ...tableState, globalFilter },
+    state: {
+      ...tableState,
+      pagination: manualPagination
+        ? tableState.pagination
+        : { pageIndex, pageSize },
+      globalFilter,
+    },
+    ...(manualPagination && pageCount ? { pageCount } : {}),
     enableRowSelection: true,
     enableMultiRowSelection: true,
     enableSubRowSelection: true,
@@ -159,6 +199,7 @@ export function TuTable<T extends Record<string, unknown>>(
     onColumnVisibilityChange: updateVisibility,
     onExpandedChange: updateExpanded,
     onSortingChange: updateSorting,
+    onPaginationChange: updatePagination,
     getExpandedRowModel: getExpandedRowModel(),
     getGroupedRowModel: getGroupedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),

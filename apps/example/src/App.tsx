@@ -30,15 +30,6 @@ export default function App() {
     }[]
   >([]);
 
-  useEffect(() => {
-    const load = async () => {
-      await new Promise((r) => setTimeout(r, 1000));
-      setUsers(usersData);
-      setIsLoading(false);
-    };
-    load();
-  }, []);
-
   const [selected, setSelected] = useState<number[]>();
 
   function updateSelected(rows: Row<Columns>[]) {
@@ -84,6 +75,29 @@ export default function App() {
     expanded: {},
   } as TableState);
 
+  useEffect(() => {
+    const pageNumber = tableState.pagination.pageIndex;
+    const pageSize = tableState.pagination.pageSize;
+
+    setUsers(
+      usersData.slice(pageNumber * pageSize, (pageNumber + 1) * pageSize)
+    );
+  }, [usersData, tableState.pagination]);
+
+  useEffect(() => {
+    const load = async () => {
+      await new Promise((r) => setTimeout(r, 1000));
+      const pageNumber = tableState.pagination.pageIndex;
+      const pageSize = tableState.pagination.pageSize;
+
+      setUsers(
+        usersData.slice(pageNumber * pageSize, (pageNumber + 1) * pageSize)
+      );
+      setIsLoading(false);
+    };
+    load();
+  }, []);
+
   return (
     <Container maxWidth="lg">
       <Box sx={{ my: 4 }}>
@@ -97,6 +111,8 @@ export default function App() {
           setSelected={updateSelected}
           preserveSelected
           enableSelection
+          manualPagination
+          rowCount={usersData.length}
         />
       </Box>
     </Container>
