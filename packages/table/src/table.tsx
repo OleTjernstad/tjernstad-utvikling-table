@@ -68,7 +68,6 @@ interface TableProperties<T extends Record<string, unknown>>
   getRowStyling?: (row: Row<T>) => ColorStyleOptions | undefined;
   setSelected?: (rows: Row<T>[]) => void;
   selectedIds?: number[];
-  preserveSelected?: boolean;
   isLoading: boolean;
   enableSelection?: boolean;
   tableState: TableState;
@@ -77,7 +76,7 @@ interface TableProperties<T extends Record<string, unknown>>
   ) => void;
   tableContainerStyle?: SxProps<Theme>;
   overrideColors?: OverrideColors | undefined;
-  manualPagination?: boolean;
+
   rowCount?: number;
 }
 
@@ -89,25 +88,24 @@ export function TuTable<T extends Record<string, unknown>>(
     children,
     getRowStyling,
     setSelected,
-    preserveSelected,
     selectedIds,
     enableSelection,
     setTableState,
     tableState,
     tableContainerStyle,
     overrideColors,
-    manualPagination,
+
     rowCount,
   } = props;
 
   const theme = useTheme();
-
+  const manualPagination = false;
   const pageCount = useMemo(() => {
-    if (rowCount) {
-      return Math.ceil(rowCount / tableState.pagination.pageSize);
+    if (rowCount && manualPagination) {
+      return Math.ceil(rowCount / tableState.pagination?.pageSize);
     }
     return undefined;
-  }, [rowCount, tableState.pagination.pageSize]);
+  }, [rowCount, tableState?.pagination?.pageSize]);
 
   const [globalFilter, setGlobalFilter] = React.useState("");
 
@@ -119,11 +117,6 @@ export function TuTable<T extends Record<string, unknown>>(
     });
   }
 
-  const [{ pageIndex, pageSize }, setPagination] = useState<PaginationState>({
-    pageIndex: 0,
-    pageSize: 20,
-  });
-
   function updatePagination(update: Updater<PaginationState>) {
     const pagination =
       update instanceof Function ? update(tableState.pagination) : update;
@@ -134,8 +127,6 @@ export function TuTable<T extends Record<string, unknown>>(
           pagination,
         };
       });
-    } else {
-      setPagination(pagination);
     }
   }
 
@@ -182,10 +173,14 @@ export function TuTable<T extends Record<string, unknown>>(
     getCoreRowModel: getCoreRowModel(),
     autoResetExpanded: false,
     state: {
-      ...tableState,
-      pagination: manualPagination
-        ? tableState.pagination
-        : { pageIndex, pageSize },
+      ...(tableState.sorting ? { sorting: tableState.sorting } : {}),
+      expanded: tableState.expanded ?? {},
+      columnVisibility: tableState.columnVisibility ?? {},
+      ...(tableState.columnFilters
+        ? { columnFilters: tableState.columnFilters }
+        : {}),
+      ...(tableState.grouping ? { grouping: tableState.grouping } : {}),
+      ...(manualPagination ? { pagination: tableState.pagination } : {}),
       globalFilter,
     },
     ...(manualPagination && pageCount ? { pageCount } : {}),
@@ -199,7 +194,7 @@ export function TuTable<T extends Record<string, unknown>>(
     onColumnVisibilityChange: updateVisibility,
     onExpandedChange: updateExpanded,
     onSortingChange: updateSorting,
-    onPaginationChange: updatePagination,
+    ...(manualPagination ? { onPaginationChange: updatePagination } : {}),
     getExpandedRowModel: getExpandedRowModel(),
     getGroupedRowModel: getGroupedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
@@ -232,6 +227,15 @@ export function TuTable<T extends Record<string, unknown>>(
       );
   }, [selectedIds, table]);
 
+  useEffect(() => {
+    if (selectedIds && manualPagination && props.data)
+      setSelectedRows(
+        table.getPreFilteredRowModel().rows.filter((r) => {
+          return selectedIds.find((o) => o === r.getValue("id"));
+        })
+      );
+  }, [selectedIds, table, manualPagination, props.data]);
+
   /**
    * Handle Row Selection:
    *
@@ -247,11 +251,7 @@ export function TuTable<T extends Record<string, unknown>>(
       const isSelected = selectIndex > -1;
 
       let updatedSelectedRows = [...(selectedRows ? selectedRows : [])];
-      if (
-        event.ctrlKey ||
-        event.metaKey ||
-        (preserveSelected && !event.shiftKey)
-      ) {
+      if (event.ctrlKey || event.metaKey || !event.shiftKey) {
         // 1. Click + CMD/CTRL - select multiple rows
 
         // Remove clicked element from list
@@ -304,7 +304,7 @@ export function TuTable<T extends Record<string, unknown>>(
         setSelected(updatedSelectedRows);
       }
     },
-    [selectedRows, preserveSelected, setSelected, enableSelection, table]
+    [selectedRows, setSelected, enableSelection, table]
   );
 
   return (
