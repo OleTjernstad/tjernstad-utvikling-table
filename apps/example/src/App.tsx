@@ -33,6 +33,7 @@ export default function App() {
   const [selected, setSelected] = useState<number[]>();
 
   function updateSelected(rows: Row<Columns>[]) {
+    console.log(rows);
     setSelected(rows.map((r) => r.getValue("id")));
   }
 
@@ -73,11 +74,12 @@ export default function App() {
   const [tableState, setTableState] = useTableState<TableState>(TableKey.user, {
     columnVisibility: {},
     expanded: {},
+    pagination: { pageIndex: 0, pageSize: 20 },
   } as TableState);
 
   useEffect(() => {
-    const pageNumber = tableState.pagination.pageIndex;
-    const pageSize = tableState.pagination.pageSize;
+    const pageNumber = tableState?.pagination?.pageIndex ?? 0;
+    const pageSize = tableState?.pagination?.pageSize ?? 10;
 
     setUsers(
       usersData.slice(pageNumber * pageSize, (pageNumber + 1) * pageSize)
@@ -87,8 +89,8 @@ export default function App() {
   useEffect(() => {
     const load = async () => {
       await new Promise((r) => setTimeout(r, 1000));
-      const pageNumber = tableState.pagination.pageIndex;
-      const pageSize = tableState.pagination.pageSize;
+      const pageNumber = tableState?.pagination?.pageIndex ?? 0;
+      const pageSize = tableState?.pagination?.pageSize ?? 10;
 
       setUsers(
         usersData.slice(pageNumber * pageSize, (pageNumber + 1) * pageSize)
@@ -100,6 +102,7 @@ export default function App() {
 
   return (
     <Container maxWidth="lg">
+      {selected?.length}
       <Box sx={{ my: 4 }}>
         <TuTable<Columns>
           columns={columns}
@@ -109,7 +112,6 @@ export default function App() {
           tableState={tableState}
           selectedIds={selected}
           setSelected={updateSelected}
-          preserveSelected
           enableSelection
           manualPagination
           rowCount={usersData.length}

@@ -28,6 +28,7 @@ import {
   useCallback,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from "react";
 import { SxProps, Theme, useTheme } from "@mui/material";
@@ -94,18 +95,20 @@ export function TuTable<T extends Record<string, unknown>>(
     tableState,
     tableContainerStyle,
     overrideColors,
-
+    manualPagination,
     rowCount,
   } = props;
 
   const theme = useTheme();
-  const manualPagination = false;
+
   const pageCount = useMemo(() => {
     if (rowCount && manualPagination) {
-      return Math.ceil(rowCount / tableState.pagination?.pageSize);
+      return Math.ceil(rowCount / (tableState.pagination?.pageSize ?? 10));
     }
     return undefined;
   }, [rowCount, tableState?.pagination?.pageSize]);
+
+  console.log({ pageCount, rowCount });
 
   const [globalFilter, setGlobalFilter] = React.useState("");
 
@@ -218,13 +221,16 @@ export function TuTable<T extends Record<string, unknown>>(
 
   const [selectedRows, setSelectedRows] = useState<Row<T>[]>([]);
 
+  const lastSelectedRow = useRef<Row<T>>();
+
   useEffect(() => {
-    if (selectedIds)
+    if (selectedIds) {
       setSelectedRows(
         table.getPreFilteredRowModel().rows.filter((r) => {
-          return selectedIds.find((o) => o === r.getValue("id"));
+          return selectedIds.find((o) => o === r?.getValue("id"));
         })
       );
+    }
   }, [selectedIds, table]);
 
   useEffect(() => {
@@ -251,6 +257,7 @@ export function TuTable<T extends Record<string, unknown>>(
       const isSelected = selectIndex > -1;
 
       let updatedSelectedRows = [...(selectedRows ? selectedRows : [])];
+
       if (event.ctrlKey || event.metaKey || !event.shiftKey) {
         // 1. Click + CMD/CTRL - select multiple rows
 
@@ -263,24 +270,32 @@ export function TuTable<T extends Record<string, unknown>>(
       } else if (event.shiftKey) {
         // 2. Click + SHIFT - Range Select multiple rows
 
-        if (selectedRows?.length) {
-          const lastSelectedRow = selectedRows[0];
+        if (selectedRows?.length && lastSelectedRow.current) {
           // Calculate array indexes and reset selected rows
-          const lastIndex = table.getRowModel().rows.indexOf(lastSelectedRow);
+          const lastIndex = table
+            .getRowModel()
+            .rows.indexOf(lastSelectedRow.current);
           const currentIndex = table.getRowModel().rows.indexOf(row);
 
-          updatedSelectedRows = [];
           if (lastIndex < currentIndex) {
-            for (let i = lastIndex; i <= currentIndex; i++) {
+            for (let i = lastIndex + 1; i <= currentIndex; i++) {
               const selectedRow = table.getRowModel().rows[i];
-              if (!selectedRow.getIsGrouped()) {
+              // Skip row if selected or grouped row
+              if (
+                !selectedRow?.getIsGrouped() &&
+                !updatedSelectedRows.find((elm) => elm.id === selectedRow.id)
+              ) {
                 updatedSelectedRows.push(selectedRow);
               }
             }
           } else {
-            for (let i = currentIndex; i <= lastIndex; i++) {
+            for (let i = currentIndex; i < lastIndex; i++) {
               const selectedRow = table.getRowModel().rows[i];
-              if (!selectedRow.getIsGrouped()) {
+              // Skip row if selected or grouped row
+              if (
+                !selectedRow?.getIsGrouped() &&
+                !updatedSelectedRows.find((elm) => elm.id === selectedRow.id)
+              ) {
                 updatedSelectedRows.push(selectedRow);
               }
             }
@@ -303,6 +318,8 @@ export function TuTable<T extends Record<string, unknown>>(
         setSelectedRows(updatedSelectedRows);
         setSelected(updatedSelectedRows);
       }
+      // set lastSelectedRow for reference to shift select
+      lastSelectedRow.current = row;
     },
     [selectedRows, setSelected, enableSelection, table]
   );
