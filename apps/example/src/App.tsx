@@ -33,7 +33,6 @@ export default function App() {
   const [selected, setSelected] = useState<number[]>();
 
   function updateSelected(rows: Row<Columns>[]) {
-    console.log(rows);
     setSelected(rows.map((r) => r.getValue("id")));
   }
 

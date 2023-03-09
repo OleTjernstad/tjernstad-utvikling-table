@@ -25,10 +25,8 @@ import {
 import {
   PropsWithChildren,
   ReactElement,
-  useCallback,
   useEffect,
   useMemo,
-  useRef,
   useState,
 } from "react";
 import { SxProps, Theme, useTheme } from "@mui/material";
@@ -49,6 +47,7 @@ import TableHead from "@mui/material/TableHead";
 import { TableRow } from "./components/group";
 import TableRowMui from "@mui/material/TableRow";
 import { rankItem } from "@tanstack/match-sorter-utils";
+import { useRowSelection } from "./hooks/useRowSelection";
 
 const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
   // Rank the item
@@ -107,8 +106,6 @@ export function TuTable<T extends Record<string, unknown>>(
     }
     return undefined;
   }, [rowCount, tableState?.pagination?.pageSize]);
-
-  console.log({ pageCount, rowCount });
 
   const [globalFilter, setGlobalFilter] = React.useState("");
 
@@ -221,8 +218,6 @@ export function TuTable<T extends Record<string, unknown>>(
 
   const [selectedRows, setSelectedRows] = useState<Row<T>[]>([]);
 
-  const lastSelectedRow = useRef<Row<T>>();
-
   useEffect(() => {
     if (selectedIds) {
       setSelectedRows(
@@ -242,87 +237,13 @@ export function TuTable<T extends Record<string, unknown>>(
       );
   }, [selectedIds, table, manualPagination, props.data]);
 
-  /**
-   * Handle Row Selection:
-   *
-   * 1. Click + CMD/CTRL - Select multiple rows
-   * 2. Click + SHIFT - Range Select multiple rows
-   * 3. Single Click - Select only one row
-   */
-  const handleRowSelection = useCallback(
-    (event: React.MouseEvent<HTMLButtonElement>, row: Row<T>) => {
-      // See if row is already selected
-      const selectedRowIds = selectedRows?.map((r) => r.id) ?? [];
-      const selectIndex = selectedRowIds.indexOf(row.id);
-      const isSelected = selectIndex > -1;
-
-      let updatedSelectedRows = [...(selectedRows ? selectedRows : [])];
-
-      if (event.ctrlKey || event.metaKey || !event.shiftKey) {
-        // 1. Click + CMD/CTRL - select multiple rows
-
-        // Remove clicked element from list
-        if (isSelected) {
-          updatedSelectedRows.splice(selectIndex, 1);
-        } else {
-          updatedSelectedRows.push(row);
-        }
-      } else if (event.shiftKey) {
-        // 2. Click + SHIFT - Range Select multiple rows
-
-        if (selectedRows?.length && lastSelectedRow.current) {
-          // Calculate array indexes and reset selected rows
-          const lastIndex = table
-            .getRowModel()
-            .rows.indexOf(lastSelectedRow.current);
-          const currentIndex = table.getRowModel().rows.indexOf(row);
-
-          if (lastIndex < currentIndex) {
-            for (let i = lastIndex + 1; i <= currentIndex; i++) {
-              const selectedRow = table.getRowModel().rows[i];
-              // Skip row if selected or grouped row
-              if (
-                !selectedRow?.getIsGrouped() &&
-                !updatedSelectedRows.find((elm) => elm.id === selectedRow.id)
-              ) {
-                updatedSelectedRows.push(selectedRow);
-              }
-            }
-          } else {
-            for (let i = currentIndex; i < lastIndex; i++) {
-              const selectedRow = table.getRowModel().rows[i];
-              // Skip row if selected or grouped row
-              if (
-                !selectedRow?.getIsGrouped() &&
-                !updatedSelectedRows.find((elm) => elm.id === selectedRow.id)
-              ) {
-                updatedSelectedRows.push(selectedRow);
-              }
-            }
-          }
-        } else {
-          // No rows previously selected, select only current row
-          updatedSelectedRows = [row];
-        }
-      } else {
-        // 3. Single Click - Select only one row
-
-        if (isSelected && updatedSelectedRows.length === 1) {
-          updatedSelectedRows = [];
-        } else {
-          updatedSelectedRows = [row];
-        }
-      }
-
-      if (setSelected && enableSelection) {
-        setSelectedRows(updatedSelectedRows);
-        setSelected(updatedSelectedRows);
-      }
-      // set lastSelectedRow for reference to shift select
-      lastSelectedRow.current = row;
-    },
-    [selectedRows, setSelected, enableSelection, table]
-  );
+  const handleRowSelection = useRowSelection({
+    selectedRows,
+    setSelectedRows,
+    table,
+    enableSelection,
+    setSelected,
+  });
 
   return (
     <>
