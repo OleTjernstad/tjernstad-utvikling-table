@@ -14,7 +14,7 @@
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "prepare-publish": "npx changeset",
-    "publish-packages": "turbo run build lint --filter @tjernstad-utvikling/* && changeset version && changeset publish"
+    "publish-packages": "turbo run lib:build lint --filter @tjernstad-utvikling/* && changeset version && changeset publish"
   },
   "devDependencies": {
     "eslint-config-custom": "workspace:*",

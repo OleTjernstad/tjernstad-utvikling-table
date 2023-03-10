@@ -1,5 +1,11 @@
 # @tjernstad-utvikling/table
 
+## 0.1.0
+
+### Minor Changes
+
+- pagination and selection
+
 ## 0.0.1
 
 ### Patch Changes

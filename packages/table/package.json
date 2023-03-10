@@ -1,7 +1,7 @@
 {
   "name": "@tjernstad-utvikling/table",
   "private": false,
-  "version": "0.0.1",
+  "version": "0.1.0",
   "author": "Ole Tjernstad",
   "type": "module",
   "module": "./dist/tu-table.esm.js",
@@ -34,13 +34,13 @@
   },
   "dependencies": {
     "@tanstack/match-sorter-utils": "^8.7.6",
-    "@tanstack/react-table": "^8.7.9"
+    "@tanstack/react-table": "^8.7.9",
+    "@mui/icons-material": "^5.11.0",
+    "@mui/material": "^5.11.3"
   },
   "devDependencies": {
     "@babel/core": "^7.21.0",
     "@babel/preset-react": "^7.18.6",
-    "@mui/icons-material": "^5.11.0",
-    "@mui/material": "^5.11.3",
     "@rollup/plugin-babel": "^6.0.3",
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-typescript": "^11.0.0",
