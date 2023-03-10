@@ -50,10 +50,16 @@ export function useRowSelection<T>({
 
         if (lastSelectedRow.current) {
           // Calculate array indexes and reset selected rows
+          console.log("row model", table.getRowModel().rows);
+          console.log("last selected row", lastSelectedRow.current);
+          console.log("lastRowUnchecked", lastRowUnchecked.current);
+
           const lastIndex = table
             .getRowModel()
             .rows.indexOf(lastSelectedRow.current);
           const currentIndex = table.getRowModel().rows.indexOf(row);
+
+          console.log({ lastIndex, currentIndex });
           // If last row was unchecked remove range
           if (lastRowUnchecked.current) {
             if (lastIndex < currentIndex) {

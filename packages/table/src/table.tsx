@@ -61,23 +61,6 @@ const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
   return itemRank.passed;
 };
 
-// interface TableProperties<T extends Record<string, unknown>>
-//   extends Omit<TableOptions<T>, "getCoreRowModel"> {
-//   children?: React.ReactNode;
-//   getRowStyling?: (row: Row<T>) => ColorStyleOptions | undefined;
-//   setSelected?: (rows: Row<T>[]) => void;
-//   selectedIds?: number[];
-//   isLoading: boolean;
-//   enableSelection?: boolean;
-//   tableState: TableState;
-//   setTableState: (
-//     value: TableState | ((val: TableState) => TableState)
-//   ) => void;
-//   tableContainerStyle?: SxProps<Theme>;
-//   overrideColors?: OverrideColors | undefined;
-//   rowCount?: number;
-// }
-
 export function TuTable<T extends Record<string, unknown>>(
   props: PropsWithChildren<TableProperties<T>>
 ): ReactElement {
@@ -204,7 +187,7 @@ export function TuTable<T extends Record<string, unknown>>(
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
     getFacetedMinMaxValues: getFacetedMinMaxValues(),
-    debugTable: true,
+    debugTable: false,
   });
 
   function getRowClassName(row: Row<T>) {
