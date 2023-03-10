@@ -1,4 +1,3 @@
-import { ColorStyleOptions, OverrideColors, TableRootStyle } from "./style";
 import {
   ColumnFiltersState,
   ExpandedState,
@@ -7,8 +6,6 @@ import {
   PaginationState,
   Row,
   SortingState,
-  TableOptions,
-  TableState,
   Updater,
   VisibilityState,
   getCoreRowModel,
@@ -29,7 +26,6 @@ import {
   useMemo,
   useState,
 } from "react";
-import { SxProps, Theme, useTheme } from "@mui/material";
 
 import Box from "@mui/material/Box";
 import { CheckboxHeaderCell } from "./components/selection";
@@ -44,10 +40,13 @@ import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
+import { TableProperties } from "./types";
+import { TableRootStyle } from "./style";
 import { TableRow } from "./components/group";
 import TableRowMui from "@mui/material/TableRow";
 import { rankItem } from "@tanstack/match-sorter-utils";
 import { useRowSelection } from "./hooks/useRowSelection";
+import { useTheme } from "@mui/material";
 
 const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
   // Rank the item
@@ -62,23 +61,22 @@ const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
   return itemRank.passed;
 };
 
-interface TableProperties<T extends Record<string, unknown>>
-  extends Omit<TableOptions<T>, "getCoreRowModel"> {
-  children?: React.ReactNode;
-  getRowStyling?: (row: Row<T>) => ColorStyleOptions | undefined;
-  setSelected?: (rows: Row<T>[]) => void;
-  selectedIds?: number[];
-  isLoading: boolean;
-  enableSelection?: boolean;
-  tableState: TableState;
-  setTableState: (
-    value: TableState | ((val: TableState) => TableState)
-  ) => void;
-  tableContainerStyle?: SxProps<Theme>;
-  overrideColors?: OverrideColors | undefined;
-
-  rowCount?: number;
-}
+// interface TableProperties<T extends Record<string, unknown>>
+//   extends Omit<TableOptions<T>, "getCoreRowModel"> {
+//   children?: React.ReactNode;
+//   getRowStyling?: (row: Row<T>) => ColorStyleOptions | undefined;
+//   setSelected?: (rows: Row<T>[]) => void;
+//   selectedIds?: number[];
+//   isLoading: boolean;
+//   enableSelection?: boolean;
+//   tableState: TableState;
+//   setTableState: (
+//     value: TableState | ((val: TableState) => TableState)
+//   ) => void;
+//   tableContainerStyle?: SxProps<Theme>;
+//   overrideColors?: OverrideColors | undefined;
+//   rowCount?: number;
+// }
 
 export function TuTable<T extends Record<string, unknown>>(
   props: PropsWithChildren<TableProperties<T>>
@@ -94,6 +92,7 @@ export function TuTable<T extends Record<string, unknown>>(
     tableState,
     tableContainerStyle,
     overrideColors,
+    enablePagination,
     manualPagination,
     rowCount,
   } = props;
@@ -197,13 +196,15 @@ export function TuTable<T extends Record<string, unknown>>(
     ...(manualPagination ? { onPaginationChange: updatePagination } : {}),
     getExpandedRowModel: getExpandedRowModel(),
     getGroupedRowModel: getGroupedRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
+    ...(enablePagination
+      ? { getPaginationRowModel: getPaginationRowModel() }
+      : {}),
     getFilteredRowModel: getFilteredRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
     getFacetedMinMaxValues: getFacetedMinMaxValues(),
-    debugTable: false,
+    debugTable: true,
   });
 
   function getRowClassName(row: Row<T>) {
@@ -315,7 +316,7 @@ export function TuTable<T extends Record<string, unknown>>(
           </TableBody>
         </Table>
       </TableContainer>
-      <Pagination table={table} />
+      {enablePagination ? <Pagination table={table} /> : null}
     </>
   );
 }

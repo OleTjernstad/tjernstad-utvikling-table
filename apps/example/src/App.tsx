@@ -76,24 +76,25 @@ export default function App() {
     pagination: { pageIndex: 0, pageSize: 20 },
   } as TableState);
 
-  useEffect(() => {
-    const pageNumber = tableState?.pagination?.pageIndex ?? 0;
-    const pageSize = tableState?.pagination?.pageSize ?? 10;
+  // useEffect(() => {
+  //   const pageNumber = tableState?.pagination?.pageIndex ?? 0;
+  //   const pageSize = tableState?.pagination?.pageSize ?? 10;
 
-    setUsers(
-      usersData.slice(pageNumber * pageSize, (pageNumber + 1) * pageSize)
-    );
-  }, [usersData, tableState.pagination]);
+  //   setUsers(
+  //     usersData.slice(pageNumber * pageSize, (pageNumber + 1) * pageSize)
+  //   );
+  // }, [usersData, tableState.pagination]);
 
   useEffect(() => {
     const load = async () => {
       await new Promise((r) => setTimeout(r, 1000));
-      const pageNumber = tableState?.pagination?.pageIndex ?? 0;
-      const pageSize = tableState?.pagination?.pageSize ?? 10;
+      // const pageNumber = tableState?.pagination?.pageIndex ?? 0;
+      // const pageSize = tableState?.pagination?.pageSize ?? 10;
 
-      setUsers(
-        usersData.slice(pageNumber * pageSize, (pageNumber + 1) * pageSize)
-      );
+      // setUsers(
+      //   usersData.slice(pageNumber * pageSize, (pageNumber + 1) * pageSize)
+      // );
+      setUsers(usersData);
       setIsLoading(false);
     };
     load();
@@ -109,11 +110,10 @@ export default function App() {
           isLoading={isLoading}
           setTableState={setTableState}
           tableState={tableState}
+          enableSelection
           selectedIds={selected}
           setSelected={updateSelected}
-          enableSelection
-          manualPagination
-          rowCount={usersData.length}
+          enablePagination
         />
       </Box>
     </Container>
