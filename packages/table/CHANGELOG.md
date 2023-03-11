@@ -1,5 +1,11 @@
 # @tjernstad-utvikling/table
 
+## 0.1.2
+
+### Patch Changes
+
+- findIndex
+
 ## 0.1.1
 
 ### Patch Changes
