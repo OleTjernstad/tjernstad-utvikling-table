@@ -1,16 +1,28 @@
 # @tjernstad-utvikling/table
 
-## 0.1.6
+## 0.1.5
 
 ### Patch Changes
 
-- cjs
+- named import file
+
+## 0.1.4
+
+### Patch Changes
+
+- .js import
+
+## 0.1.3
+
+### Patch Changes
+
+- fix mui import
 
 ## 0.1.2
 
 ### Patch Changes
 
-- cjs
+- findIndex
 
 ## 0.1.1
 
