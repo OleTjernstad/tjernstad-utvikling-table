@@ -2,24 +2,24 @@
 import { Column, Table } from "@tanstack/react-table";
 import React, { ReactElement } from "react";
 
-import Button from "@mui/material/Button";
+import Button from "@mui/material/Button/index.js";
 import ClearIcon from "@mui/icons-material/Clear";
 import { ColumnFilter } from "../components/columFilter";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogTitle from "@mui/material/DialogTitle";
-import FormControl from "@mui/material/FormControl";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormGroup from "@mui/material/FormGroup";
-import FormLabel from "@mui/material/FormLabel";
-import IconButton from "@mui/material/IconButton";
+import Dialog from "@mui/material/Dialog/index.js";
+import DialogActions from "@mui/material/DialogActions/index.js";
+import DialogContent from "@mui/material/DialogContent/index.js";
+import DialogTitle from "@mui/material/DialogTitle/index.js";
+import FormControl from "@mui/material/FormControl/index.js";
+import FormControlLabel from "@mui/material/FormControlLabel/index.js";
+import FormGroup from "@mui/material/FormGroup/index.js";
+import FormLabel from "@mui/material/FormLabel/index.js";
+import IconButton from "@mui/material/IconButton/index.js";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
+import Menu from "@mui/material/Menu/index.js";
+import MenuItem from "@mui/material/MenuItem/index.js";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import Switch from "@mui/material/Switch";
+import Switch from "@mui/material/Switch/index.js";
 
 type ColumnHidePageProps<T extends Record<string, unknown>> = {
   instance: Table<T>;

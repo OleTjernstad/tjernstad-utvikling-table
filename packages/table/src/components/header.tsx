@@ -8,9 +8,9 @@ import { ColumnAction } from "../utils";
 import { FilterRemove } from "./columFilter";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import React from "react";
-import TableCell from "@mui/material/TableCell";
-import TableSortLabel from "@mui/material/TableSortLabel";
-import Tooltip from "@mui/material/Tooltip";
+import TableCell from "@mui/material/TableCell/index.js";
+import TableSortLabel from "@mui/material/TableSortLabel/index.js";
+import Tooltip from "@mui/material/Tooltip/index.js";
 
 interface HeaderCellProps<T extends {}> {
   header: Header<T, unknown>;

@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/ban-types */
-import IconButton from "@mui/material/IconButton";
+import IconButton from "@mui/material/IconButton/index.js";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
-import MenuItem from "@mui/material/MenuItem";
+import MenuItem from "@mui/material/MenuItem/index.js";
 import React from "react";
 import { Table } from "@tanstack/react-table";
-import TextField from "@mui/material/TextField";
+import TextField from "@mui/material/TextField/index.js";
 
 interface PaginationProps<T extends {}> {
   table: Table<T>;
