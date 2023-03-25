@@ -3,7 +3,7 @@ import { Column, Table } from "@tanstack/react-table";
 import React, { ReactElement } from "react";
 
 import Button from "@mui/material/Button/index.js";
-import ClearIcon from "@mui/icons-material/Clear";
+import ClearIcon from "@mui/icons-material/Clear.js";
 import { ColumnFilter } from "../components/columFilter";
 import Dialog from "@mui/material/Dialog/index.js";
 import DialogActions from "@mui/material/DialogActions/index.js";
@@ -14,11 +14,11 @@ import FormControlLabel from "@mui/material/FormControlLabel/index.js";
 import FormGroup from "@mui/material/FormGroup/index.js";
 import FormLabel from "@mui/material/FormLabel/index.js";
 import IconButton from "@mui/material/IconButton/index.js";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown.js";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp.js";
 import Menu from "@mui/material/Menu/index.js";
 import MenuItem from "@mui/material/MenuItem/index.js";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
+import MoreVertIcon from "@mui/icons-material/MoreVert.js";
 import Switch from "@mui/material/Switch/index.js";
 
 type ColumnHidePageProps<T extends Record<string, unknown>> = {

@@ -6,8 +6,8 @@ import { CheckboxCell } from "./selection";
 import React from "react";
 import TableCellMui from "@mui/material/TableCell/index.js";
 import TableRowMui from "@mui/material/TableRow/index.js";
-import UnfoldLessIcon from "@mui/icons-material/UnfoldLess";
-import UnfoldMoreIcon from "@mui/icons-material/UnfoldMore";
+import UnfoldLessIcon from "@mui/icons-material/UnfoldLess.js";
+import UnfoldMoreIcon from "@mui/icons-material/UnfoldMore.js";
 
 interface TableRowProps<T extends {}> {
   row: Row<T>;

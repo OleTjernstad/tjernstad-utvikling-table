@@ -3,7 +3,7 @@ import { Column, Table } from "@tanstack/react-table";
 import { useEffect, useMemo, useState } from "react";
 
 import Autocomplete from "@mui/material/Autocomplete/index.js";
-import FilterAltOffIcon from "@mui/icons-material/FilterAltOff";
+import FilterAltOffIcon from "@mui/icons-material/FilterAltOff.js";
 import IconButton from "@mui/material/IconButton/index.js";
 import React from "react";
 import TextField from "@mui/material/TextField/index.js";
