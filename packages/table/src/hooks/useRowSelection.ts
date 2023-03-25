@@ -32,8 +32,6 @@ export function useRowSelection<T>({
       const selectIndex = selectedRowIds.indexOf(row.id);
       const isSelected = selectIndex > -1;
 
-      console.log({ isSelected });
-
       let updatedSelectedRows = [...(selectedRows ? selectedRows : [])];
 
       if (event.ctrlKey || event.metaKey || !event.shiftKey) {
@@ -50,16 +48,15 @@ export function useRowSelection<T>({
 
         if (lastSelectedRow.current) {
           // Calculate array indexes and reset selected rows
-          console.log("row model", table.getRowModel().rows);
-          console.log("last selected row", lastSelectedRow.current);
-          console.log("lastRowUnchecked", lastRowUnchecked.current);
 
           const lastIndex = table
             .getRowModel()
-            .rows.indexOf(lastSelectedRow.current);
-          const currentIndex = table.getRowModel().rows.indexOf(row);
+            .rows.findIndex((r) => r.index === lastSelectedRow.current?.index);
 
-          console.log({ lastIndex, currentIndex });
+          const currentIndex = table
+            .getRowModel()
+            .rows.findIndex((r) => r.index === row.index);
+
           // If last row was unchecked remove range
           if (lastRowUnchecked.current) {
             if (lastIndex < currentIndex) {
