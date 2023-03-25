@@ -27,23 +27,23 @@ import {
   useState,
 } from "react";
 
-import Box from "@mui/material/Box/index.js";
+import Box from "@mui/material/Box/Box.js";
 import { CheckboxHeaderCell } from "./components/selection";
 import { ColumnSelectRT } from "./utils";
 import { DebouncedInput } from "./components/input";
 import { HeaderCell } from "./components/header";
-import LinearProgress from "@mui/material/LinearProgress/index.js";
+import LinearProgress from "@mui/material/LinearProgress/LinearProgress.js";
 import { Pagination } from "./components/pagination";
-import Paper from "@mui/material/Paper/index.js";
+import Paper from "@mui/material/Paper/Paper.js";
 import React from "react";
-import Table from "@mui/material/Table/index.js";
-import TableBody from "@mui/material/TableBody/index.js";
-import TableContainer from "@mui/material/TableContainer/index.js";
-import TableHead from "@mui/material/TableHead/index.js";
+import Table from "@mui/material/Table/Table.js";
+import TableBody from "@mui/material/TableBody/TableBody.js";
+import TableContainer from "@mui/material/TableContainer/TableContainer.js";
+import TableHead from "@mui/material/TableHead/TableHead.js";
 import { TableProperties } from "./types";
 import { TableRootStyle } from "./style";
 import { TableRow } from "./components/group";
-import TableRowMui from "@mui/material/TableRow/index.js";
+import TableRowMui from "@mui/material/TableRow/TableRow.js";
 import { rankItem } from "@tanstack/match-sorter-utils";
 import { useRowSelection } from "./hooks/useRowSelection";
 import { useTheme } from "@mui/material";
