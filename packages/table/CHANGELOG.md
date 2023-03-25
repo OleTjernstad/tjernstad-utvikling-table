@@ -1,5 +1,11 @@
 # @tjernstad-utvikling/table
 
+## 0.1.4
+
+### Patch Changes
+
+- .js import
+
 ## 0.1.3
 
 ### Patch Changes
