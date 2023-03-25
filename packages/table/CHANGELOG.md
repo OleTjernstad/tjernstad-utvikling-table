@@ -1,5 +1,11 @@
 # @tjernstad-utvikling/table
 
+## 0.1.5
+
+### Patch Changes
+
+- named import file
+
 ## 0.1.4
 
 ### Patch Changes
