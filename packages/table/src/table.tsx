@@ -64,46 +64,32 @@ const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
 export function TuTable<T extends Record<string, unknown>>(
   props: PropsWithChildren<TableProperties<T>>
 ): ReactElement {
-  const {
-    columns,
-    children,
-    getRowStyling,
-    setSelected,
-    selectedIds,
-    enableSelection,
-    setTableState,
-    tableState,
-    tableContainerStyle,
-    overrideColors,
-    enablePagination,
-    manualPagination,
-    rowCount,
-  } = props;
-
   const theme = useTheme();
 
   const pageCount = useMemo(() => {
-    if (rowCount && manualPagination) {
-      return Math.ceil(rowCount / (tableState.pagination?.pageSize ?? 10));
+    if (props.rowCount && props.manualPagination) {
+      return Math.ceil(
+        props.rowCount / (props.tableState.pagination?.pageSize ?? 10)
+      );
     }
     return undefined;
-  }, [rowCount, tableState?.pagination?.pageSize]);
+  }, [props.rowCount, props.tableState?.pagination?.pageSize]);
 
   const [globalFilter, setGlobalFilter] = React.useState("");
 
   function updateGrouping(update: Updater<GroupingState>) {
     const grouping =
-      update instanceof Function ? update(tableState.grouping) : update;
-    setTableState((prev) => {
+      update instanceof Function ? update(props.tableState.grouping) : update;
+    props.setTableState((prev) => {
       return { ...prev, grouping };
     });
   }
 
   function updatePagination(update: Updater<PaginationState>) {
     const pagination =
-      update instanceof Function ? update(tableState.pagination) : update;
-    if (manualPagination) {
-      setTableState((prev) => {
+      update instanceof Function ? update(props.tableState.pagination) : update;
+    if (props.manualPagination) {
+      props.setTableState((prev) => {
         return {
           ...prev,
           pagination,
@@ -114,33 +100,37 @@ export function TuTable<T extends Record<string, unknown>>(
 
   function updateColumnFilters(update: Updater<ColumnFiltersState>) {
     const columnFilters =
-      update instanceof Function ? update(tableState.columnFilters) : update;
-    setTableState((prev) => {
+      update instanceof Function
+        ? update(props.tableState.columnFilters)
+        : update;
+    props.setTableState((prev) => {
       return { ...prev, columnFilters };
     });
   }
 
   function updateVisibility(update: Updater<VisibilityState>) {
     const columnVisibility =
-      update instanceof Function ? update(tableState.columnVisibility) : update;
-    setTableState((prev) => {
+      update instanceof Function
+        ? update(props.tableState.columnVisibility)
+        : update;
+    props.setTableState((prev) => {
       return { ...prev, columnVisibility };
     });
   }
   function updateExpanded(update: Updater<ExpandedState>) {
     const expanded =
-      update instanceof Function ? update(tableState.expanded) : update;
+      update instanceof Function ? update(props.tableState.expanded) : update;
 
-    setTableState((prev) => {
+    props.setTableState((prev) => {
       return { ...prev, expanded };
     });
   }
 
   function updateSorting(update: Updater<SortingState>) {
     const sorting =
-      update instanceof Function ? update(tableState.sorting) : update;
+      update instanceof Function ? update(props.tableState.sorting) : update;
 
-    setTableState((prev) => {
+    props.setTableState((prev) => {
       return { ...prev, sorting };
     });
   }
@@ -148,24 +138,29 @@ export function TuTable<T extends Record<string, unknown>>(
   /**Table instance */
   const table = useReactTable<T>({
     ...props,
-    columns,
     filterFns: {
       fuzzy: fuzzyFilter,
     },
     getCoreRowModel: getCoreRowModel(),
     autoResetExpanded: false,
     state: {
-      ...(tableState.sorting ? { sorting: tableState.sorting } : {}),
-      expanded: tableState.expanded ?? {},
-      columnVisibility: tableState.columnVisibility ?? {},
-      ...(tableState.columnFilters
-        ? { columnFilters: tableState.columnFilters }
+      ...(props.tableState.sorting
+        ? { sorting: props.tableState.sorting }
         : {}),
-      ...(tableState.grouping ? { grouping: tableState.grouping } : {}),
-      ...(manualPagination ? { pagination: tableState.pagination } : {}),
+      expanded: props.tableState.expanded ?? {},
+      columnVisibility: props.tableState.columnVisibility ?? {},
+      ...(props.tableState.columnFilters
+        ? { columnFilters: props.tableState.columnFilters }
+        : {}),
+      ...(props.tableState.grouping
+        ? { grouping: props.tableState.grouping }
+        : {}),
+      ...(props.manualPagination
+        ? { pagination: props.tableState.pagination }
+        : {}),
       globalFilter,
     },
-    ...(manualPagination && pageCount ? { pageCount } : {}),
+    ...(props.manualPagination && pageCount ? { pageCount } : {}),
     enableRowSelection: true,
     enableMultiRowSelection: true,
     enableSubRowSelection: true,
@@ -176,10 +171,10 @@ export function TuTable<T extends Record<string, unknown>>(
     onColumnVisibilityChange: updateVisibility,
     onExpandedChange: updateExpanded,
     onSortingChange: updateSorting,
-    ...(manualPagination ? { onPaginationChange: updatePagination } : {}),
+    ...(props.manualPagination ? { onPaginationChange: updatePagination } : {}),
     getExpandedRowModel: getExpandedRowModel(),
     getGroupedRowModel: getGroupedRowModel(),
-    ...(enablePagination
+    ...(props.enablePagination
       ? { getPaginationRowModel: getPaginationRowModel() }
       : {}),
     getFilteredRowModel: getFilteredRowModel(),
@@ -191,8 +186,8 @@ export function TuTable<T extends Record<string, unknown>>(
   });
 
   function getRowClassName(row: Row<T>) {
-    if (getRowStyling !== undefined) {
-      const className = getRowStyling(row);
+    if (props.getRowStyling !== undefined) {
+      const className = props.getRowStyling(row);
       if (className !== undefined) {
         return `tu-table--${className}`;
       }
@@ -203,30 +198,30 @@ export function TuTable<T extends Record<string, unknown>>(
   const [selectedRows, setSelectedRows] = useState<Row<T>[]>([]);
 
   useEffect(() => {
-    if (selectedIds) {
+    if (props.selectedIds) {
       setSelectedRows(
         table.getPreFilteredRowModel().rows.filter((r) => {
-          return selectedIds.find((o) => o === r?.getValue("id"));
+          return props.selectedIds?.find((o) => o === r?.getValue("id"));
         })
       );
     }
-  }, [selectedIds, table]);
+  }, [props.selectedIds, table]);
 
   useEffect(() => {
-    if (selectedIds && manualPagination && props.data)
+    if (props.selectedIds && props.manualPagination && props.data)
       setSelectedRows(
         table.getPreFilteredRowModel().rows.filter((r) => {
-          return selectedIds.find((o) => o === r.getValue("id"));
+          return props.selectedIds?.find((o) => o === r.getValue("id"));
         })
       );
-  }, [selectedIds, table, manualPagination, props.data]);
+  }, [props.selectedIds, table, props.manualPagination, props.data]);
 
   const handleRowSelection = useRowSelection({
     selectedRows,
     setSelectedRows,
     table,
-    enableSelection,
-    setSelected,
+    enableSelection: props.enableSelection,
+    setSelected: props.setSelected,
   });
 
   return (
@@ -234,8 +229,8 @@ export function TuTable<T extends Record<string, unknown>>(
       <TableContainer
         component={Paper}
         sx={{
-          ...TableRootStyle({ theme, overrideColors }),
-          ...(tableContainerStyle ?? {}),
+          ...TableRootStyle({ theme, overrideColors: props.overrideColors }),
+          ...(props.tableContainerStyle ?? {}),
         }}
       >
         <Box sx={{ display: "flex", height: "4em" }}>
@@ -247,7 +242,7 @@ export function TuTable<T extends Record<string, unknown>>(
               onChange={(value) => setGlobalFilter(String(value))}
             />
           </Box>
-          <Box sx={{ flexGrow: 1 }}>{children}</Box>
+          <Box sx={{ flexGrow: 1 }}>{props.children}</Box>
           <ColumnSelectRT instance={table} />
         </Box>
         <Table
@@ -259,9 +254,9 @@ export function TuTable<T extends Record<string, unknown>>(
           <TableHead>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRowMui key={headerGroup.id}>
-                {enableSelection && (
+                {props.enableSelection && (
                   <CheckboxHeaderCell
-                    setSelected={setSelected}
+                    setSelected={props.setSelected}
                     setSelectedRows={setSelectedRows}
                     selectedRows={selectedRows}
                     table={table}
@@ -286,11 +281,11 @@ export function TuTable<T extends Record<string, unknown>>(
             {table.getRowModel().rows.map((row) => {
               return (
                 <TableRow<T>
-                  enableSelection={enableSelection}
+                  enableSelection={props.enableSelection}
                   handleRowSelection={handleRowSelection}
                   key={row.id}
                   row={row}
-                  state={tableState}
+                  state={props.tableState}
                   isSelected={!!selectedRows?.find((r) => r.id === row.id)}
                   rowClassName={getRowClassName(row)}
                 />
@@ -299,7 +294,7 @@ export function TuTable<T extends Record<string, unknown>>(
           </TableBody>
         </Table>
       </TableContainer>
-      {enablePagination ? <Pagination table={table} /> : null}
+      {props.enablePagination ? <Pagination table={table} /> : null}
     </>
   );
 }

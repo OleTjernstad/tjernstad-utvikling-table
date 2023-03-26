@@ -7,8 +7,6 @@ import typescript from "@rollup/plugin-typescript";
 export default [
   {
     external: [
-      "@mui/icons-material",
-      "@mui/material",
       "@tanstack/match-sorter-utils",
       "@tanstack/react-table",
       "@tanstack/react-virtual",
@@ -17,12 +15,7 @@ export default [
     input: "./src/index.ts",
     output: [
       {
-        file: "./dist/cjs/index.js",
-        format: "cjs",
-        sourcemap: true,
-      },
-      {
-        file: "./dist/esm/tu-table.esm.js",
+        file: "./dist/tu-table.esm.js",
         format: "esm",
         sourcemap: true,
       },
@@ -39,7 +32,7 @@ export default [
     ],
   },
   {
-    input: "./dist/esm/types/index.d.ts",
+    input: "./dist/types/index.d.ts",
     output: [{ file: "./dist/index.d.ts", format: "esm" }],
     plugins: [dts()],
   },

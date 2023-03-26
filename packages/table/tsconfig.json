@@ -1,6 +1,6 @@
 {
  "include": ["src"],
-  "exclude": ["node_modules", "dist", "example", "rollup.config.js"],
+  "exclude": ["node_modules", "dist", "example", "rollup.config.mjs"],
   "compilerOptions": {
     "declaration": true,
     "declarationDir": "types",
