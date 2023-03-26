@@ -7,15 +7,21 @@ import typescript from "@rollup/plugin-typescript";
 export default [
   {
     external: [
+      "@mui/icons-material",
+      "@mui/material",
       "@tanstack/match-sorter-utils",
       "@tanstack/react-table",
-      "@tanstack/react-virtual",
       "react",
     ],
-    input: "./src/index.ts",
+    input: "./src/table.tsx",
     output: [
       {
-        file: "./dist/tu-table.esm.js",
+        file: "./dist/cjs/index.cjs",
+        format: "cjs",
+        sourcemap: true,
+      },
+      {
+        file: "./dist/esm/tu-table.esm.js",
         format: "esm",
         sourcemap: true,
       },
@@ -24,7 +30,6 @@ export default [
       babel({
         exclude: "node_modules/**",
         presets: ["@babel/preset-react"],
-        babelHelpers: "bundled",
       }),
       external(),
       resolve(),
@@ -32,7 +37,7 @@ export default [
     ],
   },
   {
-    input: "./dist/types/index.d.ts",
+    input: "./dist/esm/types/index.d.ts",
     output: [{ file: "./dist/index.d.ts", format: "esm" }],
     plugins: [dts()],
   },

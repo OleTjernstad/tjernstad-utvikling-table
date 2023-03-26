@@ -1,5 +1,11 @@
 # @tjernstad-utvikling/table
 
+## 0.1.8
+
+### Patch Changes
+
+- build
+
 ## 0.1.7
 
 ### Patch Changes

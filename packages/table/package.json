@@ -1,16 +1,8 @@
 {
   "name": "@tjernstad-utvikling/table",
   "private": false,
-  "version": "0.1.7",
+  "version": "0.1.8",
   "author": "Ole Tjernstad",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "typings": "./dist/index.d.ts",
-  "type": "module",
-  "files": [
-    "dist",
-    "src"
-  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/tjernstad-utvikling/tjernstad-utvikling-packages"
@@ -20,12 +12,24 @@
     "url": "https://github.com/tjernstad-utvikling/tjernstad-utvikling-packages/issues"
   },
   "scripts": {
-    "lib:build": "tsc",
+    "lib:build": "rm -rf dist && rollup -c && size-limit",
     "size": "size-limit"
   },
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/tu-table.esm.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "locales",
+    "src"
+  ],
   "size-limit": [
     {
-      "path": "dist/index.js",
+      "path": "dist/cjs/index.cjs",
+      "limit": "54 KB"
+    },
+    {
+      "path": "dist/esm/tu-table.esm.js",
       "limit": "50 KB"
     }
   ],

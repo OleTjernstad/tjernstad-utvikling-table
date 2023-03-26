@@ -298,3 +298,5 @@ export function TuTable<T extends Record<string, unknown>>(
     </>
   );
 }
+
+export { ColorStyleOptions, OverrideColors } from "./style";
