@@ -1,5 +1,17 @@
 # @tjernstad-utvikling/table
 
+## 0.1.11
+
+### Patch Changes
+
+- test
+
+## 0.1.10
+
+### Patch Changes
+
+- parcel
+
 ## 0.1.9
 
 ### Patch Changes

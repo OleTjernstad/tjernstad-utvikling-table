@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import { Cell, Row, TableState, flexRender } from "@tanstack/react-table";
 
-import Button from "@mui/material/Button/Button.js";
+import Button from "@mui/material/Button";
 import { CheckboxCell } from "./selection";
 import React from "react";
-import TableCellMui from "@mui/material/TableCell/TableCell.js";
-import TableRowMui from "@mui/material/TableRow/TableRow.js";
+import TableCellMui from "@mui/material/TableCell";
+import TableRowMui from "@mui/material/TableRow";
 import UnfoldLessIcon from "@mui/icons-material/UnfoldLess.js";
 import UnfoldMoreIcon from "@mui/icons-material/UnfoldMore.js";
 

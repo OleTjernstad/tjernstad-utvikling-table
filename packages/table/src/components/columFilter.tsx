@@ -2,12 +2,12 @@
 import { Column, Table } from "@tanstack/react-table";
 import { useEffect, useMemo, useState } from "react";
 
-import Autocomplete from "@mui/material/Autocomplete/Autocomplete.js";
+import Autocomplete from "@mui/material/Autocomplete/";
 import FilterAltOffIcon from "@mui/icons-material/FilterAltOff.js";
-import IconButton from "@mui/material/IconButton/IconButton.js";
+import IconButton from "@mui/material/IconButton";
 import React from "react";
-import TextField from "@mui/material/TextField/TextField.js";
-import Tooltip from "@mui/material/Tooltip/Tooltip.js";
+import TextField from "@mui/material/TextField";
+import Tooltip from "@mui/material/Tooltip";
 
 interface FilterProps<T extends {}> {
   column: Column<T, unknown>;

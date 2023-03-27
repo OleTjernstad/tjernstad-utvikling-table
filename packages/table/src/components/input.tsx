@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import TextField from "@mui/material/TextField/TextField.js";
+import TextField from "@mui/material/TextField";
 
 // A debounced input react component
 export function DebouncedInput({

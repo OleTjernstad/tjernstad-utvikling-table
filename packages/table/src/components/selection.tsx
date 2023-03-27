@@ -1,8 +1,8 @@
 import { Row, Table } from "@tanstack/react-table";
 
-import Checkbox from "@mui/material/Checkbox/Checkbox.js";
+import Checkbox from "@mui/material/Checkbox";
 import React from "react";
-import TableCell from "@mui/material/TableCell/TableCell.js";
+import TableCell from "@mui/material/TableCell";
 
 interface CheckboxCellProps<T extends {}> {
   isSelected: boolean;
