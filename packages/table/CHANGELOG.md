@@ -1,5 +1,11 @@
 # @tjernstad-utvikling/table
 
+## 0.1.12
+
+### Patch Changes
+
+- revert
+
 ## 0.1.8
 
 ### Patch Changes

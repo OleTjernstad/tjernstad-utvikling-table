@@ -1,7 +1,7 @@
 {
   "name": "@tjernstad-utvikling/table",
   "private": false,
-  "version": "0.1.8",
+  "version": "0.1.12",
   "author": "Ole Tjernstad",
   "repository": {
     "type": "git",
@@ -19,9 +19,7 @@
   "module": "dist/esm/tu-table.esm.js",
   "typings": "dist/index.d.ts",
   "files": [
-    "dist",
-    "locales",
-    "src"
+    "dist"
   ],
   "size-limit": [
     {
@@ -37,10 +35,8 @@
     "node": ">=14"
   },
   "dependencies": {
-    "@tanstack/match-sorter-utils": "^8.7.6",
-    "@tanstack/react-table": "^8.7.9",
-    "@mui/icons-material": "^5.11.0",
-    "@mui/material": "^5.11.3"
+    "@tanstack/match-sorter-utils": "^8.8.4",
+    "@tanstack/react-table": "^8.8.4"
   },
   "devDependencies": {
     "@babel/core": "^7.21.0",
@@ -51,6 +47,8 @@
     "@size-limit/preset-small-lib": "^8.2.4",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
+    "@mui/icons-material": "^5.11.11",
+    "@mui/material": "^5.11.14",
     "babel-core": "^6.26.3",
     "babel-runtime": "^6.26.0",
     "eslint": "7.32.0",
@@ -67,12 +65,12 @@
   },
   "license": "MIT",
   "peerDependencies": {
-    "@mui/icons-material": "*",
-    "@mui/material": "*",
-    "@tanstack/match-sorter-utils": "*",
-    "@tanstack/react-table": "*",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "@emotion/react": ">=11",
+    "@emotion/styled": ">=11",
+    "@mui/icons-material": ">=5",
+    "@mui/material": ">=5",
+    "react": ">=17.0",
+    "react-dom": ">=17.0"
   },
   "keywords": [
     "react-table",
