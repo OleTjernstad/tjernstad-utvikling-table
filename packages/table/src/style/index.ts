@@ -22,6 +22,8 @@ export interface OverrideColors {
     hover: string;
   };
 }
+export const OverrideColors: OverrideColors  = {}
+
 interface TableRootStyleProps {
   overrideColors?: OverrideColors | undefined;
   theme: Theme;

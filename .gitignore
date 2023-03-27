@@ -12,6 +12,7 @@ coverage
 .next/
 out/
 build
+.parcel-cache/*
 
 # misc
 .DS_Store
