@@ -17,7 +17,6 @@
     "publish-packages": "turbo run lib:build lint --filter @tjernstad-utvikling/* && changeset version && changeset publish"
   },
   "devDependencies": {
-    "eslint-config-custom": "workspace:*",
     "prettier": "latest",
     "turbo": "latest"
   },
@@ -27,7 +26,7 @@
   "dependencies": {
     "@changesets/cli": "^2.26.0"
   },
-  "packageManager": "pnpm@7.28.0",
+  "packageManager": "yarn@1.22.19",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "access": "public"

@@ -1,5 +1,11 @@
 # @tjernstad-utvikling/table
 
+## 0.1.9
+
+### Patch Changes
+
+- peers
+
 ## 0.1.8
 
 ### Patch Changes

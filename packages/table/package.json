@@ -1,7 +1,7 @@
 {
   "name": "@tjernstad-utvikling/table",
   "private": false,
-  "version": "0.1.8",
+  "version": "0.1.9",
   "author": "Ole Tjernstad",
   "repository": {
     "type": "git",
@@ -37,42 +37,34 @@
     "node": ">=14"
   },
   "dependencies": {
-    "@tanstack/match-sorter-utils": "^8.7.6",
-    "@tanstack/react-table": "^8.7.9",
-    "@mui/icons-material": "^5.11.0",
-    "@mui/material": "^5.11.3"
+    "@tanstack/match-sorter-utils": "8.8.4",
+    "@tanstack/react-table": "8.8.4"
   },
   "devDependencies": {
-    "@babel/core": "^7.21.0",
-    "@babel/preset-react": "^7.18.6",
-    "@rollup/plugin-babel": "^6.0.3",
-    "@rollup/plugin-node-resolve": "^15.0.1",
-    "@rollup/plugin-typescript": "^11.0.0",
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/icons-material": "^5.11.11",
+    "@mui/material": "^5.11.14",
     "@size-limit/preset-small-lib": "^8.2.4",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
-    "babel-core": "^6.26.3",
-    "babel-runtime": "^6.26.0",
     "eslint": "7.32.0",
-    "eslint-config-custom": "workspace:*",
+    "eslint-config-custom": "*",
+    "parcel": "^2.8.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "rollup": "^3.18.0",
-    "rollup-plugin-copy": "^3.4.0",
-    "rollup-plugin-dts": "^5.2.0",
-    "rollup-plugin-peer-deps-external": "^2.2.4",
     "size-limit": "^8.2.4",
     "tslib": "^2.5.0",
     "typescript": "^4.9.3"
   },
   "license": "MIT",
   "peerDependencies": {
-    "@mui/icons-material": "*",
-    "@mui/material": "*",
-    "@tanstack/match-sorter-utils": "*",
-    "@tanstack/react-table": "*",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "@emotion/react": ">=11",
+    "@emotion/styled": ">=11",
+    "@mui/icons-material": ">=5",
+    "@mui/material": ">=5",
+    "react": ">=17.0",
+    "react-dom": ">=17.0"
   },
   "keywords": [
     "react-table",
