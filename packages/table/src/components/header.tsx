@@ -2,15 +2,13 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import { Header, Table, flexRender } from "@tanstack/react-table";
 
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown.js";
-import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp.js";
+import { ArrowDropDown } from "./icons/arrowDropDown";
+import { ArrowDropUp } from "./icons/arrowDropUp";
 import { ColumnAction } from "../utils";
 import { FilterRemove } from "./columFilter";
-import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight.js";
+import { KeyboardArrowRight } from "./icons/keyBoardArrowRight";
 import React from "react";
-import TableCell from "@mui/material/TableCell/TableCell.js";
-import TableSortLabel from "@mui/material/TableSortLabel/TableSortLabel.js";
-import Tooltip from "@mui/material/Tooltip/Tooltip.js";
+import { TableCell as TwTableCell } from "../components/ui/table";
 
 interface HeaderCellProps<T extends {}> {
   header: Header<T, unknown>;
@@ -23,7 +21,7 @@ export function HeaderCell<T extends {}>({
 }: HeaderCellProps<T>) {
   //   const { classes } = useTableStyles();
   return (
-    <TableCell
+    <TwTableCell
       //   className={classes.header}
       key={header.id}
       colSpan={header.colSpan}
@@ -69,8 +67,8 @@ export function HeaderCell<T extends {}>({
               </div>
             </Tooltip>{" "}
             {{
-              asc: <ArrowDropUpIcon />,
-              desc: <ArrowDropDownIcon />,
+              asc: <ArrowDropUp />,
+              desc: <ArrowDropDown />,
             }[header.column.getIsSorted() as string] ?? null}
             <FilterRemove column={header.column} table={table} />
             <div
@@ -84,6 +82,6 @@ export function HeaderCell<T extends {}>({
           </div>
         </>
       )}
-    </TableCell>
+    </TwTableCell>
   );
 }
