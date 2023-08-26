@@ -1,12 +1,8 @@
 import { ColumnDef, Row, TableState } from "@tanstack/react-table";
-import React, { useEffect, useMemo, useState } from "react";
+import  { useEffect, useMemo, useState } from "react";
 
-import BlockIcon from "@mui/icons-material/Block";
-import Box from "@mui/material/Box";
-import CheckIcon from "@mui/icons-material/Check";
-import Container from "@mui/material/Container";
 import { TableKey } from "./contracts/keys";
-import { TuTable } from "@tjernstad-utvikling/table";
+import { TuTable } from "@tjernstad-utvikling/table-tw";
 import { useTableState } from "./hooks/useTableState";
 import usersData from "./data.json";
 
@@ -101,9 +97,7 @@ export default function App() {
   }, []);
 
   return (
-    <Container maxWidth="lg">
-      {selected?.length}
-      <Box sx={{ my: 4 }}>
+
         <TuTable<Columns>
           columns={columns}
           data={data}
@@ -115,8 +109,7 @@ export default function App() {
           setSelected={updateSelected}
           enablePagination
         />
-      </Box>
-    </Container>
+     
   );
 }
 
