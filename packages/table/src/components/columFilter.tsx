@@ -1,13 +1,13 @@
-/* eslint-disable @typescript-eslint/ban-types */
 import { Column, Table } from "@tanstack/react-table";
+/* eslint-disable @typescript-eslint/ban-types */
+import { ComboBox, Item } from "@adobe/react-spectrum";
 import { useEffect, useMemo, useState } from "react";
 
-import Autocomplete from "@mui/material/Autocomplete/Autocomplete.js";
-import FilterAltOffIcon from "@mui/icons-material/FilterAltOff.js";
-import IconButton from "@mui/material/IconButton/IconButton.js";
+import { Button } from "./ui/button";
+import { FilterOff } from "./icons/filterOff";
 import React from "react";
-import TextField from "@mui/material/TextField/TextField.js";
-import Tooltip from "@mui/material/Tooltip/Tooltip.js";
+import { TextField } from "./ui/textField";
+import { Tooltip } from "./ui/tooltip";
 
 interface FilterProps<T extends {}> {
   column: Column<T, unknown>;
@@ -88,14 +88,9 @@ interface FilterRemoveProps<T extends {}> {
 export function FilterRemove<T extends {}>({ column }: FilterRemoveProps<T>) {
   if (column.getIsFiltered())
     return (
-      <Tooltip title={"Fjern filter for kolonne"}>
-        <IconButton
-          color="error"
-          onClick={() => column.setFilterValue("")}
-          size="small"
-        >
-          <FilterAltOffIcon fontSize="inherit" />
-        </IconButton>
+      <Tooltip tip={"Fjern filter for kolonne"}>
+        <Button variant="link" size={"sm"} onClick={() => column.setFilterValue("")}><FilterOff /></Button>
+
       </Tooltip>
     );
   return null;
@@ -112,7 +107,7 @@ function DebouncedInput({
   value: string | number;
   onChange: (value: string | number) => void;
   debounce?: number;
-  options?: string[];
+  options?:  {name: string}[];
   label: string;
 } & Omit<React.InputHTMLAttributes<HTMLInputElement>, "onChange">) {
   const [value, setValue] = useState(initialValue);
@@ -129,27 +124,34 @@ function DebouncedInput({
     return () => clearTimeout(timeout);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);
+  
   if (props.type === "text") {
-    return (
-      <Autocomplete
-        size="small"
-        id={props.id}
-        options={options ?? []}
-        onChange={(_, value) => {
-          setValue(value ?? "");
-        }}
-        sx={{ width: 300 }}
-        renderInput={(params) => <TextField {...params} label={label} />}
-      />
+    //https://react-spectrum.adobe.com/react-spectrum/ComboBox.html
+    return (<>
+      <ComboBox
+        label="Pick an engineering major"
+        defaultItems={options}
+        onSelectionChange={setValue}>
+        {item => <Item>{item.name}</Item>}
+      </ComboBox>
+      {/* // <Autocomplete
+      //   size="small"
+      //   id={props.id}
+      //   options={options ?? []}
+      //   onChange={(_, value) => {
+      //     setValue(value ?? "");
+      //   }}
+      //   sx={{ width: 300 }}
+      //   renderInput={(params) => <TextField {...params} label={label} />}
+      // />*/}</> 
     );
   }
 
   return (
     <TextField
-      size="small"
+      // size="small"
       id={props.id}
-      variant="outlined"
-      sx={{ width: 300 }}
+      className="w-300"
       label={label}
       value={value}
       onChange={(e) => setValue(e.target.value)}

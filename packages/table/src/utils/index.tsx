@@ -2,24 +2,7 @@
 import { Column, Table } from "@tanstack/react-table";
 import React, { ReactElement } from "react";
 
-import Button from "@mui/material/Button/Button.js";
-import ClearIcon from "@mui/icons-material/Clear.js";
 import { ColumnFilter } from "../components/columFilter";
-import Dialog from "@mui/material/Dialog/Dialog.js";
-import DialogActions from "@mui/material/DialogActions/DialogActions.js";
-import DialogContent from "@mui/material/DialogContent/DialogContent.js";
-import DialogTitle from "@mui/material/DialogTitle/DialogTitle.js";
-import FormControl from "@mui/material/FormControl/FormControl.js";
-import FormControlLabel from "@mui/material/FormControlLabel/FormControlLabel.js";
-import FormGroup from "@mui/material/FormGroup/FormGroup.js";
-import FormLabel from "@mui/material/FormLabel/FormLabel.js";
-import IconButton from "@mui/material/IconButton/IconButton.js";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown.js";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp.js";
-import Menu from "@mui/material/Menu/Menu.js";
-import MenuItem from "@mui/material/MenuItem/MenuItem.js";
-import MoreVertIcon from "@mui/icons-material/MoreVert.js";
-import Switch from "@mui/material/Switch/Switch.js";
 
 type ColumnHidePageProps<T extends Record<string, unknown>> = {
   instance: Table<T>;

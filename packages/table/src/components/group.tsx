@@ -1,13 +1,15 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import { Cell, Row, TableState, flexRender } from "@tanstack/react-table";
+import {
+  TableCell as TwTableCell,
+  TableRow as TwTableRow,
+} from "../components/ui/table";
 
-import Button from "@mui/material/Button/Button.js";
+import { Button } from "./ui/button";
 import { CheckboxCell } from "./selection";
 import React from "react";
-import TableCellMui from "@mui/material/TableCell/TableCell.js";
-import TableRowMui from "@mui/material/TableRow/TableRow.js";
-import UnfoldLessIcon from "@mui/icons-material/UnfoldLess.js";
-import UnfoldMoreIcon from "@mui/icons-material/UnfoldMore.js";
+import { UnfoldLess } from "./icons/unfoldLess";
+import { UnfoldMore } from "./icons/unfoldMore";
 
 interface TableRowProps<T extends {}> {
   row: Row<T>;
@@ -29,7 +31,7 @@ export function TableRow<T extends {}>({
   handleRowSelection,
 }: TableRowProps<T>) {
   return (
-    <TableRowMui
+    <TwTableRow
       data-row-index={row.index}
       data-row-is-group-row={row.getIsGrouped() ? 1 : undefined}
       style={{
@@ -49,7 +51,7 @@ export function TableRow<T extends {}>({
       {row.getVisibleCells().map((cell) => {
         return <TableCell key={cell.id} cell={cell} state={state} />;
       })}
-    </TableRowMui>
+    </TwTableRow>
   );
 }
 
@@ -60,7 +62,7 @@ interface TableCellProps<T extends {}> {
 export function TableCell<T extends {}>({ cell }: TableCellProps<T>) {
   if (cell.getIsGrouped() || cell.row.getIsGrouped())
     return (
-      <TableCellMui
+      <TwTableCell
         data-is-action={cell.column.id === "action" ? 1 : undefined}
         aria-describedby="rowActionDescription"
       >
@@ -74,16 +76,13 @@ export function TableCell<T extends {}>({ cell }: TableCellProps<T>) {
                   cursor: cell.row.getCanExpand() ? "pointer" : "normal",
                 },
               }}
-              variant="text"
-              size="small"
-              startIcon={
-                cell.row.getIsExpanded() ? (
-                  <UnfoldLessIcon />
-                ) : (
-                  <UnfoldMoreIcon />
-                )
-              }
+              variant="link"
+              size="sm"
             >
+              cell.row.getIsExpanded() ? (
+              <UnfoldLess />
+              ) : (
+              <UnfoldMore />)
               {flexRender(cell.column.columnDef.cell, cell.getContext())} (
               {cell.row.subRows.length})
             </Button>
@@ -98,12 +97,12 @@ export function TableCell<T extends {}>({ cell }: TableCellProps<T>) {
         ) : cell.getIsPlaceholder() ? null : cell.row.getIsGrouped() ? (
           <span></span>
         ) : null}
-      </TableCellMui>
+      </TwTableCell>
     );
 
   return (
-    <TableCellMui aria-describedby="rowActionDescription">
+    <TwTableCell aria-describedby="rowActionDescription">
       {flexRender(cell.column.columnDef.cell, cell.getContext())}
-    </TableCellMui>
+    </TwTableCell>
   );
 }
