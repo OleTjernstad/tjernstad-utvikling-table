@@ -1,8 +1,8 @@
 # Table
 
-This is a opinionated implementation of Tanstack table with Material UI table style.
+This is a opinionated implementation of Tanstack table with Tailwind CSS style.
 
- __Built with [Material UI V5](https://mui.com) and [TanStack Table V8](https://tanstack.com/table/v8)__
+ __Built with [Tailwind CSS](https://tailwindcss.com/) and [TanStack Table V8](https://tanstack.com/table/v8)__
 
 ## Get Started
 

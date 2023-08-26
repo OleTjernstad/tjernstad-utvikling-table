@@ -16,11 +16,6 @@ export default [
     input: "./src/table.tsx",
     output: [
       {
-        file: "./dist/cjs/index.cjs",
-        format: "cjs",
-        sourcemap: true,
-      },
-      {
         file: "./dist/esm/tu-table.esm.js",
         format: "esm",
         sourcemap: true,

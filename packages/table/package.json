@@ -1,7 +1,7 @@
 {
-  "name": "@tjernstad-utvikling/table",
+  "name": "@tjernstad-utvikling/table-tw",
   "private": false,
-  "version": "0.1.12",
+  "version": "0.0.1",
   "author": "Ole Tjernstad",
   "repository": {
     "type": "git",
@@ -47,8 +47,6 @@
     "@size-limit/preset-small-lib": "^8.2.4",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
-    "@mui/icons-material": "^5.11.11",
-    "@mui/material": "^5.11.14",
     "babel-core": "^6.26.3",
     "babel-runtime": "^6.26.0",
     "eslint": "7.32.0",
@@ -65,10 +63,6 @@
   },
   "license": "MIT",
   "peerDependencies": {
-    "@emotion/react": ">=11",
-    "@emotion/styled": ">=11",
-    "@mui/icons-material": ">=5",
-    "@mui/material": ">=5",
     "react": ">=17.0",
     "react-dom": ">=17.0"
   },
