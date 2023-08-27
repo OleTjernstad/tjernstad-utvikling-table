@@ -2,25 +2,26 @@
 import { Column, Table } from "@tanstack/react-table";
 import React, { ReactElement } from "react";
 
-import { ColumnFilter } from "../components/columFilter";
+// import { ColumnFilter } from "../components/columFilter";
 
 type ColumnHidePageProps<T extends Record<string, unknown>> = {
   instance: Table<T>;
 };
-export function ColumnSelectRT<T extends Record<string, unknown>>({
-  instance,
-}: ColumnHidePageProps<T>): ReactElement | null {
-  const [open, setOpen] = React.useState(false);
-  // const { allColumns, toggleHideColumn } = instance;
-  const hideableColumns = instance
-    .getAllColumns()
-    .filter((column) => !(column.id === "actions"));
-  const checkedCount = hideableColumns.reduce(
-    (acc, val) => acc + (val.getIsVisible() ? 0 : 1),
-    0
-  );
+export function ColumnSelectRT<
+  T extends Record<string, unknown>,
+>({} // instance,
+: ColumnHidePageProps<T>): ReactElement | null {
+  // const [open, setOpen] = React.useState(false);
+  // // const { allColumns, toggleHideColumn } = instance;
+  // const hideableColumns = instance
+  //   .getAllColumns()
+  //   .filter((column) => !(column.id === "actions"));
+  // const checkedCount = hideableColumns.reduce(
+  //   (acc, val) => acc + (val.getIsVisible() ? 0 : 1),
+  //   0
+  // );
 
-  const onlyOneOptionLeft = checkedCount + 1 >= hideableColumns.length;
+  // const onlyOneOptionLeft = checkedCount + 1 >= hideableColumns.length;
   return null;
   return (
     <>
@@ -82,15 +83,15 @@ interface ColumnActionProps<T extends {}> {
 export function ColumnAction<T extends {}>({} // column,
 // table,
 : ColumnActionProps<T>) {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  // const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
+  // const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  //   setAnchorEl(event.currentTarget);
+  // };
 
-  const close = () => {
-    setAnchorEl(null);
-  };
+  // const close = () => {
+  //   setAnchorEl(null);
+  // };
   return null;
   return (
     <>

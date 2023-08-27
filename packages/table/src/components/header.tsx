@@ -10,7 +10,7 @@ import { KeyboardArrowLeft } from "./icons/keyboardArrowLeft";
 import { KeyboardArrowRight } from "./icons/keyBoardArrowRight";
 import React from "react";
 import { Tooltip } from "./ui/tooltip";
-import { TableCell as TwTableCell } from "../components/ui/table";
+import { TableHead as TwTableCell } from "../components/ui/table";
 
 interface HeaderCellProps<T extends {}> {
   header: Header<T, unknown>;

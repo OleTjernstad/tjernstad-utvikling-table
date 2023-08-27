@@ -1,5 +1,5 @@
 import { ColumnDef, Row, TableState } from "@tanstack/react-table";
-import  { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { TableKey } from "./contracts/keys";
 import { TuTable } from "@tjernstad-utvikling/table-tw";
@@ -97,26 +97,28 @@ export default function App() {
   }, []);
 
   return (
-
-        <TuTable<Columns>
-          columns={columns}
-          data={data}
-          isLoading={isLoading}
-          setTableState={setTableState}
-          tableState={tableState}
-          enableSelection
-          selectedIds={selected}
-          setSelected={updateSelected}
-          enablePagination
-        />
-     
+    <div className="w-full p-10">
+      <TuTable<Columns>
+        columns={columns}
+        data={data}
+        isLoading={isLoading}
+        setTableState={setTableState}
+        tableState={tableState}
+        enableSelection
+        selectedIds={selected}
+        setSelected={updateSelected}
+        enablePagination
+      />
+    </div>
   );
 }
 
 const StatusCell = ({ isLocked }: { isLocked: boolean }) => {
   if (isLocked) {
-    return <BlockIcon fontSize="small" />;
+    return <p>block</p>;
+    // <BlockIcon fontSize="small" />;
   }
 
-  return <CheckIcon fontSize="small" />;
+  return <p>check</p>;
+  // <CheckIcon fontSize="small" />;
 };

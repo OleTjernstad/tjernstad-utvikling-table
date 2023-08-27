@@ -7,10 +7,15 @@ import typescript from "@rollup/plugin-typescript";
 export default [
   {
     external: [
-      "@mui/icons-material",
-      "@mui/material",
-      "@tanstack/match-sorter-utils",
-      "@tanstack/react-table",
+      "@adobe/react-spectrum",
+      // "@radix-ui/react-checkbox",
+      // "@radix-ui/react-slot",
+      // "@radix-ui/react-tooltip",
+      // "class-variance-authority",
+      // "clsx",
+      // "tailwind-merge",
+      // "@tanstack/match-sorter-utils",
+      // "@tanstack/react-table",
       "react",
     ],
     input: "./src/table.tsx",
@@ -32,9 +37,15 @@ export default [
       typescript(),
     ],
   },
-  {
-    input: "./dist/esm/types/index.d.ts",
-    output: [{ file: "./dist/index.d.ts", format: "esm" }],
-    plugins: [dts()],
-  },
+  // {
+  //   input: "./dist/esm/types/index.d.ts",
+  //   output: [
+  //     {
+  //       file: "./dist/index.d.ts",
+  //       format: "esm",
+  //       hoistTransitiveImports: false,
+  //     },
+  //   ],
+  //   plugins: [dts()],
+  // },
 ];

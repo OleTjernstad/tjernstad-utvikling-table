@@ -29,17 +29,16 @@ import {
 import {
   Table,
   TableBody,
-  TableHead,
+  TableHeader,
   TableRow as TwTableRow,
 } from "./components/ui/table";
 
 import { CheckboxHeaderCell } from "./components/selection";
-import { ColumnSelectRT } from "./utils";
-import { DebouncedInput } from "./components/input";
 import { HeaderCell } from "./components/header";
 import { Pagination } from "./components/pagination";
 import React from "react";
 import { TableProperties } from "./types";
+import { TableRootStyle } from "./style";
 import { TableRow } from "./components/group";
 import { rankItem } from "@tanstack/match-sorter-utils";
 import { useRowSelection } from "./hooks/useRowSelection";
@@ -220,14 +219,14 @@ export function TuTable<T extends Record<string, unknown>>(
 
   return (
     <>
-      {/* <TableContainer
-      // component={Paper}
-      // sx={{
+      <div
+
+      // style={{
       //   ...TableRootStyle({ theme, overrideColors: props.overrideColors }),
       //   ...(props.tableContainerStyle ?? {}),
       // }}
-      > */}
-      <div style={{ display: "flex", height: "4em" }}>
+      >
+        {/* <div style={{ display: "flex", height: "4em" }}>
         <div style={{ padding: 2 }}>
           <DebouncedInput
             label="Søk i alle kolonner"
@@ -238,51 +237,51 @@ export function TuTable<T extends Record<string, unknown>>(
         </div>
         <div style={{ flexGrow: 1 }}>{props.children}</div>
         <ColumnSelectRT instance={table} />
-      </div>
-      <Table style={{ overflowX: "auto" }} role="grid" aria-label="Table">
-        <TableHead>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <TwTableRow key={headerGroup.id}>
-              {props.enableSelection && (
-                <CheckboxHeaderCell
-                  setSelected={props.setSelected}
-                  setSelectedRows={setSelectedRows}
-                  selectedRows={selectedRows}
-                  table={table}
-                />
-              )}
-              {headerGroup.headers.map((header) => {
-                return (
-                  <HeaderCell key={header.id} header={header} table={table} />
-                );
-              })}
-            </TwTableRow>
-          ))}
-        </TableHead>
-        <TableBody>
-          {props.isLoading && (
+      </div> */}
+        <Table style={{ overflowX: "auto" }} role="grid" aria-label="Table">
+          <TableHeader>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <TwTableRow key={headerGroup.id}>
+                {props.enableSelection && (
+                  <CheckboxHeaderCell
+                    setSelected={props.setSelected}
+                    setSelectedRows={setSelectedRows}
+                    selectedRows={selectedRows}
+                    table={table}
+                  />
+                )}
+                {headerGroup.headers.map((header) => {
+                  return (
+                    <HeaderCell key={header.id} header={header} table={table} />
+                  );
+                })}
+              </TwTableRow>
+            ))}
+          </TableHeader>
+          <TableBody>
+            {/* {props.isLoading && (
             <tr>
-              {/* <td colSpan={table.getVisibleFlatColumns().length}>
+              <td colSpan={table.getVisibleFlatColumns().length}>
                   <LinearProgress sx={{ width: "100%" }} />
-                </td> */}
+                </td> 
             </tr>
-          )}
-          {table.getRowModel().rows.map((row) => {
-            return (
-              <TableRow<T>
-                enableSelection={props.enableSelection}
-                handleRowSelection={handleRowSelection}
-                key={row.id}
-                row={row}
-                state={props.tableState}
-                isSelected={!!selectedRows?.find((r) => r.id === row.id)}
-                rowClassName={getRowClassName(row)}
-              />
-            );
-          })}
-        </TableBody>
-      </Table>
-      {/* </TableContainer> */}
+          )} */}
+            {table.getRowModel().rows.map((row) => {
+              return (
+                <TableRow<T>
+                  enableSelection={props.enableSelection}
+                  handleRowSelection={handleRowSelection}
+                  key={row.id}
+                  row={row}
+                  state={props.tableState}
+                  isSelected={!!selectedRows?.find((r) => r.id === row.id)}
+                  rowClassName={getRowClassName(row)}
+                />
+              );
+            })}
+          </TableBody>
+        </Table>
+      </div>
       {props.enablePagination ? <Pagination table={table} /> : null}
     </>
   );

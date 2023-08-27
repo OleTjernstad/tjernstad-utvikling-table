@@ -1,9 +1,9 @@
 {
   "include": [
     "src",
-    "@types/node"
   ],
   "compilerOptions": {
+    "types": ["@adobe/react-spectrum"],
     "declaration": true,
     "declarationDir": "types",
     "emitDeclarationOnly": true,
