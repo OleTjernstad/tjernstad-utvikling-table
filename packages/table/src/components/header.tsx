@@ -6,8 +6,10 @@ import { ArrowDropDown } from "./icons/arrowDropDown";
 import { ArrowDropUp } from "./icons/arrowDropUp";
 import { ColumnAction } from "../utils";
 import { FilterRemove } from "./columFilter";
+import { KeyboardArrowLeft } from "./icons/keyboardArrowLeft";
 import { KeyboardArrowRight } from "./icons/keyBoardArrowRight";
 import React from "react";
+import { Tooltip } from "./ui/tooltip";
 import { TableCell as TwTableCell } from "../components/ui/table";
 
 interface HeaderCellProps<T extends {}> {
@@ -36,21 +38,24 @@ export function HeaderCell<T extends {}>({
             }}
           >
             {header.column.getCanGroup() ? (
-              <Tooltip title={"Grupper kolonne"}>
-                <TableSortLabel
-                  active
-                  {...{
-                    onClick: header.column.getToggleGroupingHandler(),
-                    style: {
-                      cursor: "pointer",
-                    },
-                  }}
-                  direction={header.column.getIsGrouped() ? "desc" : "asc"}
-                  IconComponent={KeyboardArrowRight}
-                />
-              </Tooltip>
+              <>
+                <Tooltip tip={"Grupper kolonne"}>
+                  <div
+                    {...{
+                      onClick: header.column.getToggleGroupingHandler(),
+                      style: {
+                        cursor: "pointer",
+                      },
+                    }}
+                  ></div>
+                </Tooltip>{" "}
+                {{
+                  asc: <KeyboardArrowRight />,
+                  desc: <KeyboardArrowLeft />,
+                }[header.column.getIsSorted() as string] ?? null}
+              </>
             ) : null}{" "}
-            <Tooltip title={"Sorter kolonne"}>
+            <Tooltip tip={"Sorter kolonne"}>
               <div
                 {...{
                   className: header.column.getCanSort()

@@ -1,4 +1,3 @@
-
 export interface OverrideColors {
   disabled?: {
     bg: string;
@@ -23,7 +22,7 @@ export interface OverrideColors {
 }
 interface TableRootStyleProps {
   overrideColors?: OverrideColors | undefined;
-  theme: Theme;
+  theme: any;
 }
 export function TableRootStyle({ overrideColors, theme }: TableRootStyleProps) {
   return {

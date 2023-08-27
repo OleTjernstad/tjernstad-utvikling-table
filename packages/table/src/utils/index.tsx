@@ -21,10 +21,10 @@ export function ColumnSelectRT<T extends Record<string, unknown>>({
   );
 
   const onlyOneOptionLeft = checkedCount + 1 >= hideableColumns.length;
-
+  return null;
   return (
     <>
-      <Button
+      {/* <Button
         style={{ margin: "10px", marginLeft: 0 }}
         variant="contained"
         color="info"
@@ -70,7 +70,7 @@ export function ColumnSelectRT<T extends Record<string, unknown>>({
             lukk
           </Button>
         </DialogActions>
-      </Dialog>
+      </Dialog> */}
     </>
   );
 }
@@ -79,10 +79,9 @@ interface ColumnActionProps<T extends {}> {
   column: Column<T, unknown>;
   table: Table<T>;
 }
-export function ColumnAction<T extends {}>({
-  column,
-  table,
-}: ColumnActionProps<T>) {
+export function ColumnAction<T extends {}>({} // column,
+// table,
+: ColumnActionProps<T>) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -92,10 +91,10 @@ export function ColumnAction<T extends {}>({
   const close = () => {
     setAnchorEl(null);
   };
-
+  return null;
   return (
     <>
-      <IconButton
+      {/* <IconButton
         aria-label="kolonne meny"
         aria-controls="simple-menu"
         aria-haspopup="true"
@@ -148,7 +147,7 @@ export function ColumnAction<T extends {}>({
             <ColumnFilter column={column} table={table} />
           </MenuItem>
         )}
-      </Menu>
+      </Menu> */}
     </>
   );
 }

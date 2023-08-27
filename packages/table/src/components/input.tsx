@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import TextField from "@mui/material/TextField/TextField.js";
+import { TextField } from "./ui/textField";
 
 // A debounced input react component
 export function DebouncedInput({
@@ -31,13 +31,11 @@ export function DebouncedInput({
 
   return (
     <TextField
-      variant="outlined"
       id={props.name}
       label={label}
       name={props.name}
       value={value}
       onChange={(e) => setValue(e.target.value)}
-      size={"small"}
     />
   );
 }

@@ -1,6 +1,5 @@
 import { ColorStyleOptions, OverrideColors } from "./style";
 import { ColumnDef, Row, TableState } from "@tanstack/react-table";
-import { SxProps, Theme } from "@mui/material";
 
 export type TableProperties<T extends Record<string, unknown>> = {
   columns: ColumnDef<T, unknown>[];
@@ -9,7 +8,7 @@ export type TableProperties<T extends Record<string, unknown>> = {
   children?: React.ReactNode;
 
   getRowStyling?: (row: Row<T>) => ColorStyleOptions | undefined;
-  tableContainerStyle?: SxProps<Theme>;
+  // tableContainerStyle?: SxProps<Theme>;
   overrideColors?: OverrideColors | undefined;
 
   tableState: TableState;

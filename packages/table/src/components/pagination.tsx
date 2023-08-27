@@ -1,103 +1,96 @@
-/* eslint-disable @typescript-eslint/ban-types */
-import IconButton from "@mui/material/IconButton/IconButton.js";
-import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft.js";
-import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight.js";
-import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft.js";
-import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight.js";
-import MenuItem from "@mui/material/MenuItem/MenuItem.js";
 import React from "react";
 import { Table } from "@tanstack/react-table";
-import TextField from "@mui/material/TextField/TextField.js";
 
 interface PaginationProps<T extends {}> {
   table: Table<T>;
 }
-export function Pagination<T extends {}>({ table }: PaginationProps<T>) {
-  return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-between",
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-        }}
-      >
-        <IconButton
-          color="primary"
-          aria-label="Gå til første side"
-          onClick={() => table.setPageIndex(0)}
-          disabled={!table.getCanPreviousPage()}
-        >
-          <KeyboardDoubleArrowLeftIcon />
-        </IconButton>
-        <IconButton
-          color="primary"
-          aria-label="Gå tilbake en"
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
-        >
-          <KeyboardArrowLeftIcon />
-        </IconButton>
-        <IconButton
-          color="primary"
-          aria-label="Gå fram en"
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
-        >
-          <KeyboardArrowRightIcon />
-        </IconButton>
-        <IconButton
-          color="primary"
-          aria-label="Gå til siste side"
-          onClick={() => table.setPageIndex(table.getPageCount() - 1)}
-          disabled={!table.getCanNextPage()}
-        >
-          <KeyboardDoubleArrowRightIcon />
-        </IconButton>
-        <span style={{ paddingLeft: "20px", paddingTop: "10px" }}>
-          <TextField
-            size="small"
-            label={"Gå til side"}
-            id="outlined-basic"
-            variant="outlined"
-            type="number"
-            defaultValue={table.getState().pagination.pageIndex + 1}
-            onChange={(e) => {
-              const page = e.target.value ? Number(e.target.value) - 1 : 0;
-              table.setPageIndex(page);
-            }}
-          />
-        </span>
-        <span style={{ paddingTop: "10px", paddingLeft: "20px" }}>
-          <TextField
-            size="small"
-            select
-            label="Vis"
-            value={table.getState().pagination.pageSize}
-            onChange={(e) => {
-              table.setPageSize(Number(e.target.value));
-            }}
-          >
-            {[10, 20, 30, 40, 50].map((pageSize) => (
-              <MenuItem key={pageSize} value={pageSize}>
-                {pageSize}
-              </MenuItem>
-            ))}
-          </TextField>
-        </span>
-      </div>
+export function Pagination<T extends {}>({}: PaginationProps<T>) {
+  return <div></div>;
+  // return (
+  //   <div
+  //     style={{
+  //       display: "flex",
+  //       flexDirection: "row",
+  //       justifyContent: "space-between",
+  //     }}
+  //   >
+  //     <div
+  //       style={{
+  //         display: "flex",
+  //         flexDirection: "row",
+  //       }}
+  //     >
+  //       <IconButton
+  //         color="primary"
+  //         aria-label="Gå til første side"
+  //         onClick={() => table.setPageIndex(0)}
+  //         disabled={!table.getCanPreviousPage()}
+  //       >
+  //         <KeyboardDoubleArrowLeftIcon />
+  //       </IconButton>
+  //       <IconButton
+  //         color="primary"
+  //         aria-label="Gå tilbake en"
+  //         onClick={() => table.previousPage()}
+  //         disabled={!table.getCanPreviousPage()}
+  //       >
+  //         <KeyboardArrowLeftIcon />
+  //       </IconButton>
+  //       <IconButton
+  //         color="primary"
+  //         aria-label="Gå fram en"
+  //         onClick={() => table.nextPage()}
+  //         disabled={!table.getCanNextPage()}
+  //       >
+  //         <KeyboardArrowRightIcon />
+  //       </IconButton>
+  //       <IconButton
+  //         color="primary"
+  //         aria-label="Gå til siste side"
+  //         onClick={() => table.setPageIndex(table.getPageCount() - 1)}
+  //         disabled={!table.getCanNextPage()}
+  //       >
+  //         <KeyboardDoubleArrowRightIcon />
+  //       </IconButton>
+  //       <span style={{ paddingLeft: "20px", paddingTop: "10px" }}>
+  //         <TextField
+  //           size="small"
+  //           label={"Gå til side"}
+  //           id="outlined-basic"
+  //           variant="outlined"
+  //           type="number"
+  //           defaultValue={table.getState().pagination.pageIndex + 1}
+  //           onChange={(e) => {
+  //             const page = e.target.value ? Number(e.target.value) - 1 : 0;
+  //             table.setPageIndex(page);
+  //           }}
+  //         />
+  //       </span>
+  //       <span style={{ paddingTop: "10px", paddingLeft: "20px" }}>
+  //         <TextField
+  //           // size="small"
+  //           select
+  //           label="Vis"
+  //           value={table.getState().pagination.pageSize}
+  //           onChange={(e) => {
+  //             table.setPageSize(Number(e.target.value));
+  //           }}
+  //         >
+  //           {[10, 20, 30, 40, 50].map((pageSize) => (
+  //             <MenuItem key={pageSize} value={pageSize}>
+  //               {pageSize}
+  //             </MenuItem>
+  //           ))}
+  //         </TextField>
+  //       </span>
+  //     </div>
 
-      <span>
-        <div>Side</div>
-        <strong>
-          {table.getState().pagination.pageIndex + 1} av {table.getPageCount()}
-        </strong>
-      </span>
-    </div>
-  );
+  //     <span>
+  //       <div>Side</div>
+  //       <strong>
+  //         {table.getState().pagination.pageIndex + 1} av {table.getPageCount()}
+  //       </strong>
+  //     </span>
+  //   </div>
+  // );
 }

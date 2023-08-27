@@ -1,8 +1,8 @@
 import { Row, Table } from "@tanstack/react-table";
 
-import Checkbox from "@mui/material/Checkbox/Checkbox.js";
+import { Checkbox } from "./ui/checkbox";
 import React from "react";
-import TableCell from "@mui/material/TableCell/TableCell.js";
+import { TableCell as TwTableCell } from "../components/ui/table";
 
 interface CheckboxCellProps<T extends {}> {
   isSelected: boolean;
@@ -18,13 +18,13 @@ export function CheckboxCell<T extends {}>({
   row,
 }: CheckboxCellProps<T>) {
   return (
-    <TableCell>
+    <TwTableCell>
       <Checkbox
-        size="small"
+        // size="small"
         checked={isSelected}
         onClick={(e) => handleRowSelection(e, row)}
       />
-    </TableCell>
+    </TwTableCell>
   );
 }
 
@@ -53,15 +53,14 @@ export function CheckboxHeaderCell<T extends {}>({
   }
 
   return (
-    <TableCell>
+    <TwTableCell>
       <Checkbox
-        size="small"
         checked={rows.length === selectedRows.length}
         indeterminate={
           selectedRows.length > 0 && rows.length > selectedRows.length
         }
         onClick={setSelection}
       />
-    </TableCell>
+    </TwTableCell>
   );
 }
