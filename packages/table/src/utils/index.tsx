@@ -1,6 +1,7 @@
-/* eslint-disable @typescript-eslint/ban-types */
-import { Column, Table } from "@tanstack/react-table";
 import React, { ReactElement } from "react";
+
+/* eslint-disable @typescript-eslint/ban-types */
+import { Table } from "@tanstack/react-table";
 
 // import { ColumnFilter } from "../components/columFilter";
 
@@ -72,83 +73,6 @@ export function ColumnSelectRT<
           </Button>
         </DialogActions>
       </Dialog> */}
-    </>
-  );
-}
-
-interface ColumnActionProps<T extends {}> {
-  column: Column<T, unknown>;
-  table: Table<T>;
-}
-export function ColumnAction<T extends {}>({} // column,
-// table,
-: ColumnActionProps<T>) {
-  // const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-
-  // const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-  //   setAnchorEl(event.currentTarget);
-  // };
-
-  // const close = () => {
-  //   setAnchorEl(null);
-  // };
-  return null;
-  return (
-    <>
-      {/* <IconButton
-        aria-label="kolonne meny"
-        aria-controls="simple-menu"
-        aria-haspopup="true"
-        onClick={handleClick}
-        size="small"
-      >
-        <MoreVertIcon fontSize="inherit" />
-      </IconButton>
-      <Menu
-        id="simple-menu"
-        anchorEl={anchorEl}
-        keepMounted
-        open={Boolean(anchorEl)}
-        onClose={close}
-      >
-        {column.getCanSort() && [
-          <MenuItem key="removeSort">
-            <Button
-              disabled={!column.getIsSorted()}
-              variant="text"
-              startIcon={<ClearIcon />}
-              onClick={() => column.clearSorting()}
-            >
-              Fjern sortering
-            </Button>
-          </MenuItem>,
-          <MenuItem key="raisingSort">
-            <Button
-              disabled={column.getIsSorted() === "asc"}
-              variant="text"
-              startIcon={<KeyboardArrowUpIcon />}
-              onClick={() => column.toggleSorting(false)}
-            >
-              Sorter stigende
-            </Button>
-          </MenuItem>,
-          <MenuItem key="downSort">
-            <Button
-              disabled={column.getIsSorted() === "desc"}
-              variant="text"
-              startIcon={<KeyboardArrowDownIcon />}
-              onClick={() => column.toggleSorting(true)}
-            >
-              Sorter synkende
-            </Button>
-          </MenuItem>,
-        ]}
-        {column.getCanFilter() && (
-          <MenuItem>
-            <ColumnFilter column={column} table={table} />
-          </MenuItem>
-        )}
-      </Menu> */}
     </>
   );
 }

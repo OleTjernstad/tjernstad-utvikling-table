@@ -8,6 +8,7 @@ export default [
   {
     external: [
       "@radix-ui/react-checkbox",
+      "@radix-ui/react-dropdown-menu",
       "@radix-ui/react-slot",
       "@radix-ui/react-tooltip",
       "class-variance-authority",
