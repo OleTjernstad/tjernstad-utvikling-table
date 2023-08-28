@@ -4,11 +4,13 @@ import { Header, Table, flexRender } from "@tanstack/react-table";
 
 import { ArrowDropDown } from "./icons/arrowDropDown";
 import { ArrowDropUp } from "./icons/arrowDropUp";
+import { Button } from "./ui/button";
 import { ColumnAction } from "../utils";
 import { FilterRemove } from "./columFilter";
 import { KeyboardArrowLeft } from "./icons/keyboardArrowLeft";
 import { KeyboardArrowRight } from "./icons/keyBoardArrowRight";
 import React from "react";
+import { Sort } from "./icons/sort";
 import { Tooltip } from "./ui/tooltip";
 import { TableHead as TwTableCell } from "../components/ui/table";
 
@@ -40,27 +42,27 @@ export function HeaderCell<T extends {}>({
             {header.column.getCanGroup() ? (
               <>
                 <Tooltip tip={"Grupper kolonne"}>
-                  <div
+                  <Button
+                    variant={"outline"}
+                    size={"icon"}
+                    className="mr-2"
                     {...{
                       onClick: header.column.getToggleGroupingHandler(),
-                      style: {
-                        cursor: "pointer",
-                      },
                     }}
-                  ></div>
+                  >
+                    {header.column.getIsGrouped() ? (
+                      <KeyboardArrowRight />
+                    ) : (
+                      <KeyboardArrowLeft />
+                    )}
+                  </Button>
                 </Tooltip>{" "}
-                {{
-                  asc: <KeyboardArrowRight />,
-                  desc: <KeyboardArrowLeft />,
-                }[header.column.getIsSorted() as string] ?? null}
               </>
-            ) : null}{" "}
+            ) : null}
             <Tooltip tip={"Sorter kolonne"}>
               <div
                 {...{
-                  className: header.column.getCanSort()
-                    ? "classes.canSortClass"
-                    : "",
+                  className: header.column.getCanSort() ? "cursor-pointer" : "",
                   onClick: header.column.getToggleSortingHandler(),
                   onKeyDown: header.column.getToggleSortingHandler(),
                 }}
@@ -71,10 +73,25 @@ export function HeaderCell<T extends {}>({
                 )}
               </div>
             </Tooltip>{" "}
-            {{
-              asc: <ArrowDropUp />,
-              desc: <ArrowDropDown />,
-            }[header.column.getIsSorted() as string] ?? null}
+            {header.column.getCanSort() ? (
+              <Button
+                variant={"outline"}
+                size={"icon"}
+                className="ml-2"
+                {...{
+                  onClick: header.column.getToggleSortingHandler(),
+                  onKeyDown: header.column.getToggleSortingHandler(),
+                }}
+              >
+                {header.column.getIsSorted() === "asc" ? (
+                  <ArrowDropUp />
+                ) : header.column.getIsSorted() === "desc" ? (
+                  <ArrowDropDown />
+                ) : (
+                  <Sort />
+                )}
+              </Button>
+            ) : null}
             <FilterRemove column={header.column} table={table} />
             <div
               style={{

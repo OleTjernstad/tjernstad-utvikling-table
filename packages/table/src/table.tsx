@@ -39,7 +39,7 @@ import { Pagination } from "./components/pagination";
 import React from "react";
 import { TableProperties } from "./types";
 // import { TableRootStyle } from "./style";
-import { TableRow } from "./components/group";
+import { TableRow } from "./components/row";
 import { rankItem } from "@tanstack/match-sorter-utils";
 import { useRowSelection } from "./hooks/useRowSelection";
 
