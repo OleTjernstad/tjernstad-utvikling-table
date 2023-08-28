@@ -38,7 +38,7 @@ import { HeaderCell } from "./components/header";
 import { Pagination } from "./components/pagination";
 import React from "react";
 import { TableProperties } from "./types";
-import { TableRootStyle } from "./style";
+// import { TableRootStyle } from "./style";
 import { TableRow } from "./components/group";
 import { rankItem } from "@tanstack/match-sorter-utils";
 import { useRowSelection } from "./hooks/useRowSelection";
@@ -238,7 +238,7 @@ export function TuTable<T extends Record<string, unknown>>(
         <div style={{ flexGrow: 1 }}>{props.children}</div>
         <ColumnSelectRT instance={table} />
       </div> */}
-        <Table style={{ overflowX: "auto" }} role="grid" aria-label="Table">
+        <Table role="grid" aria-label="Table">
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TwTableRow key={headerGroup.id}>

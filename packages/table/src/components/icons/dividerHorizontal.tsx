@@ -1,17 +1,19 @@
 import React from "react";
 
-export function Check(props: any) {
+export function DividerHorizontal(props: any) {
   return (
     <svg
       width="1em"
       height="1em"
-      viewBox="0 0 24 24"
+      viewBox="0 0 15 15"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
       <path
         fill="hsl(var(--primary-foreground))"
-        d="m9.55 18l-5.7-5.7l1.425-1.425L9.55 15.15l9.175-9.175L20.15 7.4L9.55 18Z"
+        fillRule="evenodd"
+        d="M2 7.5a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1h-10a.5.5 0 0 1-.5-.5Z"
+        clipRule="evenodd"
       ></path>
     </svg>
   );

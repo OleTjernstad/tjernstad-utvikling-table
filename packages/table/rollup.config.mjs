@@ -7,15 +7,14 @@ import typescript from "@rollup/plugin-typescript";
 export default [
   {
     external: [
-      "@adobe/react-spectrum",
-      // "@radix-ui/react-checkbox",
-      // "@radix-ui/react-slot",
-      // "@radix-ui/react-tooltip",
-      // "class-variance-authority",
-      // "clsx",
-      // "tailwind-merge",
-      // "@tanstack/match-sorter-utils",
-      // "@tanstack/react-table",
+      "@radix-ui/react-checkbox",
+      "@radix-ui/react-slot",
+      "@radix-ui/react-tooltip",
+      "class-variance-authority",
+      "clsx",
+      "tailwind-merge",
+      "@tanstack/match-sorter-utils",
+      "@tanstack/react-table",
       "react",
     ],
     input: "./src/table.tsx",
