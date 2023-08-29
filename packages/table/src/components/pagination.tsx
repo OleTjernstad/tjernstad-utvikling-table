@@ -1,96 +1,103 @@
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./ui/select";
+
+import { Button } from "./ui/button";
+import { KeyboardArrowLeft } from "./icons/keyboardArrowLeft";
+import { KeyboardArrowRight } from "./icons/keyBoardArrowRight";
+import { KeyboardDoubleArrowLeft } from "./icons/keyboardDoubleArrowLeft";
+import { KeyboardDoubleArrowRight } from "./icons/keyboardDoubleArrowRight";
 import React from "react";
 import { Table } from "@tanstack/react-table";
+import { TextField } from "./ui/textField";
 
 interface PaginationProps<T extends {}> {
   table: Table<T>;
 }
-export function Pagination<T extends {}>({}: PaginationProps<T>) {
-  return <div></div>;
-  // return (
-  //   <div
-  //     style={{
-  //       display: "flex",
-  //       flexDirection: "row",
-  //       justifyContent: "space-between",
-  //     }}
-  //   >
-  //     <div
-  //       style={{
-  //         display: "flex",
-  //         flexDirection: "row",
-  //       }}
-  //     >
-  //       <IconButton
-  //         color="primary"
-  //         aria-label="Gå til første side"
-  //         onClick={() => table.setPageIndex(0)}
-  //         disabled={!table.getCanPreviousPage()}
-  //       >
-  //         <KeyboardDoubleArrowLeftIcon />
-  //       </IconButton>
-  //       <IconButton
-  //         color="primary"
-  //         aria-label="Gå tilbake en"
-  //         onClick={() => table.previousPage()}
-  //         disabled={!table.getCanPreviousPage()}
-  //       >
-  //         <KeyboardArrowLeftIcon />
-  //       </IconButton>
-  //       <IconButton
-  //         color="primary"
-  //         aria-label="Gå fram en"
-  //         onClick={() => table.nextPage()}
-  //         disabled={!table.getCanNextPage()}
-  //       >
-  //         <KeyboardArrowRightIcon />
-  //       </IconButton>
-  //       <IconButton
-  //         color="primary"
-  //         aria-label="Gå til siste side"
-  //         onClick={() => table.setPageIndex(table.getPageCount() - 1)}
-  //         disabled={!table.getCanNextPage()}
-  //       >
-  //         <KeyboardDoubleArrowRightIcon />
-  //       </IconButton>
-  //       <span style={{ paddingLeft: "20px", paddingTop: "10px" }}>
-  //         <TextField
-  //           size="small"
-  //           label={"Gå til side"}
-  //           id="outlined-basic"
-  //           variant="outlined"
-  //           type="number"
-  //           defaultValue={table.getState().pagination.pageIndex + 1}
-  //           onChange={(e) => {
-  //             const page = e.target.value ? Number(e.target.value) - 1 : 0;
-  //             table.setPageIndex(page);
-  //           }}
-  //         />
-  //       </span>
-  //       <span style={{ paddingTop: "10px", paddingLeft: "20px" }}>
-  //         <TextField
-  //           // size="small"
-  //           select
-  //           label="Vis"
-  //           value={table.getState().pagination.pageSize}
-  //           onChange={(e) => {
-  //             table.setPageSize(Number(e.target.value));
-  //           }}
-  //         >
-  //           {[10, 20, 30, 40, 50].map((pageSize) => (
-  //             <MenuItem key={pageSize} value={pageSize}>
-  //               {pageSize}
-  //             </MenuItem>
-  //           ))}
-  //         </TextField>
-  //       </span>
-  //     </div>
+export function Pagination<T extends {}>({ table }: PaginationProps<T>) {
+  return (
+    <div className="flex flex-row justify-between">
+      <div className="flex flex-row pt-3">
+        <Button
+          variant={"outline"}
+          size={"sm"}
+          aria-label="Gå til første side"
+          onClick={() => table.setPageIndex(0)}
+          disabled={!table.getCanPreviousPage()}
+        >
+          <KeyboardDoubleArrowLeft />
+        </Button>
+        <Button
+          variant={"outline"}
+          size={"sm"}
+          aria-label="Gå tilbake en"
+          onClick={() => table.previousPage()}
+          disabled={!table.getCanPreviousPage()}
+        >
+          <KeyboardArrowLeft />
+        </Button>
+        <Button
+          variant={"outline"}
+          size={"sm"}
+          aria-label="Gå fram en"
+          onClick={() => table.nextPage()}
+          disabled={!table.getCanNextPage()}
+        >
+          <KeyboardArrowRight />
+        </Button>
+        <Button
+          variant={"outline"}
+          size={"sm"}
+          aria-label="Gå til siste side"
+          onClick={() => table.setPageIndex(table.getPageCount() - 1)}
+          disabled={!table.getCanNextPage()}
+        >
+          <KeyboardDoubleArrowRight />
+        </Button>
+        <span className="ml-2 bg-white">
+          <TextField
+            className=""
+            label={"Gå til side"}
+            id="outlined-basic"
+            type="number"
+            defaultValue={table.getState().pagination.pageIndex + 1}
+            onChange={(e) => {
+              const page = e.target.value ? Number(e.target.value) - 1 : 0;
+              table.setPageIndex(page);
+            }}
+          />
+        </span>
+        <span className="ml-2 bg-white">
+          <Select
+            value={String(table.getState().pagination.pageSize)}
+            onValueChange={(value) => {
+              table.setPageSize(Number(value));
+            }}
+          >
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="Theme" />
+            </SelectTrigger>
+            <SelectContent>
+              {[10, 20, 30, 40, 50].map((pageSize) => (
+                <SelectItem key={pageSize} value={String(pageSize)}>
+                  {pageSize} rader pr side
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </span>
+      </div>
 
-  //     <span>
-  //       <div>Side</div>
-  //       <strong>
-  //         {table.getState().pagination.pageIndex + 1} av {table.getPageCount()}
-  //       </strong>
-  //     </span>
-  //   </div>
-  // );
+      <div>
+        <div>Side</div>
+        <strong>
+          {table.getState().pagination.pageIndex + 1} av {table.getPageCount()}
+        </strong>
+      </div>
+    </div>
+  );
 }

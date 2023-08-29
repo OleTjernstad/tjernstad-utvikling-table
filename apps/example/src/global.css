@@ -83,6 +83,6 @@
 .float-label-input:focus-within label,
 .float-label-input input:not(:placeholder-shown)+label,
 .float-label-input textarea:not(:placeholder-shown)+label {
-  transform: translateY(-1.5rem) scale(0.75);
+  transform: translateY(-1rem) scale(0.75);
   background-color: inherit
 }

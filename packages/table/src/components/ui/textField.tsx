@@ -20,7 +20,7 @@ const TextField = React.forwardRef<HTMLInputElement, InputProps>(
           id={id}
           placeholder=" "
           className={cn(
-            "flex w-full  bg-inherit  text-sm shadow-sm transition-colors focus:outline-none focus:shadow-outline border border-gray-300 rounded-md py-3 px-3 appearance-none leading-normal focus:border-blue-400  ",
+            "flex w-full  bg-inherit  text-sm shadow-sm transition-colors focus:outline-none focus:shadow-outline border border-gray-300 rounded-md py-1 px-1 appearance-none leading-normal focus:border-blue-400  ",
             className
           )}
           ref={ref}
@@ -30,7 +30,7 @@ const TextField = React.forwardRef<HTMLInputElement, InputProps>(
         />
         <label
           htmlFor={id}
-          className="absolute top-3 left-0 text-gray-400 pointer-events-none transition duration-200 ease-in-out px-2 text-grey-darker bg-white"
+          className="absolute top-1 left-0 text-gray-400 pointer-events-none transition duration-200 ease-in-out px-2 text-grey-darker bg-white"
         >
           {label}
         </label>
