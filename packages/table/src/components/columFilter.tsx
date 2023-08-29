@@ -1,5 +1,5 @@
 import { Column, Table } from "@tanstack/react-table";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Button } from "./ui/button";
 import { FilterOff } from "./icons/filterOff";
@@ -21,15 +21,6 @@ export function ColumnFilter<T extends {}>({ column, table }: FilterProps<T>) {
 
   const columnFilterValue = column.getFilterValue();
 
-  const sortedUniqueValues = useMemo(
-    () =>
-      typeof firstValue === "number"
-        ? []
-        : Array.from(column.getFacetedUniqueValues().keys()).sort(),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [firstValue]
-  );
-
   return typeof firstValue === "number" ? (
     <div>
       <div style={{ display: "flex" }}>
@@ -41,11 +32,7 @@ export function ColumnFilter<T extends {}>({ column, table }: FilterProps<T>) {
           onChange={(value) =>
             column.setFilterValue((old: [number, number]) => [value, old?.[1]])
           }
-          label={`Min ${
-            column.getFacetedMinMaxValues()?.[0]
-              ? `(${column.getFacetedMinMaxValues()?.[0]})`
-              : ""
-          }`}
+          label={`Min`}
         />
         <DebouncedInput
           type="number"
@@ -55,11 +42,7 @@ export function ColumnFilter<T extends {}>({ column, table }: FilterProps<T>) {
           onChange={(value) =>
             column.setFilterValue((old: [number, number]) => [old?.[0], value])
           }
-          label={`Maks ${
-            column.getFacetedMinMaxValues()?.[1]
-              ? `(${column.getFacetedMinMaxValues()?.[1]})`
-              : ""
-          }`}
+          label={`Maks`}
         />
       </div>
     </div>
@@ -70,11 +53,7 @@ export function ColumnFilter<T extends {}>({ column, table }: FilterProps<T>) {
         id={column.id}
         value={(columnFilterValue ?? "") as string}
         onChange={(value) => column.setFilterValue(value)}
-        label={`Søk... (${column.getFacetedUniqueValues().size})`}
-        options={sortedUniqueValues
-          .slice(0, 50)
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          .map((value: any) => value)}
+        label={`Søk...`}
       />
     </>
   );
@@ -105,14 +84,12 @@ function DebouncedInput({
   value: initialValue,
   onChange,
   debounce = 500,
-  options,
   label,
   ...props
 }: {
   value: string | number;
   onChange: (value: string | number) => void;
   debounce?: number;
-  options?: { name: string }[];
   label: string;
 } & Omit<React.InputHTMLAttributes<HTMLInputElement>, "onChange">) {
   const [value, setValue] = useState(initialValue);
@@ -131,27 +108,15 @@ function DebouncedInput({
   }, [value]);
 
   if (props.type === "text") {
-    //https://react-spectrum.adobe.com/react-spectrum/ComboBox.html
     return (
       <>
-        <TextField label={label} />
-        {/* <ComboBox
-          label="Pick an engineering major"
-          defaultItems={options}
-          onSelectionChange={setValue}
-        >
-          {(item) => <Item>{item.name}</Item>}
-        </ComboBox> */}
-        {/* // <Autocomplete
-      //   size="small"
-      //   id={props.id}
-      //   options={options ?? []}
-      //   onChange={(_, value) => {
-      //     setValue(value ?? "");
-      //   }}
-      //   sx={{ width: 300 }}
-      //   renderInput={(params) => <TextField {...params} label={label} />}
-      // />*/}
+        <TextField
+          value={value}
+          label={label}
+          onChange={(e) => {
+            setValue(e.target.value ?? "");
+          }}
+        />
       </>
     );
   }
