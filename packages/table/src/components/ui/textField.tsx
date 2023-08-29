@@ -30,7 +30,7 @@ const TextField = React.forwardRef<HTMLInputElement, InputProps>(
         />
         <label
           htmlFor={id}
-          className="absolute top-3 left-0 text-gray-400 pointer-events-none transition duration-200 ease-in-out px-2 text-grey-darker"
+          className="absolute top-3 left-0 text-gray-400 pointer-events-none transition duration-200 ease-in-out px-2 text-grey-darker bg-white"
         >
           {label}
         </label>

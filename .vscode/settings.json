@@ -4,11 +4,14 @@
         "errormessage",
         "Fjern",
         "Grupper",
+        "hideable",
         "kolonne",
+        "kolonner",
         "Maks",
         "sortering",
         "stigende",
         "synkende",
-        "Tanstack"
+        "Tanstack",
+        "Velg"
     ]
 }

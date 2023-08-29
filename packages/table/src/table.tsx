@@ -34,6 +34,8 @@ import {
 } from "./components/ui/table";
 
 import { CheckboxHeaderCell } from "./components/selection";
+import { ColumnSelect } from "./components/columnSelect";
+import { DebouncedInput } from "./components/input";
 import { HeaderCell } from "./components/header";
 import { Pagination } from "./components/pagination";
 import React from "react";
@@ -226,18 +228,21 @@ export function TuTable<T extends Record<string, unknown>>(
       //   ...(props.tableContainerStyle ?? {}),
       // }}
       >
-        {/* <div style={{ display: "flex", height: "4em" }}>
-        <div style={{ padding: 2 }}>
-          <DebouncedInput
-            label="Søk i alle kolonner"
-            name="search"
-            value={globalFilter ?? ""}
-            onChange={(value) => setGlobalFilter(String(value))}
-          />
+        <div
+          className="flex h-4 bg-white"
+          style={{ display: "flex", height: "4em" }}
+        >
+          <div className="p-1 bg-inherit">
+            <DebouncedInput
+              label="Søk i alle kolonner"
+              name="search"
+              value={globalFilter ?? ""}
+              onChange={(value) => setGlobalFilter(String(value))}
+            />
+          </div>
+          <div className="flex-grow">{props.children}</div>
+          <ColumnSelect instance={table} />
         </div>
-        <div style={{ flexGrow: 1 }}>{props.children}</div>
-        <ColumnSelectRT instance={table} />
-      </div> */}
         <Table role="grid" aria-label="Table">
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (

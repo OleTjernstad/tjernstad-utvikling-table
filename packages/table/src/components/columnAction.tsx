@@ -23,16 +23,6 @@ export function ColumnAction<T extends {}>({
   column,
   table,
 }: ColumnActionProps<T>) {
-  // const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-
-  // const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-  //   setAnchorEl(event.currentTarget);
-  // };
-
-  // const close = () => {
-  //   setAnchorEl(null);
-  // };
-
   return (
     <>
       <DropdownMenu>
