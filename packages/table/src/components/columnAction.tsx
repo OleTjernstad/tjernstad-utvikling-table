@@ -9,6 +9,9 @@ import {
 
 import { Button } from "./ui/button";
 import { Clear } from "./icons/clear";
+import { ColumnFilter } from "./columFilter";
+import { KeyboardArrowDown } from "./icons/keyboardArrowDown";
+import { KeyboardArrowUp } from "./icons/keyboardArrowUp";
 import { MoreVert } from "./icons/moreVert";
 import React from "react";
 
@@ -16,7 +19,10 @@ interface ColumnActionProps<T extends {}> {
   column: Column<T, unknown>;
   table: Table<T>;
 }
-export function ColumnAction<T extends {}>({ column }: ColumnActionProps<T>) {
+export function ColumnAction<T extends {}>({
+  column,
+  table,
+}: ColumnActionProps<T>) {
   // const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   // const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -51,60 +57,29 @@ export function ColumnAction<T extends {}>({ column }: ColumnActionProps<T>) {
             >
               <Clear className="mr-2" /> Fjern sortering
             </DropdownMenuItem>,
+            <DropdownMenuItem
+              key={"raisingSort"}
+              disabled={column.getIsSorted() === "asc"}
+              onClick={() => column.toggleSorting(false)}
+            >
+              <KeyboardArrowUp className="mr-2" /> Sorter stigende
+            </DropdownMenuItem>,
+            <DropdownMenuItem
+              key={"downSort"}
+              disabled={column.getIsSorted() === "desc"}
+              onClick={() => column.toggleSorting(false)}
+            >
+              <KeyboardArrowDown className="mr-2" /> Sorter synkende
+            </DropdownMenuItem>,
           ]}
 
           <DropdownMenuSeparator />
-          <DropdownMenuItem>Billing</DropdownMenuItem>
-          <DropdownMenuItem>Team</DropdownMenuItem>
-          <DropdownMenuItem>Subscription</DropdownMenuItem>
+          {column.getCanFilter() && (
+            <ColumnFilter column={column} table={table} />
+          )}
+          {/* <DropdownMenuItem>Billing</DropdownMenuItem> */}
         </DropdownMenuContent>
       </DropdownMenu>
-
-      {/* //   <Menu
-    //     id="simple-menu"
-    //     anchorEl={anchorEl}
-    //     keepMounted
-    //     open={Boolean(anchorEl)}
-    //     onClose={close}
-    //   >
-    //     {column.getCanSort() && [
-    //       <MenuItem key="removeSort">
-    //         <Button
-    //           disabled={!column.getIsSorted()}
-    //           variant="text"
-    //           startIcon={<ClearIcon />}
-    //           onClick={() => column.clearSorting()}
-    //         >
-    //           Fjern sortering
-    //         </Button>
-    //       </MenuItem>,
-    //       <MenuItem key="raisingSort">
-    //         <Button
-    //           disabled={column.getIsSorted() === "asc"}
-    //           variant="text"
-    //           startIcon={<KeyboardArrowUpIcon />}
-    //           onClick={() => column.toggleSorting(false)}
-    //         >
-    //           Sorter stigende
-    //         </Button>
-    //       </MenuItem>,
-    //       <MenuItem key="downSort">
-    //         <Button
-    //           disabled={column.getIsSorted() === "desc"}
-    //           variant="text"
-    //           startIcon={<KeyboardArrowDownIcon />}
-    //           onClick={() => column.toggleSorting(true)}
-    //         >
-    //           Sorter synkende
-    //         </Button>
-    //       </MenuItem>,
-    //     ]}
-    //     {column.getCanFilter() && (
-    //       <MenuItem>
-    //         <ColumnFilter column={column} table={table} />
-    //       </MenuItem>
-    //     )}
-    //   </Menu>  */}
     </>
   );
 }

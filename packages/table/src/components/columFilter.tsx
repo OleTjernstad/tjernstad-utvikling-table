@@ -134,6 +134,7 @@ function DebouncedInput({
     //https://react-spectrum.adobe.com/react-spectrum/ComboBox.html
     return (
       <>
+        <TextField label={label} />
         {/* <ComboBox
           label="Pick an engineering major"
           defaultItems={options}

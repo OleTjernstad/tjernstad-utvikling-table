@@ -21,7 +21,7 @@ export default [
     input: "./src/table.tsx",
     output: [
       {
-        file: "./dist/esm/tu-table.esm.js",
+        file: "./dist/tu-table.js",
         format: "esm",
         sourcemap: true,
       },

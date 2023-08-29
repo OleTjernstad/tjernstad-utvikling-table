@@ -15,14 +15,14 @@
     "lib:build": "rm -rf dist && rollup -c && size-limit",
     "size": "size-limit"
   },
-  "module": "dist/esm/tu-table.esm.js",
-  "typings": "dist/esm/index.d.ts",
+  "module": "dist/tu-table.js",
+  "typings": "dist/index.d.ts",
   "files": [
     "dist"
   ],
   "size-limit": [
     {
-      "path": "dist/esm/tu-table.esm.js",
+      "path": "dist/tu-table.js",
       "limit": "80 KB"
     }
   ],
