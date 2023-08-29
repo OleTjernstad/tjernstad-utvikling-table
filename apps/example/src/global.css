@@ -86,15 +86,3 @@
   transform: translateY(-1.5rem) scale(0.75);
   background-color: inherit
 }
-
-.errormessage {
-  visibility: hidden;
-}
-
-[aria-invalid="true"] {
-  @apply border-destructive
-}
-
-[aria-invalid="true"]~.errormessage {
-  visibility: visible;
-}

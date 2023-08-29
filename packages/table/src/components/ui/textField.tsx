@@ -6,11 +6,10 @@ export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   label: React.ReactNode;
   error?: boolean;
-  helperText?: string;
 }
 
 const TextField = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type, id, label, error, helperText, ...props }, ref) => {
+  ({ className, type, id, label, error, ...props }, ref) => {
     return (
       <div
         style={{ margin: "auto" }}
@@ -31,13 +30,10 @@ const TextField = React.forwardRef<HTMLInputElement, InputProps>(
         />
         <label
           htmlFor={id}
-          className="absolute top-3 left-0 text-gray-400 pointer-events-none transition duration-200 ease-in-outbg-white px-2 text-grey-darker"
+          className="absolute top-3 left-0 text-gray-400 pointer-events-none transition duration-200 ease-in-out px-2 text-grey-darker"
         >
           {label}
         </label>
-        <span id={"err_" + id} className="errormessage text-destructive">
-          {helperText}
-        </span>
       </div>
     );
   }
