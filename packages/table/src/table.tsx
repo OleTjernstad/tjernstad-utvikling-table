@@ -40,7 +40,6 @@ import { HeaderCell } from "./components/header";
 import { Pagination } from "./components/pagination";
 import React from "react";
 import { TableProperties } from "./types";
-// import { TableRootStyle } from "./style";
 import { TableRow } from "./components/row";
 import { rankItem } from "@tanstack/match-sorter-utils";
 import { useRowSelection } from "./hooks/useRowSelection";
@@ -184,7 +183,7 @@ export function TuTable<T extends Record<string, unknown>>(
     if (props.getRowStyling !== undefined) {
       const className = props.getRowStyling(row);
       if (className !== undefined) {
-        return `tu-table--${className}`;
+        return className;
       }
     }
     return "";
@@ -221,13 +220,7 @@ export function TuTable<T extends Record<string, unknown>>(
 
   return (
     <>
-      <div
-
-      // style={{
-      //   ...TableRootStyle({ theme, overrideColors: props.overrideColors }),
-      //   ...(props.tableContainerStyle ?? {}),
-      // }}
-      >
+      <div>
         <div
           className="flex h-4 bg-white"
           style={{ display: "flex", height: "4em" }}
@@ -292,6 +285,4 @@ export function TuTable<T extends Record<string, unknown>>(
   );
 }
 
-{
-  /* export { ColorStyleOptions, OverrideColors } from "./style"; */
-}
+export { ColorStyleOptions, baseColors } from "./style";
