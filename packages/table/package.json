@@ -1,7 +1,7 @@
 {
   "name": "@tjernstad-utvikling/table-tw",
   "private": false,
-  "version": "0.0.1",
+  "version": "0.0.0-beta",
   "author": "Ole Tjernstad",
   "repository": {
     "type": "git",
@@ -15,14 +15,14 @@
     "lib:build": "rm -rf dist && vite build && size-limit",
     "size": "size-limit"
   },
-  "module": "dist/tu-table.js",
+  "module": "dist/tu-table.mjs",
   "typings": "dist/index.d.ts",
   "files": [
     "dist"
   ],
   "size-limit": [
     {
-      "path": "dist/tu-table.js",
+      "path": "dist/tu-table.mjs",
       "limit": "80 KB"
     }
   ],
