@@ -67,7 +67,6 @@ export function ColumnAction<T extends {}>({
           {column.getCanFilter() && (
             <ColumnFilter column={column} table={table} />
           )}
-          {/* <DropdownMenuItem>Billing</DropdownMenuItem> */}
         </DropdownMenuContent>
       </DropdownMenu>
     </>

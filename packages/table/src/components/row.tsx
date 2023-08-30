@@ -37,7 +37,7 @@ export function TableRow<T extends {}>({
       }}
       className={cn(
         { "tu-table-selectable": !row.getIsGrouped() },
-        { "bg-sky-600/50 hover:bg-sky-00/50": isSelected },
+        { "bg-sky-600/50 hover:bg-sky-800/50": isSelected },
         { selectedRowClassName: isSelected && selectedRowClassName },
         rowClassName
       )}
