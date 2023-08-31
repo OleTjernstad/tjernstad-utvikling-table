@@ -32,9 +32,9 @@ export function TableCell<T extends {}>({ cell }: TableCellProps<T>) {
               size="sm"
             >
               cell.row.getIsExpanded() ? (
-              <UnfoldLess />
+              <UnfoldLess color="text-foreground" />
               ) : (
-              <UnfoldMore />)
+              <UnfoldMore color="text-foreground" />)
               {flexRender(cell.column.columnDef.cell, cell.getContext())} (
               {cell.row.subRows.length})
             </Button>

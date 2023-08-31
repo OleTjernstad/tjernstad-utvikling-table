@@ -12,7 +12,7 @@
     "url": "https://github.com/tjernstad-utvikling/tjernstad-utvikling-packages/issues"
   },
   "scripts": {
-    "lib:build": "rm -rf dist && vite build && size-limit",
+    "lib:build": "rm -rf dist && tsc && vite build && size-limit",
     "size": "size-limit"
   },
   "module": "dist/tu-table.mjs",

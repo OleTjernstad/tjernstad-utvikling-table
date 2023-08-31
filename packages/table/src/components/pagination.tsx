@@ -29,7 +29,7 @@ export function Pagination<T extends {}>({ table }: PaginationProps<T>) {
           onClick={() => table.setPageIndex(0)}
           disabled={!table.getCanPreviousPage()}
         >
-          <KeyboardDoubleArrowLeft />
+          <KeyboardDoubleArrowLeft color="text-foreground" />
         </Button>
         <Button
           variant={"outline"}
@@ -38,7 +38,7 @@ export function Pagination<T extends {}>({ table }: PaginationProps<T>) {
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
         >
-          <KeyboardArrowLeft />
+          <KeyboardArrowLeft color="text-foreground" />
         </Button>
         <Button
           variant={"outline"}
@@ -47,7 +47,7 @@ export function Pagination<T extends {}>({ table }: PaginationProps<T>) {
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
         >
-          <KeyboardArrowRight />
+          <KeyboardArrowRight color="text-foreground" />
         </Button>
         <Button
           variant={"outline"}
@@ -56,7 +56,7 @@ export function Pagination<T extends {}>({ table }: PaginationProps<T>) {
           onClick={() => table.setPageIndex(table.getPageCount() - 1)}
           disabled={!table.getCanNextPage()}
         >
-          <KeyboardDoubleArrowRight />
+          <KeyboardDoubleArrowRight color="text-foreground" />
         </Button>
         <span className="ml-2 bg-white">
           <TextField

@@ -73,7 +73,7 @@ export function FilterRemove<T extends {}>({ column }: FilterRemoveProps<T>) {
           size={"sm"}
           onClick={() => column.setFilterValue("")}
         >
-          <FilterOff />
+          <FilterOff color="text-destructive" />
         </Button>
       </Tooltip>
     );

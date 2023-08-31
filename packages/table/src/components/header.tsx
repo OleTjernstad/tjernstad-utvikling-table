@@ -51,9 +51,9 @@ export function HeaderCell<T extends {}>({
                     }}
                   >
                     {header.column.getIsGrouped() ? (
-                      <KeyboardArrowRight />
+                      <KeyboardArrowRight color="text-foreground" />
                     ) : (
-                      <KeyboardArrowLeft />
+                      <KeyboardArrowLeft color="text-foreground" />
                     )}
                   </Button>
                 </Tooltip>{" "}
@@ -84,11 +84,11 @@ export function HeaderCell<T extends {}>({
                 }}
               >
                 {header.column.getIsSorted() === "asc" ? (
-                  <ArrowDropUp />
+                  <ArrowDropUp color="text-foreground" />
                 ) : header.column.getIsSorted() === "desc" ? (
-                  <ArrowDropDown />
+                  <ArrowDropDown color="text-foreground" />
                 ) : (
-                  <Sort />
+                  <Sort color="text-foreground" />
                 )}
               </Button>
             ) : null}

@@ -222,7 +222,7 @@ export function TuTable<T extends Record<string, unknown>>(
     <>
       <div>
         <div
-          className="flex h-4 bg-white"
+          className="flex h-4 bg-background"
           style={{ display: "flex", height: "4em" }}
         >
           <div className="p-1 bg-inherit">
@@ -257,13 +257,15 @@ export function TuTable<T extends Record<string, unknown>>(
             ))}
           </TableHeader>
           <TableBody>
-            {/* {props.isLoading && (
-            <tr>
-              <td colSpan={table.getVisibleFlatColumns().length}>
-                  <LinearProgress sx={{ width: "100%" }} />
-                </td> 
-            </tr>
-          )} */}
+            {props.isLoading && (
+              <tr>
+                <td colSpan={table.getVisibleFlatColumns().length}>
+                  {/* <LinearProgress sx={{ width: "100%" }} /> */}
+                  Laster
+                </td>
+              </tr>
+            )}
+
             {table.getRowModel().rows.map((row) => {
               return (
                 <TableRow<T>

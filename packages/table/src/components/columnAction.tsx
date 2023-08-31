@@ -35,7 +35,7 @@ export function ColumnAction<T extends {}>({
             aria-haspopup="true"
             // onClick={handleClick}
           >
-            <MoreVert />
+            <MoreVert color="text-foreground" />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
@@ -45,21 +45,24 @@ export function ColumnAction<T extends {}>({
               onClick={() => column.clearSorting()}
               disabled={!column.getIsSorted()}
             >
-              <Clear className="mr-2" /> Fjern sortering
+              <Clear color="text-destructive" className="mr-2" /> Fjern
+              sortering
             </DropdownMenuItem>,
             <DropdownMenuItem
               key={"raisingSort"}
               disabled={column.getIsSorted() === "asc"}
               onClick={() => column.toggleSorting(false)}
             >
-              <KeyboardArrowUp className="mr-2" /> Sorter stigende
+              <KeyboardArrowUp color="text-foreground" className="mr-2" />{" "}
+              Sorter stigende
             </DropdownMenuItem>,
             <DropdownMenuItem
               key={"downSort"}
               disabled={column.getIsSorted() === "desc"}
               onClick={() => column.toggleSorting(false)}
             >
-              <KeyboardArrowDown className="mr-2" /> Sorter synkende
+              <KeyboardArrowDown color="text-foreground" className="mr-2" />{" "}
+              Sorter synkende
             </DropdownMenuItem>,
           ]}
 
