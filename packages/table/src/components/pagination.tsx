@@ -20,7 +20,7 @@ interface PaginationProps<T extends {}> {
 }
 export function Pagination<T extends {}>({ table }: PaginationProps<T>) {
   return (
-    <div className="flex flex-row justify-between">
+    <div className="flex flex-row justify-between mt-2">
       <div className="flex flex-row pt-3">
         <Button
           variant={"outline"}
@@ -58,7 +58,7 @@ export function Pagination<T extends {}>({ table }: PaginationProps<T>) {
         >
           <KeyboardDoubleArrowRight color="text-foreground" />
         </Button>
-        <span className="ml-2 bg-white">
+        <span className="ml-2 bg-background">
           <TextField
             className=""
             label={"Gå til side"}
@@ -71,20 +71,20 @@ export function Pagination<T extends {}>({ table }: PaginationProps<T>) {
             }}
           />
         </span>
-        <span className="ml-2 bg-white">
+        <span className="ml-2 bg-background">
           <Select
             value={String(table.getState().pagination.pageSize)}
             onValueChange={(value) => {
               table.setPageSize(Number(value));
             }}
           >
-            <SelectTrigger className="w-[180px]">
+            <SelectTrigger label="Vis" className="w-[90px]" id="number-of-rows">
               <SelectValue placeholder="Theme" />
             </SelectTrigger>
             <SelectContent>
-              {[10, 20, 30, 40, 50].map((pageSize) => (
+              {[20, 30, 40, 50, 60].map((pageSize) => (
                 <SelectItem key={pageSize} value={String(pageSize)}>
-                  {pageSize} rader pr side
+                  {pageSize}
                 </SelectItem>
               ))}
             </SelectContent>

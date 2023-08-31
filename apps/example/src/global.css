@@ -35,8 +35,7 @@
     --radius: 0.5rem;
   }
  
-    @media (prefers-color-scheme: dark) {
-      :root {
+      .dark {
           --background: 222.2 84% 4.9%;
           --foreground: 210 40% 98%;
       
@@ -66,7 +65,7 @@
           --ring: 212.7 26.8% 83.9%;
         }
     }
-}
+
  
 @layer base {
   * {
@@ -75,16 +74,4 @@
   body {
     @apply bg-background text-foreground;
   }
-}
-
-
-.float-label-input {
-  margin: 32px 0;
-}
-
-.float-label-input:focus-within label,
-.float-label-input input:not(:placeholder-shown)+label,
-.float-label-input textarea:not(:placeholder-shown)+label {
-  transform: translateY(-1rem) scale(0.75);
-  background-color: inherit
 }
