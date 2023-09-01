@@ -2,7 +2,7 @@
 
 This is a opinionated implementation of Tanstack table with Tailwind CSS style.
 
- __Built with [Tailwind CSS](https://tailwindcss.com/) and [TanStack Table V8](https://tanstack.com/table/v8)__
+**Built with [Tailwind CSS](https://tailwindcss.com/) and [TanStack Table V8](https://tanstack.com/table/v8)**
 
 ## Get Started
 

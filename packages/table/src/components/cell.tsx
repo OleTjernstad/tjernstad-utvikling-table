@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-types */
 import { Cell, TableState, flexRender } from '@tanstack/react-table';
 
 import { Button } from './ui/button';
@@ -28,10 +27,8 @@ export function TableCell<T extends {}>({ cell }: TableCellProps<T>) {
               variant="link"
               size="sm"
             >
-              cell.row.getIsExpanded() ? (
-              <UnfoldLess color="text-foreground" />
-              ) : (
-              <UnfoldMore color="text-foreground" />){flexRender(cell.column.columnDef.cell, cell.getContext())} ({cell.row.subRows.length})
+              {cell.row.getIsExpanded() ? <UnfoldLess color="text-foreground" /> : <UnfoldMore color="text-foreground" />}
+              {flexRender(cell.column.columnDef.cell, cell.getContext())} ({cell.row.subRows.length})
             </Button>
           </>
         ) : cell.getIsAggregated() ? (
