@@ -14,7 +14,7 @@ interface PaginationProps<T extends {}> {
 }
 export function Pagination<T extends {}>({ table }: PaginationProps<T>) {
   return (
-    <div className="flex flex-row justify-between mt-2">
+    <div className="mt-2 flex flex-row justify-between">
       <div className="flex flex-row pt-3">
         <Button
           variant={'outline'}
@@ -46,7 +46,7 @@ export function Pagination<T extends {}>({ table }: PaginationProps<T>) {
         >
           <KeyboardDoubleArrowRight color="text-foreground" />
         </Button>
-        <span className="ml-2 bg-background">
+        <span className="bg-background ml-2">
           <TextField
             className=""
             label={'Gå til side'}
@@ -59,7 +59,7 @@ export function Pagination<T extends {}>({ table }: PaginationProps<T>) {
             }}
           />
         </span>
-        <span className="ml-2 bg-background">
+        <span className="bg-background ml-2">
           <Select
             value={String(table.getState().pagination.pageSize)}
             onValueChange={(value) => {

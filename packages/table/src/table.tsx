@@ -186,8 +186,8 @@ export function TuTable<T extends Record<string, unknown>>(props: PropsWithChild
   return (
     <>
       <div>
-        <div className="flex h-4 bg-background" style={{ display: 'flex', height: '4em' }}>
-          <div className="p-1 bg-inherit">
+        <div className="bg-background flex h-4" style={{ display: 'flex', height: '4em' }}>
+          <div className="bg-inherit p-1">
             <DebouncedInput
               label="Søk i alle kolonner"
               name="search"
