@@ -1,6 +1,6 @@
-import { IconProps } from "./type";
-import React from "react";
-import { cn } from "../../lib/utils";
+import { IconProps } from './type';
+import React from 'react';
+import { cn } from '../../lib/utils';
 
 export function CaretSort({ color, className, ...props }: IconProps) {
   return (
@@ -9,7 +9,7 @@ export function CaretSort({ color, className, ...props }: IconProps) {
       height="1em"
       viewBox="0 0 15 15"
       xmlns="http://www.w3.org/2000/svg"
-      className={cn("fill-current text-black", color, className)}
+      className={cn('fill-current text-black', color, className)}
       {...props}
     >
       <path

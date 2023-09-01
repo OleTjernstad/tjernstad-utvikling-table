@@ -1,22 +1,15 @@
-import { Row, Table } from "@tanstack/react-table";
+import { Row, Table } from '@tanstack/react-table';
 
-import { Checkbox } from "./ui/checkbox";
-import React from "react";
-import { TableCell as TwTableCell } from "../components/ui/table";
+import { Checkbox } from './ui/checkbox';
+import React from 'react';
+import { TableCell as TwTableCell } from '../components/ui/table';
 
 interface CheckboxCellProps<T extends {}> {
   isSelected: boolean;
   row: Row<T>;
-  handleRowSelection: (
-    event: React.MouseEvent<HTMLButtonElement>,
-    row: Row<T>
-  ) => void;
+  handleRowSelection: (event: React.MouseEvent<HTMLButtonElement>, row: Row<T>) => void;
 }
-export function CheckboxCell<T extends {}>({
-  isSelected,
-  handleRowSelection,
-  row,
-}: CheckboxCellProps<T>) {
+export function CheckboxCell<T extends {}>({ isSelected, handleRowSelection, row }: CheckboxCellProps<T>) {
   return (
     <TwTableCell>
       <Checkbox
@@ -34,12 +27,7 @@ interface CheckboxHeaderCellProps<T extends {}> {
   setSelected: ((rows: Row<T>[]) => void) | undefined;
   setSelectedRows: (value: Row<T>[]) => void;
 }
-export function CheckboxHeaderCell<T extends {}>({
-  selectedRows,
-  table,
-  setSelected,
-  setSelectedRows,
-}: CheckboxHeaderCellProps<T>) {
+export function CheckboxHeaderCell<T extends {}>({ selectedRows, table, setSelected, setSelectedRows }: CheckboxHeaderCellProps<T>) {
   const rows = table.getRowModel().rows;
 
   function setSelection() {
@@ -56,9 +44,7 @@ export function CheckboxHeaderCell<T extends {}>({
     <TwTableCell>
       <Checkbox
         checked={rows.length === selectedRows.length}
-        indeterminate={
-          selectedRows.length > 0 && rows.length > selectedRows.length
-        }
+        indeterminate={selectedRows.length > 0 && rows.length > selectedRows.length}
         onClick={setSelection}
       />
     </TwTableCell>

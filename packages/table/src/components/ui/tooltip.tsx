@@ -1,20 +1,18 @@
-import { Tooltip as BaseToolTip, TooltipContent, TooltipProvider, TooltipTrigger } from "./tooltipBase";
-import React, { PropsWithChildren } from "react";
+import { Tooltip as BaseToolTip, TooltipContent, TooltipProvider, TooltipTrigger } from './tooltipBase';
+import React, { PropsWithChildren } from 'react';
 
 interface TooltipProps extends PropsWithChildren {
-  
-  tip: string
+  tip: string;
 }
-export function Tooltip({children, tip}:TooltipProps) {
+export function Tooltip({ children, tip }: TooltipProps) {
   return (
-  <TooltipProvider>
-  <BaseToolTip>
-    <TooltipTrigger asChild>{children}</TooltipTrigger>
-    <TooltipContent>
-      <p>{tip}</p>
-    </TooltipContent>
-  </BaseToolTip>
-</TooltipProvider>
-)
-
+    <TooltipProvider>
+      <BaseToolTip>
+        <TooltipTrigger asChild>{children}</TooltipTrigger>
+        <TooltipContent>
+          <p>{tip}</p>
+        </TooltipContent>
+      </BaseToolTip>
+    </TooltipProvider>
+  );
 }

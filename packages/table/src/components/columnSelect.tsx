@@ -1,29 +1,17 @@
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
-import React, { ReactElement } from "react";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './ui/dropdown-menu';
+import React, { ReactElement } from 'react';
 
-import { Button } from "./ui/button";
-import { Switch } from "./ui/switch";
-import { Table } from "@tanstack/react-table";
+import { Button } from './ui/button';
+import { Switch } from './ui/switch';
+import { Table } from '@tanstack/react-table';
 
 type ColumnHidePageProps<T extends Record<string, unknown>> = {
   instance: Table<T>;
 };
-export function ColumnSelect<T extends Record<string, unknown>>({
-  instance,
-}: ColumnHidePageProps<T>): ReactElement | null {
+export function ColumnSelect<T extends Record<string, unknown>>({ instance }: ColumnHidePageProps<T>): ReactElement | null {
   // const { allColumns, toggleHideColumn } = instance;
-  const hideableColumns = instance
-    .getAllColumns()
-    .filter((column) => !(column.id === "actions"));
-  const checkedCount = hideableColumns.reduce(
-    (acc, val) => acc + (val.getIsVisible() ? 0 : 1),
-    0
-  );
+  const hideableColumns = instance.getAllColumns().filter((column) => !(column.id === 'actions'));
+  const checkedCount = hideableColumns.reduce((acc, val) => acc + (val.getIsVisible() ? 0 : 1), 0);
 
   const onlyOneOptionLeft = checkedCount + 1 >= hideableColumns.length;
 
@@ -31,19 +19,14 @@ export function ColumnSelect<T extends Record<string, unknown>>({
     <>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button
-            className="m-3 ml-0"
-            variant="default"
-            color="info"
-            aria-haspopup="true"
-          >
+          <Button className="m-3 ml-0" variant="default" color="info" aria-haspopup="true">
             Velg kolonner
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           {instance
             .getAllLeafColumns()
-            .filter((column) => !(column.id === "actions"))
+            .filter((column) => !(column.id === 'actions'))
             .map((c) => (
               <DropdownMenuItem
                 key={c.id}
@@ -54,11 +37,7 @@ export function ColumnSelect<T extends Record<string, unknown>>({
                   func(e);
                 }}
               >
-                <Switch
-                  className="mr-2"
-                  disabled={c.getIsVisible() && onlyOneOptionLeft}
-                  checked={c.getIsVisible()}
-                />
+                <Switch className="mr-2" disabled={c.getIsVisible() && onlyOneOptionLeft} checked={c.getIsVisible()} />
                 {c.columnDef.header?.toString()}
               </DropdownMenuItem>
             ))}
