@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
-import { TextField } from "./ui/textField";
+import { TextField } from './ui/textField';
 
 // A debounced input react component
 export function DebouncedInput({
@@ -14,7 +14,7 @@ export function DebouncedInput({
   onChange: (value: string | number) => void;
   label: string;
   debounce?: number;
-} & Omit<React.InputHTMLAttributes<HTMLInputElement>, "onChange">) {
+} & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'>) {
   const [value, setValue] = useState(initialValue);
 
   useEffect(() => {
@@ -29,13 +29,5 @@ export function DebouncedInput({
     return () => clearTimeout(timeout);
   }, [value]);
 
-  return (
-    <TextField
-      id={props.name}
-      label={label}
-      name={props.name}
-      value={value}
-      onChange={(e) => setValue(e.target.value)}
-    />
-  );
+  return <TextField id={props.name} label={label} name={props.name} value={value} onChange={(e) => setValue(e.target.value)} />;
 }

@@ -1,5 +1,5 @@
-import { Row, Table } from "@tanstack/react-table";
-import { useCallback, useRef } from "react";
+import { Row, Table } from '@tanstack/react-table';
+import { useCallback, useRef } from 'react';
 
 interface UseRowSelectionProps<T> {
   selectedRows: Row<T>[];
@@ -9,13 +9,7 @@ interface UseRowSelectionProps<T> {
   enableSelection?: boolean;
 }
 
-export function useRowSelection<T>({
-  selectedRows,
-  table,
-  setSelectedRows,
-  setSelected,
-  enableSelection,
-}: UseRowSelectionProps<T>) {
+export function useRowSelection<T>({ selectedRows, table, setSelectedRows, setSelected, enableSelection }: UseRowSelectionProps<T>) {
   const lastSelectedRow = useRef<Row<T>>();
   const lastRowUnchecked = useRef<boolean>(false);
 
@@ -49,13 +43,9 @@ export function useRowSelection<T>({
         if (lastSelectedRow.current) {
           // Calculate array indexes and reset selected rows
 
-          const lastIndex = table
-            .getRowModel()
-            .rows.findIndex((r) => r.index === lastSelectedRow.current?.index);
+          const lastIndex = table.getRowModel().rows.findIndex((r) => r.index === lastSelectedRow.current?.index);
 
-          const currentIndex = table
-            .getRowModel()
-            .rows.findIndex((r) => r.index === row.index);
+          const currentIndex = table.getRowModel().rows.findIndex((r) => r.index === row.index);
 
           // If last row was unchecked remove range
           if (lastRowUnchecked.current) {
@@ -65,9 +55,7 @@ export function useRowSelection<T>({
                 // Skip row if selected or grouped row
                 if (!selectedRow?.getIsGrouped()) {
                   // return selectedRow;
-                  updatedSelectedRows = updatedSelectedRows.filter(
-                    (elm) => elm.id !== selectedRow.id
-                  );
+                  updatedSelectedRows = updatedSelectedRows.filter((elm) => elm.id !== selectedRow.id);
                 }
               }
             } else {
@@ -76,9 +64,7 @@ export function useRowSelection<T>({
                 // Skip row if selected or grouped row
                 if (!selectedRow?.getIsGrouped()) {
                   // return selectedRow;
-                  updatedSelectedRows = updatedSelectedRows.filter(
-                    (elm) => elm.id !== selectedRow.id
-                  );
+                  updatedSelectedRows = updatedSelectedRows.filter((elm) => elm.id !== selectedRow.id);
                 }
               }
             }
@@ -119,10 +105,7 @@ export function useRowSelection<T>({
 function selectRange<T>(index: number, update: Row<T>[], table: Table<T>) {
   const selectedRow = table.getRowModel().rows[index];
   // Skip row if selected or grouped row
-  if (
-    !selectedRow?.getIsGrouped() &&
-    !update.find((elm) => elm.id === selectedRow.id)
-  ) {
+  if (!selectedRow?.getIsGrouped() && !update.find((elm) => elm.id === selectedRow.id)) {
     // return selectedRow;
     update.push(selectedRow);
   }

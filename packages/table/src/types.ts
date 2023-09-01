@@ -1,6 +1,6 @@
-import { ColumnDef, Row, TableState } from "@tanstack/react-table";
+import { ColumnDef, Row, TableState } from '@tanstack/react-table';
 
-import { ColorStyleOptions } from "./style";
+import { ColorStyleOptions } from './style';
 
 export type TableProperties<T extends Record<string, unknown>> = {
   columns: ColumnDef<T, unknown>[];
@@ -12,9 +12,7 @@ export type TableProperties<T extends Record<string, unknown>> = {
   selectedRowClassName?: string;
 
   tableState: TableState;
-  setTableState: (
-    value: TableState | ((val: TableState) => TableState)
-  ) => void;
+  setTableState: (value: TableState | ((val: TableState) => TableState)) => void;
 } & (
   | {
       manualPagination?: boolean;

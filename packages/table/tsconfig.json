@@ -1,7 +1,5 @@
 {
-  "include": [
-    "src",
-  ],
+  "include": ["src"],
   "compilerOptions": {
     "declaration": true,
     "declarationDir": "types",
@@ -10,10 +8,7 @@
     "forceConsistentCasingInFileNames": true,
     "importHelpers": true,
     "jsx": "react",
-    "lib": [
-      "dom",
-      "esnext"
-    ],
+    "lib": ["dom", "esnext"],
     "module": "esnext",
     "moduleResolution": "node",
     "noFallthroughCasesInSwitch": true,
