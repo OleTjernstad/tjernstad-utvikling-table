@@ -1,5 +1,11 @@
 # @tjernstad-utvikling/table-tw
 
+## 0.0.3
+
+### Patch Changes
+
+- manual pagination
+
 ## 0.0.2
 
 ### Patch Changes
