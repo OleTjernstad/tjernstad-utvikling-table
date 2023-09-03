@@ -70,7 +70,7 @@ export function Pagination<T extends {}>({ table }: PaginationProps<T>) {
               <SelectValue placeholder="Theme" />
             </SelectTrigger>
             <SelectContent>
-              {[20, 30, 40, 50, 60].map((pageSize) => (
+              {[10, 20, 30, 40, 50, 60].map((pageSize) => (
                 <SelectItem key={pageSize} value={String(pageSize)}>
                   {pageSize}
                 </SelectItem>

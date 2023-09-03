@@ -46,7 +46,11 @@ const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
   return itemRank.passed;
 };
 
-export function TuTable<T extends Record<string, unknown>>(props: PropsWithChildren<TableProperties<T>>): ReactElement {
+export function TuTable<T extends Record<string, unknown>>({
+  paginationState,
+  updatePagination,
+  ...props
+}: PropsWithChildren<TableProperties<T>>): ReactElement {
   const pageCount = useMemo(() => {
     if (props.rowCount && props.manualPagination) {
       return Math.ceil(props.rowCount / (props.tableState.pagination?.pageSize ?? 10));
@@ -63,15 +67,11 @@ export function TuTable<T extends Record<string, unknown>>(props: PropsWithChild
     });
   }
 
-  function updatePagination(update: Updater<PaginationState>) {
-    const pagination = update instanceof Function ? update(props.tableState.pagination) : update;
-    if (props.manualPagination) {
-      props.setTableState((prev) => {
-        return {
-          ...prev,
-          pagination
-        };
-      });
+  function localUpdatePagination(update: Updater<PaginationState>) {
+    if (paginationState && props.manualPagination && updatePagination) {
+      const pagination = update instanceof Function ? update(paginationState) : update;
+
+      updatePagination(pagination);
     }
   }
 
@@ -132,10 +132,10 @@ export function TuTable<T extends Record<string, unknown>>(props: PropsWithChild
     onColumnVisibilityChange: updateVisibility,
     onExpandedChange: updateExpanded,
     onSortingChange: updateSorting,
-    ...(props.manualPagination ? { onPaginationChange: updatePagination } : {}),
+    ...(props.manualPagination ? { onPaginationChange: localUpdatePagination } : {}),
     getExpandedRowModel: getExpandedRowModel(),
     getGroupedRowModel: getGroupedRowModel(),
-    ...(props.enablePagination ? { getPaginationRowModel: getPaginationRowModel() } : {}),
+    ...(props.enablePagination && !props.manualPagination ? { getPaginationRowModel: getPaginationRowModel() } : {}),
     getFilteredRowModel: getFilteredRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFacetedRowModel: getFacetedRowModel(),
@@ -186,7 +186,7 @@ export function TuTable<T extends Record<string, unknown>>(props: PropsWithChild
   return (
     <>
       <div>
-        <div className="bg-background flex h-4">
+        <div className="bg-background flex h-16">
           <div className="bg-inherit p-1">
             <DebouncedInput
               label="Søk i alle kolonner"

@@ -9,8 +9,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@tanstack/react-table": "^8.7.9",
     "@tjernstad-utvikling/table-tw": "workspace:*",
+    "@tanstack/react-table": "^8.8.4",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "react": "^18.2.0",

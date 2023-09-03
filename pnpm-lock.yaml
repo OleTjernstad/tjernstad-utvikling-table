@@ -15,7 +15,7 @@ importers:
 
   apps/example:
     specifiers:
-      '@tanstack/react-table': ^8.7.9
+      '@tanstack/react-table': ^8.8.4
       '@tjernstad-utvikling/table-tw': workspace:*
       '@types/node': ^20.5.6
       '@types/react': ^18.0.27
@@ -34,7 +34,7 @@ importers:
       typescript: ^4.9.3
       vite: ^4.1.0
     dependencies:
-      '@tanstack/react-table': 8.7.9_biqbaboplfbrettd7655fr4n2y
+      '@tanstack/react-table': 8.8.4_biqbaboplfbrettd7655fr4n2y
       '@tjernstad-utvikling/table-tw': link:../../packages/table
       class-variance-authority: 0.7.0
       clsx: 2.0.0
@@ -87,11 +87,11 @@ importers:
       '@radix-ui/react-switch': 1.0.3_3xleytyzprlgycb2ded54tx72i
       '@radix-ui/react-tooltip': 1.0.6_3xleytyzprlgycb2ded54tx72i
       '@tanstack/match-sorter-utils': 8.8.4
-      '@tanstack/react-table': 8.8.4_biqbaboplfbrettd7655fr4n2y
       class-variance-authority: 0.7.0
       clsx: 2.0.0
       tailwind-merge: 1.14.0
     devDependencies:
+      '@tanstack/react-table': 8.8.4_biqbaboplfbrettd7655fr4n2y
       '@types/react': 18.0.28
       '@types/react-dom': 18.0.11
       eslint: 7.32.0
@@ -1653,18 +1653,6 @@ packages:
       remove-accents: 0.4.2
     dev: false
 
-  /@tanstack/react-table/8.7.9_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-6MbbQn5AupSOkek1+6IYu+1yZNthAKTRZw9tW92Vi6++iRrD1GbI3lKTjJalf8lEEKOqapPzQPE20nywu0PjCA==}
-    engines: {node: '>=12'}
-    peerDependencies:
-      react: '>=16'
-      react-dom: '>=16'
-    dependencies:
-      '@tanstack/table-core': 8.7.9
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-    dev: false
-
   /@tanstack/react-table/8.8.4_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-5w2AoBnDBJYuUa80sLOqelcG/eJdGwIPFBRnEiU3RCAEeZ1QIhYse/0vzhTY8VAcTXa2sjWhXNDWci4VlktNmg==}
     engines: {node: '>=12'}
@@ -1675,17 +1663,10 @@ packages:
       '@tanstack/table-core': 8.8.4
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
-    dev: false
-
-  /@tanstack/table-core/8.7.9:
-    resolution: {integrity: sha512-4RkayPMV1oS2SKDXfQbFoct1w5k+pvGpmX18tCXMofK/VDRdA2hhxfsQlMvsJ4oTX8b0CI4Y3GDKn5T425jBCw==}
-    engines: {node: '>=12'}
-    dev: false
 
   /@tanstack/table-core/8.8.4:
     resolution: {integrity: sha512-4gq0A/Qz/JFuclxPd1UnNi5P57vbVF10mPK743Iuv2ORLLgF/O/XkaYjYDGw5SHMof8CgiT/nfdJdlgHsOfRIg==}
     engines: {node: '>=12'}
-    dev: false
 
   /@types/argparse/1.0.38:
     resolution: {integrity: sha512-ebDJ9b0e702Yr7pWgB0jzm+CX4Srzz8RcXtLJDJB+BSccqMa36uyH/zUsSYao5+BD1ytv3k3rPYCq4mAE1hsXA==}

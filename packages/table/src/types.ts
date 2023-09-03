@@ -1,4 +1,4 @@
-import { ColumnDef, Row, TableState } from '@tanstack/react-table';
+import { ColumnDef, PaginationState, Row, TableState } from '@tanstack/react-table';
 
 import { ColorStyleOptions } from './style';
 
@@ -18,9 +18,11 @@ export type TableProperties<T extends Record<string, unknown>> = {
       manualPagination?: boolean;
       enablePagination: boolean;
       rowCount: number;
+      paginationState: PaginationState;
+      updatePagination: (v: PaginationState) => void;
     }
-  | { enablePagination: boolean; manualPagination?: never; rowCount?: never }
-  | { enablePagination?: never; manualPagination?: never; rowCount?: never }
+  | { enablePagination: boolean; manualPagination?: never; rowCount?: never; paginationState?: never; updatePagination?: never }
+  | { enablePagination?: never; manualPagination?: never; rowCount?: never; paginationState?: never; updatePagination?: never }
 ) &
   (
     | {
