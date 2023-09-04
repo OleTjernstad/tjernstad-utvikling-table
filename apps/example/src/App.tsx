@@ -83,7 +83,7 @@ export default function App() {
 
   useEffect(() => {
     const load = async () => {
-      await new Promise((r) => setTimeout(r, 1000));
+      await new Promise((r) => setTimeout(r, 10000000));
       // const pageNumber = tableState?.pagination?.pageIndex ?? 0;
       // const pageSize = tableState?.pagination?.pageSize ?? 10;
 

@@ -62,6 +62,36 @@ pagination: { pageIndex: 0, pageSize: 20 },
 />
 ```
 
+### tailwind.config
+
+#### Theme colors
+
+The component uses theme config installed by [shadcn/ui](https://ui.shadcn.com/)
+
+#### Loading indicator
+
+Add this for animating the loading indicator
+
+```javascript
+theme : {
+    extend: {
+        animation: {
+        progress: 'progress 1s infinite linear',
+      },
+      keyframes: {
+        progress: {
+          '0%': { transform: ' translateX(0) scaleX(0)' },
+          '40%': { transform: 'translateX(0) scaleX(0.4)' },
+          '100%': { transform: 'translateX(100%) scaleX(0.5)' },
+        },
+      },
+      transformOrigin: {
+        'left-right': '0% 50%',
+      }
+    }
+}
+```
+
 ## Features
 
 - sorting

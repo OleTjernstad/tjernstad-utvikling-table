@@ -1,23 +1,24 @@
 {
-    "cSpell.words": [
-        "clsx",
-        "errormessage",
-        "Fjern",
-        "første",
-        "fram",
-        "Grupper",
-        "hideable",
-        "kolonne",
-        "kolonner",
-        "Maks",
-        "rader",
-        "siste",
-        "sortering",
-        "stigende",
-        "synkende",
-        "tailwindcss",
-        "Tanstack",
-        "tilbake",
-        "Velg"
-    ]
+  "cSpell.words": [
+    "clsx",
+    "errormessage",
+    "Fjern",
+    "første",
+    "fram",
+    "Grupper",
+    "hideable",
+    "kolonne",
+    "kolonner",
+    "Maks",
+    "rader",
+    "shadcn",
+    "siste",
+    "sortering",
+    "stigende",
+    "synkende",
+    "tailwindcss",
+    "Tanstack",
+    "tilbake",
+    "Velg"
+  ]
 }
