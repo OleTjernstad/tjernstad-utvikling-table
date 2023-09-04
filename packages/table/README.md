@@ -75,11 +75,11 @@ Add this for animating the loading indicator
 ```javascript
 theme : {
     extend: {
-        animation: {
-        progress: 'progress 1s infinite linear',
+      animation: {
+        "progress-linear-intermediate": 'progress-linear 1s infinite linear',
       },
       keyframes: {
-        progress: {
+        "progress-linear": {
           '0%': { transform: ' translateX(0) scaleX(0)' },
           '40%': { transform: 'translateX(0) scaleX(0.4)' },
           '100%': { transform: 'translateX(100%) scaleX(0.5)' },

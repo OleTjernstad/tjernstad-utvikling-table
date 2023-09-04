@@ -214,11 +214,13 @@ export function TuTable<T extends Record<string, unknown>>({
           <TableBody>
             {/* https://tailwindcomponents.com/component/indeterminate-progress-bar */}
             {props.isLoading && (
-              <tr>
-                <td className="h-1.5 w-full overflow-hidden bg-pink-100" colSpan={table.getVisibleFlatColumns().length}>
-                  <div className="progress left-right bg-primary h-full w-full"></div>
+              <tr className="w-full">
+                <td
+                  className="bg-accent h-1.5 w-full overflow-hidden"
+                  colSpan={table.getVisibleFlatColumns().length + (props.enableSelection ? 1 : 0)}
+                >
+                  <div className="animate-progress-linear-intermediate origin-left-right bg-primary h-full w-full"></div>
                   {/* <LinearProgress sx={{ width: "100%" }} /> */}
-                  Laster
                 </td>
               </tr>
             )}

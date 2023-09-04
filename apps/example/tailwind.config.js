@@ -66,9 +66,9 @@ module.exports = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: 0 },
         },
-        progress: {
+        "progress-linear": {
           "0%": { transform: " translateX(0) scaleX(0)" },
-          "40%": { transform: "translateX(0) scaleX(0.4)" },
+          "20%": { transform: "translateX(0) scaleX(0.2)" },
           "100%": { transform: "translateX(100%) scaleX(0.5)" },
         },
       },
@@ -78,7 +78,7 @@ module.exports = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        progress: "progress 1s infinite linear",
+        "progress-linear-intermediate": "progress-linear 1s infinite linear",
       },
     },
   },
