@@ -29,9 +29,6 @@ export function TableRow<T extends {}>({
     <TwTableRow
       data-row-index={row.index}
       data-row-is-group-row={row.getIsGrouped() ? 1 : undefined}
-      style={{
-        cursor: !row.getIsGrouped() ? 'pointer' : 'auto'
-      }}
       className={cn(
         { 'tu-table-selectable': !row.getIsGrouped() },
         { 'bg-sky-600/50 hover:bg-sky-800/50': isSelected },

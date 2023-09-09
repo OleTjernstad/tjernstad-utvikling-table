@@ -1,5 +1,11 @@
 # @tjernstad-utvikling/table-tw
 
+## 0.1.1
+
+### Patch Changes
+
+- row cursor
+
 ## 0.1.0
 
 ### Minor Changes
