@@ -1,5 +1,11 @@
 # @tjernstad-utvikling/table-tw
 
+## 0.1.0
+
+### Minor Changes
+
+- 8b1f398: overrideColors
+
 ## 0.0.4
 
 ### Patch Changes
