@@ -13,10 +13,3 @@ export const baseColors: OverrideColors = {
   error: 'bg-rose-600/50 hover:bg-rose-800/50',
   warning: 'bg-amber-600/50 hover:bg-amber-800/50'
 };
-export enum ColorStyleOptions {
-  completed = 'completed',
-  disabled = 'disabled',
-  cut = 'cut',
-  error = 'error',
-  warning = 'warning'
-}

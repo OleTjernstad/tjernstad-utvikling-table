@@ -246,4 +246,4 @@ export function TuTable<T extends Record<string, unknown>>({
   );
 }
 
-export { ColorStyleOptions, baseColors } from './style';
+export { baseColors } from './style';

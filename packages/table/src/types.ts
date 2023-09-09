@@ -1,14 +1,12 @@
 import { ColumnDef, PaginationState, Row, TableState } from '@tanstack/react-table';
 
-import { ColorStyleOptions } from './style';
-
 export type TableProperties<T extends Record<string, unknown>> = {
   columns: ColumnDef<T, unknown>[];
   data: T[];
   isLoading: boolean;
   children?: React.ReactNode;
 
-  getRowStyling?: (row: Row<T>) => ColorStyleOptions | undefined;
+  getRowStyling?: (row: Row<T>) => string | undefined;
   selectedRowClassName?: string;
 
   tableState: TableState;
