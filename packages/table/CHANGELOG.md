@@ -1,5 +1,11 @@
 # @tjernstad-utvikling/table-tw
 
+## 0.1.3
+
+### Patch Changes
+
+- z10
+
 ## 0.1.2
 
 ### Patch Changes
