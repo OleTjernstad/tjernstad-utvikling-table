@@ -1,4 +1,9 @@
-import { ColumnDef, Row, TableState } from "@tanstack/react-table";
+import {
+  ColumnDef,
+  PaginationState,
+  Row,
+  TableState,
+} from "@tanstack/react-table";
 import { useEffect, useMemo, useState } from "react";
 
 import { TableKey } from "./contracts/keys";
@@ -27,6 +32,10 @@ export default function App() {
   >([]);
 
   const [selected, setSelected] = useState<number[]>();
+  const [paginationState, setPaginationState] = useState<PaginationState>({
+    pageIndex: 0,
+    pageSize: 10,
+  });
 
   function updateSelected(rows: Row<Columns>[]) {
     setSelected(rows.map((r) => r.getValue("id")));
@@ -69,28 +78,27 @@ export default function App() {
   const [tableState, setTableState] = useTableState<TableState>(TableKey.user, {
     columnVisibility: {},
     expanded: {},
-    pagination: { pageIndex: 0, pageSize: 20 },
   } as TableState);
 
-  // useEffect(() => {
-  //   const pageNumber = tableState?.pagination?.pageIndex ?? 0;
-  //   const pageSize = tableState?.pagination?.pageSize ?? 10;
+  useEffect(() => {
+    const pageNumber = paginationState?.pageIndex ?? 0;
+    const pageSize = paginationState?.pageSize ?? 10;
 
-  //   setUsers(
-  //     usersData.slice(pageNumber * pageSize, (pageNumber + 1) * pageSize)
-  //   );
-  // }, [usersData, tableState.pagination]);
+    setUsers(
+      usersData.slice(pageNumber * pageSize, (pageNumber + 1) * pageSize)
+    );
+  }, [usersData, paginationState]);
 
   useEffect(() => {
     const load = async () => {
       await new Promise((r) => setTimeout(r, 2000));
-      // const pageNumber = tableState?.pagination?.pageIndex ?? 0;
-      // const pageSize = tableState?.pagination?.pageSize ?? 10;
+      const pageNumber = tableState?.pagination?.pageIndex ?? 0;
+      const pageSize = tableState?.pagination?.pageSize ?? 10;
 
-      // setUsers(
-      //   usersData.slice(pageNumber * pageSize, (pageNumber + 1) * pageSize)
-      // );
-      setUsers(usersData);
+      setUsers(
+        usersData.slice(pageNumber * pageSize, (pageNumber + 1) * pageSize)
+      );
+      // setUsers(usersData);
       setIsLoading(false);
     };
     load();
@@ -108,6 +116,13 @@ export default function App() {
         selectedIds={selected}
         setSelected={updateSelected}
         enablePagination
+        manualPagination
+        paginationState={paginationState}
+        rowCount={usersData.length}
+        updatePagination={(v) => {
+          setPaginationState(v);
+          console.log(v);
+        }}
       />
     </div>
   );

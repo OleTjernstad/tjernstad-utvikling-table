@@ -1,5 +1,11 @@
 # @tjernstad-utvikling/table-tw
 
+## 0.2.1
+
+### Patch Changes
+
+- fix manual pagination
+
 ## 0.2.0
 
 ### Minor Changes

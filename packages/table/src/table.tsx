@@ -118,7 +118,7 @@ export function TuTable<T extends Record<string, unknown>>({
       columnVisibility: props.tableState.columnVisibility ?? {},
       ...(props.tableState.columnFilters ? { columnFilters: props.tableState.columnFilters } : {}),
       ...(props.tableState.grouping ? { grouping: props.tableState.grouping } : {}),
-      ...(props.manualPagination ? { pagination: props.tableState.pagination } : {}),
+      ...(props.manualPagination ? { pagination: paginationState } : {}),
       globalFilter
     },
     ...(props.manualPagination && pageCount ? { pageCount } : {}),
