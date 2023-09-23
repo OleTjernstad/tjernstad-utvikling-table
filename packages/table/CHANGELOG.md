@@ -1,5 +1,11 @@
 # @tjernstad-utvikling/table-tw
 
+## 0.2.0
+
+### Minor Changes
+
+- focus shadow
+
 ## 0.1.3
 
 ### Patch Changes
