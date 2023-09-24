@@ -15,7 +15,7 @@ const TextField = React.forwardRef<HTMLInputElement, InputProps>(({ className, t
         id={id}
         placeholder=" "
         className={cn(
-          'text-foreground border-foreground peer flex w-full appearance-none rounded border bg-transparent px-2 pb-2 pt-2 text-sm focus:border-blue-600 focus:outline-none focus:ring-0 dark:focus:border-blue-500',
+          'text-foreground border-foreground focus:shadow-[0_0_0_5px_rgba(21, 156, 228, 0.4)] peer flex w-full appearance-none rounded border bg-transparent px-2 pb-2 pt-2 text-sm focus:border-blue-600 focus:outline-none focus:ring-0 dark:focus:border-blue-500',
           className
         )}
         ref={ref}

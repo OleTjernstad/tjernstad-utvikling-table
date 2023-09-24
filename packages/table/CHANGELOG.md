@@ -1,5 +1,11 @@
 # @tjernstad-utvikling/table-tw
 
+## 0.2.2
+
+### Patch Changes
+
+- fix focus and page calculation
+
 ## 0.2.1
 
 ### Patch Changes

@@ -17,7 +17,7 @@ const Checkbox = React.forwardRef<
       //   onCheckedChange={setChecked}
       ref={ref}
       className={cn(
-        'border-foreground focus-visible:ring-ring focus-visible:shadow-[0_0_0_5px_rgba(21, 156, 228, 0.4)] disabled:opacity-50focus-visible:shadow-[0_0_0_5px_rgba(21, 156, 228, 0.4)] peer h-4 w-4 shrink-0 rounded-sm border shadow focus-visible:outline-none focus-visible:ring-1 disabled:cursor-not-allowed',
+        'border-foreground focus:ring-ring focus:shadow-[0_0_0_5px_rgba(21, 156, 228, 0.4)] peer h-4 w-4 shrink-0 rounded-sm border shadow focus:outline-none focus:ring-1 disabled:cursor-not-allowed disabled:opacity-50',
         'data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground',
         className
       )}

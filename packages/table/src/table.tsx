@@ -53,7 +53,7 @@ export function TuTable<T extends Record<string, unknown>>({
 }: PropsWithChildren<TableProperties<T>>): ReactElement {
   const pageCount = useMemo(() => {
     if (props.rowCount && props.manualPagination) {
-      return Math.ceil(props.rowCount / (props.tableState.pagination?.pageSize ?? 10));
+      return Math.ceil(props.rowCount / (paginationState?.pageSize ?? 10));
     }
     return undefined;
   }, [props.rowCount, props.tableState?.pagination?.pageSize]);
