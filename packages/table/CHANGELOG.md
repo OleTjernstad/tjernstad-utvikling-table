@@ -1,5 +1,11 @@
 # @tjernstad-utvikling/table-tw
 
+## 0.2.3
+
+### Patch Changes
+
+- useMemo dep
+
 ## 0.2.2
 
 ### Patch Changes

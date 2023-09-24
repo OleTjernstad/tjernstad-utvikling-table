@@ -56,7 +56,7 @@ export function TuTable<T extends Record<string, unknown>>({
       return Math.ceil(props.rowCount / (paginationState?.pageSize ?? 10));
     }
     return undefined;
-  }, [props.rowCount, props.tableState?.pagination?.pageSize]);
+  }, [props.rowCount, paginationState?.pageSize]);
 
   const [globalFilter, setGlobalFilter] = React.useState('');
 
