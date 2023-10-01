@@ -56,21 +56,19 @@ export function HeaderCell<T extends {}>({ header, table }: HeaderCellProps<T>) 
               <div
                 {...{
                   className: header.column.getCanSort() ? 'cursor-pointer' : '',
-                  onClick: header.column.getToggleSortingHandler(),
-                  onKeyDown: header.column.getToggleSortingHandler()
+                  onClick: header.column.getToggleSortingHandler()
                 }}
               >
                 {flexRender(header.column.columnDef.header, header.getContext())}
               </div>
-            </Tooltip>{' '}
+            </Tooltip>
             {header.column.getCanSort() ? (
               <Button
                 variant={'outline'}
                 size={'icon'}
                 className="ml-2"
                 {...{
-                  onClick: header.column.getToggleSortingHandler(),
-                  onKeyDown: header.column.getToggleSortingHandler()
+                  onClick: header.column.getToggleSortingHandler()
                 }}
               >
                 {header.column.getIsSorted() === 'asc' ? (

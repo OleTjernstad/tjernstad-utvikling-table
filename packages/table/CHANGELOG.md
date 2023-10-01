@@ -1,5 +1,11 @@
 # @tjernstad-utvikling/table-tw
 
+## 0.2.4
+
+### Patch Changes
+
+- remove onkeydown
+
 ## 0.2.3
 
 ### Patch Changes
