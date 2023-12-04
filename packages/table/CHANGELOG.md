@@ -1,5 +1,11 @@
 # @tjernstad-utvikling/table-tw
 
+## 0.2.5
+
+### Patch Changes
+
+- 6ae661d: shadow-color
+
 ## 0.2.4
 
 ### Patch Changes
