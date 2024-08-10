@@ -213,17 +213,6 @@ export function TuTable<T extends Record<string, unknown>>({
           </TableHeader>
           <TableBody>
             {/* https://tailwindcomponents.com/component/indeterminate-progress-bar */}
-            {props.isLoading && (
-              <tr className="w-full">
-                <td
-                  className="bg-accent h-1.5 w-full overflow-hidden"
-                  colSpan={table.getVisibleFlatColumns().length + (props.enableSelection ? 1 : 0)}
-                >
-                  <div className="animate-progress-linear-intermediate origin-left-right bg-primary h-full w-full"></div>
-                  {/* <LinearProgress sx={{ width: "100%" }} /> */}
-                </td>
-              </tr>
-            )}
 
             {table.getRowModel().rows.map((row) => {
               return (
@@ -241,7 +230,6 @@ export function TuTable<T extends Record<string, unknown>>({
           </TableBody>
         </Table>
       </div>
-      {props.enablePagination ? <Pagination table={table} /> : null}
     </>
   );
 }
