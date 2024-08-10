@@ -30,6 +30,7 @@
   },
   "devDependencies": {
     "@tanstack/react-table": "^8.20.1",
+    "@total-typescript/tsconfig": "^1.0.4",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "eslint": "9.9.0",
@@ -46,8 +47,8 @@
   "license": "MIT",
   "peerDependencies": {
     "@tanstack/react-table": ">=8.0",
-    "react": ">=17.0",
-    "react-dom": ">=17.0"
+    "react": ">=18.0",
+    "react-dom": ">=18.0"
   },
   "keywords": [
     "react-table",

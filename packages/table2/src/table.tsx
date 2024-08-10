@@ -1,13 +1,5 @@
+import { Table, TableBody, TableHeader, TableRow as TwTableRow } from './components/ui/table';
 import {
-  ColumnFiltersState,
-  ExpandedState,
-  FilterFn,
-  GroupingState,
-  PaginationState,
-  Row,
-  SortingState,
-  Updater,
-  VisibilityState,
   getCoreRowModel,
   getExpandedRowModel,
   getFacetedMinMaxValues,
@@ -17,18 +9,25 @@ import {
   getGroupedRowModel,
   getPaginationRowModel,
   getSortedRowModel,
-  useReactTable
+  useReactTable,
+  type ColumnFiltersState,
+  type ExpandedState,
+  type FilterFn,
+  type GroupingState,
+  type PaginationState,
+  type Row,
+  type SortingState,
+  type Updater,
+  type VisibilityState
 } from '@tanstack/react-table';
-import { PropsWithChildren, ReactElement, useEffect, useMemo, useState } from 'react';
-import { Table, TableBody, TableHeader, TableRow as TwTableRow } from './components/ui/table';
+import { useEffect, useMemo, useState, type PropsWithChildren, type ReactElement } from 'react';
 
 import { CheckboxHeaderCell } from './components/selection';
 import { ColumnSelect } from './components/columnSelect';
 import { DebouncedInput } from './components/input';
 import { HeaderCell } from './components/header';
-import { Pagination } from './components/pagination';
 import React from 'react';
-import { TableProperties } from './types';
+import type { TableProperties } from './types';
 import { TableRow } from './components/row';
 import { rankItem } from '@tanstack/match-sorter-utils';
 import { useRowSelection } from './hooks/useRowSelection';

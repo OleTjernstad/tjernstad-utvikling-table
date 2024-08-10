@@ -1,24 +1,8 @@
 {
   "include": ["src"],
+  "extends": "@total-typescript/tsconfig/bundler/dom/library-monorepo",
   "compilerOptions": {
-    "declaration": true,
-    "declarationDir": "types",
-    "noEmit": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "importHelpers": true,
-    "jsx": "react",
-    "lib": ["dom", "esnext"],
-    "module": "esnext",
-    "moduleResolution": "node",
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitReturns": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "jsx": "react-jsx",
     "rootDir": "./src",
-    "skipLibCheck": true,
-    "sourceMap": true,
-    "strict": true,
-    "target": "ES6"
   }
 }
