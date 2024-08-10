@@ -1,5 +1,5 @@
 {
-  "name": "@tjernstad-utvikling/table-tw-old",
+  "name": "@tjernstad-utvikling/table-tw",
   "private": false,
   "version": "0.2.5",
   "author": "Ole Tjernstad",
@@ -23,23 +23,17 @@
     "node": ">=14"
   },
   "dependencies": {
-    "@radix-ui/react-checkbox": "^1.0.4",
-    "@radix-ui/react-dropdown-menu": "^2.0.5",
-    "@radix-ui/react-select": "^1.2.2",
-    "@radix-ui/react-slot": "^1.0.2",
-    "@radix-ui/react-switch": "^1.0.3",
-    "@radix-ui/react-tooltip": "^1.0.6",
-    "@tanstack/match-sorter-utils": "^8.8.4",
+    "@tanstack/match-sorter-utils": "^8.19.4",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "tailwind-merge": "^1.14.0"
   },
   "devDependencies": {
+    "@tanstack/react-table": "^8.8.4",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "eslint": "7.32.0",
     "eslint-config-custom": "workspace:*",
-    "@tanstack/react-table": "^8.8.4",
     "prettier": "3.0.3",
     "prettier-plugin-tailwindcss": "^0.5.4",
     "react": "^18.2.0",
@@ -51,9 +45,9 @@
   },
   "license": "MIT",
   "peerDependencies": {
+    "@tanstack/react-table": ">=8.0",
     "react": ">=17.0",
-    "react-dom": ">=17.0",
-    "@tanstack/react-table": ">=8.0"
+    "react-dom": ">=17.0"
   },
   "keywords": [
     "react-table",
