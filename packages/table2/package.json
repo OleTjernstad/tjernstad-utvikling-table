@@ -15,7 +15,7 @@
   "scripts": {
     "lib:build": "rm -rf dist && tsc && vite build"
   },
-  "module": "dist/tu-table.mjs",
+  "module": "dist/tu-table.js",
   "typings": "dist/index.d.ts",
   "files": [
     "dist"

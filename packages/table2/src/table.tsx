@@ -7,20 +7,18 @@ import {
   getFacetedUniqueValues,
   getFilteredRowModel,
   getGroupedRowModel,
-  getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
   type ColumnFiltersState,
   type ExpandedState,
   type FilterFn,
   type GroupingState,
-  type PaginationState,
   type Row,
   type SortingState,
   type Updater,
   type VisibilityState
 } from '@tanstack/react-table';
-import { useMemo, useState, type PropsWithChildren, type ReactElement } from 'react';
+import { useState, type PropsWithChildren, type ReactElement } from 'react';
 
 import { CheckboxHeaderCell } from './components/selection';
 import { ColumnSelect } from './components/columnSelect';
@@ -45,11 +43,7 @@ const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
   return itemRank.passed;
 };
 
-export function TuTable<T extends Record<string, unknown>>({
-  paginationState,
-  updatePagination,
-  ...props
-}: PropsWithChildren<TableProperties<T>>): ReactElement {
+export function TuTable<T extends Record<string, unknown>>({ ...props }: PropsWithChildren<TableProperties<T>>): ReactElement {
   const [globalFilter, setGlobalFilter] = React.useState('');
 
   function updateGrouping(update: Updater<GroupingState>) {
@@ -57,14 +51,6 @@ export function TuTable<T extends Record<string, unknown>>({
     props.setTableState((prev) => {
       return { ...prev, grouping };
     });
-  }
-
-  function localUpdatePagination(update: Updater<PaginationState>) {
-    if (paginationState && props.manualPagination && updatePagination) {
-      const pagination = update instanceof Function ? update(paginationState) : update;
-
-      updatePagination(pagination);
-    }
   }
 
   function updateColumnFilters(update: Updater<ColumnFiltersState>) {
@@ -110,7 +96,6 @@ export function TuTable<T extends Record<string, unknown>>({
       columnVisibility: props.tableState.columnVisibility ?? {},
       ...(props.tableState.columnFilters ? { columnFilters: props.tableState.columnFilters } : {}),
       ...(props.tableState.grouping ? { grouping: props.tableState.grouping } : {}),
-      ...(props.manualPagination ? { pagination: paginationState } : {}),
       globalFilter
     },
     enableRowSelection: true,

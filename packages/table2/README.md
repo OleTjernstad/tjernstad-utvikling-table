@@ -68,7 +68,15 @@ pagination: { pageIndex: 0, pageSize: 20 },
 
 The component uses theme config installed by [shadcn/ui](https://ui.shadcn.com/)
 
+add content import to your tailwind config
+
+```javascript
+'path/to/node_modules/@tjernstad-utvikling/table-tw/dist/**/*.{mjs,js,ts,jsx,tsx}',
+```
+
 #### Loading indicator
+
+ 
 
 Add this for animating the loading indicator
 

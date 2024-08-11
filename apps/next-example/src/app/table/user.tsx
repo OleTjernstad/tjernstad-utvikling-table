@@ -1,14 +1,11 @@
-import {
-  ColumnDef,
-  PaginationState,
-  Row,
-  TableState,
-} from "@tanstack/react-table";
+"use client";
+import { ColumnDef, Row, TableState } from "@tanstack/react-table";
 import { useEffect, useMemo, useState } from "react";
 
-import { TableKey } from "./contracts/keys";
+import { StatusCell } from "./status";
+import { TableKey } from "../contracts/keys";
 import { TuTable } from "@tjernstad-utvikling/table-tw";
-import { useTableState } from "./hooks/useTableState";
+import { useTableState } from "@/hooks/useTableState";
 import usersData from "./data.json";
 
 type Columns = {
@@ -19,7 +16,7 @@ type Columns = {
   isLocked: boolean;
 };
 
-export default function App() {
+export default function UserTable() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [users, setUsers] = useState<
     {
@@ -32,10 +29,6 @@ export default function App() {
   >([]);
 
   const [selected, setSelected] = useState<number[]>();
-  const [paginationState, setPaginationState] = useState<PaginationState>({
-    pageIndex: 0,
-    pageSize: 10,
-  });
 
   function updateSelected(rows: Row<Columns>[]) {
     setSelected(rows.map((r) => r.getValue("id")));
@@ -81,15 +74,6 @@ export default function App() {
   } as TableState);
 
   useEffect(() => {
-    const pageNumber = paginationState?.pageIndex ?? 0;
-    const pageSize = paginationState?.pageSize ?? 10;
-
-    setUsers(
-      usersData.slice(pageNumber * pageSize, (pageNumber + 1) * pageSize)
-    );
-  }, [usersData, paginationState]);
-
-  useEffect(() => {
     const load = async () => {
       await new Promise((r) => setTimeout(r, 2000));
       const pageNumber = tableState?.pagination?.pageIndex ?? 0;
@@ -119,13 +103,3 @@ export default function App() {
     </div>
   );
 }
-
-const StatusCell = ({ isLocked }: { isLocked: boolean }) => {
-  if (isLocked) {
-    return <p>block</p>;
-    // <BlockIcon fontSize="small" />;
-  }
-
-  return <p>check</p>;
-  // <CheckIcon fontSize="small" />;
-};

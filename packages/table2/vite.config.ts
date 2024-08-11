@@ -11,6 +11,7 @@ export default defineConfig({
       fileName: 'tu-table',
       formats: ['es']
     },
+    sourcemap: true,
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled
       // into your library
@@ -28,8 +29,7 @@ export default defineConfig({
         'react'
       ],
       output: {
-        format: 'esm',
-        sourcemap: true
+        format: 'esm'
       }
     }
   },
