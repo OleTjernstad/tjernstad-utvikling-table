@@ -20,7 +20,7 @@ import {
   type Updater,
   type VisibilityState
 } from '@tanstack/react-table';
-import { useEffect, useMemo, useState, type PropsWithChildren, type ReactElement } from 'react';
+import { useMemo, useState, type PropsWithChildren, type ReactElement } from 'react';
 
 import { CheckboxHeaderCell } from './components/selection';
 import { ColumnSelect } from './components/columnSelect';
@@ -50,13 +50,6 @@ export function TuTable<T extends Record<string, unknown>>({
   updatePagination,
   ...props
 }: PropsWithChildren<TableProperties<T>>): ReactElement {
-  const pageCount = useMemo(() => {
-    if (props.rowCount && props.manualPagination) {
-      return Math.ceil(props.rowCount / (paginationState?.pageSize ?? 10));
-    }
-    return undefined;
-  }, [props.rowCount, paginationState?.pageSize]);
-
   const [globalFilter, setGlobalFilter] = React.useState('');
 
   function updateGrouping(update: Updater<GroupingState>) {
@@ -120,7 +113,6 @@ export function TuTable<T extends Record<string, unknown>>({
       ...(props.manualPagination ? { pagination: paginationState } : {}),
       globalFilter
     },
-    ...(props.manualPagination && pageCount ? { pageCount } : {}),
     enableRowSelection: true,
     enableMultiRowSelection: true,
     enableSubRowSelection: true,
@@ -131,16 +123,16 @@ export function TuTable<T extends Record<string, unknown>>({
     onColumnVisibilityChange: updateVisibility,
     onExpandedChange: updateExpanded,
     onSortingChange: updateSorting,
-    ...(props.manualPagination ? { onPaginationChange: localUpdatePagination } : {}),
+
     getExpandedRowModel: getExpandedRowModel(),
     getGroupedRowModel: getGroupedRowModel(),
-    ...(props.enablePagination && !props.manualPagination ? { getPaginationRowModel: getPaginationRowModel() } : {}),
+
     getFilteredRowModel: getFilteredRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
     getFacetedMinMaxValues: getFacetedMinMaxValues(),
-    debugTable: false
+    debugTable: import.meta.env.DEV
   });
 
   function getRowClassName(row: Row<T>) {
@@ -153,26 +145,11 @@ export function TuTable<T extends Record<string, unknown>>({
     return '';
   }
 
-  const [selectedRows, setSelectedRows] = useState<Row<T>[]>([]);
-
-  useEffect(() => {
-    if (props.selectedIds) {
-      setSelectedRows(
-        table.getPreFilteredRowModel().rows.filter((r) => {
-          return props.selectedIds?.find((o) => o === r?.getValue('id'));
-        })
-      );
-    }
-  }, [props.selectedIds, table]);
-
-  useEffect(() => {
-    if (props.selectedIds && props.manualPagination && props.data)
-      setSelectedRows(
-        table.getPreFilteredRowModel().rows.filter((r) => {
-          return props.selectedIds?.find((o) => o === r.getValue('id'));
-        })
-      );
-  }, [props.selectedIds, table, props.manualPagination, props.data]);
+  const [selectedRows, setSelectedRows] = useState<Row<T>[]>(() =>
+    table.getPreFilteredRowModel().rows.filter((r) => {
+      return props.selectedIds?.find((o) => o === r?.getValue('id'));
+    })
+  );
 
   const handleRowSelection = useRowSelection({
     selectedRows,

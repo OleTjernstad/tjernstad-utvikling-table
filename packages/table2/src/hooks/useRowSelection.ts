@@ -1,4 +1,4 @@
-import { Row, Table } from '@tanstack/react-table';
+import type { Row, Table } from '@tanstack/react-table';
 import { useCallback, useRef } from 'react';
 
 interface UseRowSelectionProps<T> {
@@ -55,7 +55,7 @@ export function useRowSelection<T>({ selectedRows, table, setSelectedRows, setSe
                 // Skip row if selected or grouped row
                 if (!selectedRow?.getIsGrouped()) {
                   // return selectedRow;
-                  updatedSelectedRows = updatedSelectedRows.filter((elm) => elm.id !== selectedRow.id);
+                  updatedSelectedRows = updatedSelectedRows.filter((elm) => elm.id !== selectedRow?.id);
                 }
               }
             } else {
@@ -64,7 +64,7 @@ export function useRowSelection<T>({ selectedRows, table, setSelectedRows, setSe
                 // Skip row if selected or grouped row
                 if (!selectedRow?.getIsGrouped()) {
                   // return selectedRow;
-                  updatedSelectedRows = updatedSelectedRows.filter((elm) => elm.id !== selectedRow.id);
+                  updatedSelectedRows = updatedSelectedRows.filter((elm) => elm.id !== selectedRow?.id);
                 }
               }
             }
@@ -105,8 +105,8 @@ export function useRowSelection<T>({ selectedRows, table, setSelectedRows, setSe
 function selectRange<T>(index: number, update: Row<T>[], table: Table<T>) {
   const selectedRow = table.getRowModel().rows[index];
   // Skip row if selected or grouped row
-  if (!selectedRow?.getIsGrouped() && !update.find((elm) => elm.id === selectedRow.id)) {
+  if (!selectedRow?.getIsGrouped() && !update.find((elm) => elm.id === selectedRow?.id)) {
     // return selectedRow;
-    update.push(selectedRow);
+    if (selectedRow) update.push(selectedRow);
   }
 }

@@ -97,7 +97,6 @@ theme : {
 - sorting
 - Column filter
 - Global filter
-- Pagination
 - Hide columns
 - Selection and range selection
 - Preserve table state
