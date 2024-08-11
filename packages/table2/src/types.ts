@@ -1,4 +1,4 @@
-import { ColumnDef, PaginationState, Row, TableState } from '@tanstack/react-table';
+import type { ColumnDef, PaginationState, Row, TableState } from '@tanstack/react-table';
 
 export type TableProperties<T extends Record<string, unknown>> = {
   columns: ColumnDef<T, unknown>[];

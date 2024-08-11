@@ -4,6 +4,10 @@
     "build": {
       "outputs": ["dist/**"]
     },
+    "lib:build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**", ".next/**"]
+    },
     "check-types": {
       "dependsOn": ["^check-types"]
     },

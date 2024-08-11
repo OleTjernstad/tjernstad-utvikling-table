@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-types */
-import { Row, TableState } from '@tanstack/react-table';
+import type { Row, TableState } from '@tanstack/react-table';
 
 import { CheckboxCell } from './selection';
 import React from 'react';

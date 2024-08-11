@@ -3,6 +3,7 @@
   "private": false,
   "version": "0.2.5",
   "author": "Ole Tjernstad",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "https://github.com/tjernstad-utvikling/tjernstad-utvikling-packages"
@@ -12,7 +13,7 @@
     "url": "https://github.com/tjernstad-utvikling/tjernstad-utvikling-packages/issues"
   },
   "scripts": {
-    "lib:build": "rm -rf dist && tsc && vite build"
+    "lib:build-old": "rm -rf dist && tsc && vite build"
   },
   "module": "dist/tu-table.mjs",
   "typings": "dist/index.d.ts",

@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable @typescript-eslint/ban-types */
-import { Header, Table, flexRender } from '@tanstack/react-table';
+import { type Header, type Table, flexRender } from '@tanstack/react-table';
 
 import { ArrowDropDown } from './icons/arrowDropDown';
 import { ArrowDropUp } from './icons/arrowDropUp';
@@ -59,6 +59,7 @@ export function HeaderCell<T extends {}>({ header, table }: HeaderCellProps<T>) 
                   onClick: header.column.getToggleSortingHandler()
                 }}
               >
+                {/* @ts-ignore*/}
                 {flexRender(header.column.columnDef.header, header.getContext())}
               </div>
             </Tooltip>
