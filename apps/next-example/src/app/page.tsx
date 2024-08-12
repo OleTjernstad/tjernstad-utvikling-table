@@ -1,4 +1,3 @@
-import Image from "next/image";
 import UserTable from "./table/user";
 
 export default function Home() {

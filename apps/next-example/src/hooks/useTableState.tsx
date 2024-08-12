@@ -1,4 +1,5 @@
 // credits to https://usehooks.com/useLocalStorage/
+"use client";
 
 import { useEffect, useState } from "react";
 

@@ -1,20 +1,13 @@
 "use client";
-import { ColumnDef, Row, TableState } from "@tanstack/react-table";
+
+import { Columns, columns } from "./columns";
+import { Row, TableState } from "@tanstack/react-table";
 import { useEffect, useMemo, useState } from "react";
 
-import { StatusCell } from "./status";
 import { TableKey } from "../contracts/keys";
 import { TuTable } from "@tjernstad-utvikling/table-tw";
 import { useTableState } from "@/hooks/useTableState";
 import usersData from "./data.json";
-
-type Columns = {
-  id: number;
-  name: string;
-  email: string;
-  phone: string;
-  isLocked: boolean;
-};
 
 export default function UserTable() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -41,32 +34,6 @@ export default function UserTable() {
       };
     });
   }, [users]);
-
-  const columns: ColumnDef<Columns>[] = useMemo(
-    () => [
-      {
-        header: "#",
-        accessorKey: "id",
-        enableGrouping: false,
-      },
-      {
-        header: "Name",
-        accessorKey: "name",
-        enableGrouping: false,
-      },
-      {
-        header: "Email",
-        accessorKey: "email",
-        enableGrouping: false,
-      },
-      {
-        header: "Locked User",
-        accessorKey: "isLocked",
-        cell: ({ cell }) => <StatusCell isLocked={cell.getValue<boolean>()} />,
-      },
-    ],
-    []
-  );
 
   const [tableState, setTableState] = useTableState<TableState>(TableKey.user, {
     columnVisibility: {},
