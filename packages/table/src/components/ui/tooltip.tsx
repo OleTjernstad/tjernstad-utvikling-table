@@ -1,5 +1,5 @@
 import { Tooltip as BaseToolTip, TooltipContent, TooltipProvider, TooltipTrigger } from './tooltipBase';
-import React, { PropsWithChildren } from 'react';
+import React, { type PropsWithChildren } from 'react';
 
 interface TooltipProps extends PropsWithChildren {
   tip: string;

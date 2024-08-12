@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/ban-types */
-import { Row, TableState } from '@tanstack/react-table';
+import type { Row, TableState } from '@tanstack/react-table';
 
 import { CheckboxCell } from './selection';
 import React from 'react';
 import { TableCell } from './cell';
-import { TableRow as TwTableRow } from '../components/ui/table';
+import { TableRow as TwTableRow } from './ui/table';
 import { cn } from '../lib/utils';
 
 interface TableRowProps<T extends {}> {

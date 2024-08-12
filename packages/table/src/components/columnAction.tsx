@@ -1,4 +1,4 @@
-import { Column, Table } from '@tanstack/react-table';
+import type { Column, Table } from '@tanstack/react-table';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from './ui/dropdown-menu';
 
 import { Button } from './ui/button';

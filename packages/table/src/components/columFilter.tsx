@@ -1,4 +1,4 @@
-import { Column, Table } from '@tanstack/react-table';
+import type { Column, Table } from '@tanstack/react-table';
 import { useEffect, useState } from 'react';
 
 import { Button } from './ui/button';

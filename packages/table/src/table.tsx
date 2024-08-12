@@ -1,13 +1,5 @@
+import { Table, TableBody, TableHeader, TableRow as TwTableRow } from './components/ui/table';
 import {
-  ColumnFiltersState,
-  ExpandedState,
-  FilterFn,
-  GroupingState,
-  PaginationState,
-  Row,
-  SortingState,
-  Updater,
-  VisibilityState,
   getCoreRowModel,
   getExpandedRowModel,
   getFacetedMinMaxValues,
@@ -15,20 +7,25 @@ import {
   getFacetedUniqueValues,
   getFilteredRowModel,
   getGroupedRowModel,
-  getPaginationRowModel,
   getSortedRowModel,
-  useReactTable
+  useReactTable,
+  type ColumnFiltersState,
+  type ExpandedState,
+  type FilterFn,
+  type GroupingState,
+  type Row,
+  type SortingState,
+  type Updater,
+  type VisibilityState
 } from '@tanstack/react-table';
-import { PropsWithChildren, ReactElement, useEffect, useMemo, useState } from 'react';
-import { Table, TableBody, TableHeader, TableRow as TwTableRow } from './components/ui/table';
+import { useState, type PropsWithChildren, type ReactElement } from 'react';
 
 import { CheckboxHeaderCell } from './components/selection';
 import { ColumnSelect } from './components/columnSelect';
 import { DebouncedInput } from './components/input';
 import { HeaderCell } from './components/header';
-import { Pagination } from './components/pagination';
 import React from 'react';
-import { TableProperties } from './types';
+import type { TableProperties } from './types';
 import { TableRow } from './components/row';
 import { rankItem } from '@tanstack/match-sorter-utils';
 import { useRowSelection } from './hooks/useRowSelection';
@@ -46,18 +43,7 @@ const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
   return itemRank.passed;
 };
 
-export function TuTable<T extends Record<string, unknown>>({
-  paginationState,
-  updatePagination,
-  ...props
-}: PropsWithChildren<TableProperties<T>>): ReactElement {
-  const pageCount = useMemo(() => {
-    if (props.rowCount && props.manualPagination) {
-      return Math.ceil(props.rowCount / (paginationState?.pageSize ?? 10));
-    }
-    return undefined;
-  }, [props.rowCount, paginationState?.pageSize]);
-
+export function TuTable<T extends Record<string, unknown>>({ ...props }: PropsWithChildren<TableProperties<T>>): ReactElement {
   const [globalFilter, setGlobalFilter] = React.useState('');
 
   function updateGrouping(update: Updater<GroupingState>) {
@@ -65,14 +51,6 @@ export function TuTable<T extends Record<string, unknown>>({
     props.setTableState((prev) => {
       return { ...prev, grouping };
     });
-  }
-
-  function localUpdatePagination(update: Updater<PaginationState>) {
-    if (paginationState && props.manualPagination && updatePagination) {
-      const pagination = update instanceof Function ? update(paginationState) : update;
-
-      updatePagination(pagination);
-    }
   }
 
   function updateColumnFilters(update: Updater<ColumnFiltersState>) {
@@ -118,10 +96,8 @@ export function TuTable<T extends Record<string, unknown>>({
       columnVisibility: props.tableState.columnVisibility ?? {},
       ...(props.tableState.columnFilters ? { columnFilters: props.tableState.columnFilters } : {}),
       ...(props.tableState.grouping ? { grouping: props.tableState.grouping } : {}),
-      ...(props.manualPagination ? { pagination: paginationState } : {}),
       globalFilter
     },
-    ...(props.manualPagination && pageCount ? { pageCount } : {}),
     enableRowSelection: true,
     enableMultiRowSelection: true,
     enableSubRowSelection: true,
@@ -132,16 +108,16 @@ export function TuTable<T extends Record<string, unknown>>({
     onColumnVisibilityChange: updateVisibility,
     onExpandedChange: updateExpanded,
     onSortingChange: updateSorting,
-    ...(props.manualPagination ? { onPaginationChange: localUpdatePagination } : {}),
+
     getExpandedRowModel: getExpandedRowModel(),
     getGroupedRowModel: getGroupedRowModel(),
-    ...(props.enablePagination && !props.manualPagination ? { getPaginationRowModel: getPaginationRowModel() } : {}),
+
     getFilteredRowModel: getFilteredRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
     getFacetedMinMaxValues: getFacetedMinMaxValues(),
-    debugTable: false
+    debugTable: import.meta.env.DEV
   });
 
   function getRowClassName(row: Row<T>) {
@@ -154,26 +130,11 @@ export function TuTable<T extends Record<string, unknown>>({
     return '';
   }
 
-  const [selectedRows, setSelectedRows] = useState<Row<T>[]>([]);
-
-  useEffect(() => {
-    if (props.selectedIds) {
-      setSelectedRows(
-        table.getPreFilteredRowModel().rows.filter((r) => {
-          return props.selectedIds?.find((o) => o === r?.getValue('id'));
-        })
-      );
-    }
-  }, [props.selectedIds, table]);
-
-  useEffect(() => {
-    if (props.selectedIds && props.manualPagination && props.data)
-      setSelectedRows(
-        table.getPreFilteredRowModel().rows.filter((r) => {
-          return props.selectedIds?.find((o) => o === r.getValue('id'));
-        })
-      );
-  }, [props.selectedIds, table, props.manualPagination, props.data]);
+  const [selectedRows, setSelectedRows] = useState<Row<T>[]>(() =>
+    table.getPreFilteredRowModel().rows.filter((r) => {
+      return props.selectedIds?.find((o) => o === r?.getValue('id'));
+    })
+  );
 
   const handleRowSelection = useRowSelection({
     selectedRows,
@@ -213,17 +174,6 @@ export function TuTable<T extends Record<string, unknown>>({
           </TableHeader>
           <TableBody>
             {/* https://tailwindcomponents.com/component/indeterminate-progress-bar */}
-            {props.isLoading && (
-              <tr className="w-full">
-                <td
-                  className="bg-accent h-1.5 w-full overflow-hidden"
-                  colSpan={table.getVisibleFlatColumns().length + (props.enableSelection ? 1 : 0)}
-                >
-                  <div className="animate-progress-linear-intermediate origin-left-right bg-primary h-full w-full"></div>
-                  {/* <LinearProgress sx={{ width: "100%" }} /> */}
-                </td>
-              </tr>
-            )}
 
             {table.getRowModel().rows.map((row) => {
               return (
@@ -241,7 +191,6 @@ export function TuTable<T extends Record<string, unknown>>({
           </TableBody>
         </Table>
       </div>
-      {props.enablePagination ? <Pagination table={table} /> : null}
     </>
   );
 }

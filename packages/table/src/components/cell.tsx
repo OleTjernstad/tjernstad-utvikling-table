@@ -1,4 +1,4 @@
-import { Cell, TableState, flexRender } from '@tanstack/react-table';
+import { type Cell, type TableState, flexRender } from '@tanstack/react-table';
 
 import { Button } from './ui/button';
 import React from 'react';

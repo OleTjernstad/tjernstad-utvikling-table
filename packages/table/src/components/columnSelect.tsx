@@ -1,9 +1,9 @@
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './ui/dropdown-menu';
-import React, { ReactElement } from 'react';
+import React, { type ReactElement } from 'react';
 
 import { Button } from './ui/button';
 import { Switch } from './ui/switch';
-import { Table } from '@tanstack/react-table';
+import type { Table } from '@tanstack/react-table';
 
 type ColumnHidePageProps<T extends Record<string, unknown>> = {
   instance: Table<T>;

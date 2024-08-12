@@ -1,8 +1,8 @@
-import { Row, Table } from '@tanstack/react-table';
+import type { Row, Table } from '@tanstack/react-table';
 
 import { Checkbox } from './ui/checkbox';
 import React from 'react';
-import { TableCell as TwTableCell } from '../components/ui/table';
+import { TableCell as TwTableCell } from './ui/table';
 
 interface CheckboxCellProps<T extends {}> {
   isSelected: boolean;
@@ -15,7 +15,7 @@ export function CheckboxCell<T extends {}>({ isSelected, handleRowSelection, row
       <Checkbox
         // size="small"
         checked={isSelected}
-        onClick={(e) => handleRowSelection(e, row)}
+        onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleRowSelection(e, row)}
       />
     </TwTableCell>
   );

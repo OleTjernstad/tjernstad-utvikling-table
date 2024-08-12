@@ -5,7 +5,7 @@ import { Row, TableState } from "@tanstack/react-table";
 import { useEffect, useMemo, useState } from "react";
 
 import { TableKey } from "../contracts/keys";
-import { TuTable } from "@tjernstad-utvikling/table-tw";
+import { TuTable } from "../../../../../packages/table/dist";
 import { useTableState } from "@/hooks/useTableState";
 import usersData from "./data.json";
 

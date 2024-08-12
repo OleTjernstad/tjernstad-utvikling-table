@@ -1,4 +1,4 @@
-import { IconProps } from './type';
+import type { IconProps } from './type';
 import React from 'react';
 import { cn } from '../../lib/utils';
 
