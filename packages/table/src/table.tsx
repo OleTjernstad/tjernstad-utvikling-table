@@ -96,10 +96,6 @@ export function TuTable<T extends Record<string, unknown>>({ ...props }: PropsWi
       ...(props.tableState.grouping ? { grouping: props.tableState.grouping } : {}),
       globalFilter
     },
-    // enableRowSelection: true,
-    // enableMultiRowSelection: true,
-    // enableSubRowSelection: true,
-    enableExpanding: true,
     onGlobalFilterChange: setGlobalFilter,
     globalFilterFn: fuzzyFilter,
 
