@@ -68,7 +68,6 @@ export function TuTable<T extends Record<string, unknown>>({ ...props }: PropsWi
   }
   function updateExpanded(update: Updater<ExpandedState>) {
     const expanded = update instanceof Function ? update(props.tableState.expanded) : update;
-
     props.setTableState((prev) => {
       return { ...prev, expanded };
     });
@@ -89,7 +88,6 @@ export function TuTable<T extends Record<string, unknown>>({ ...props }: PropsWi
       fuzzy: fuzzyFilter
     },
     getCoreRowModel: getCoreRowModel(),
-    autoResetExpanded: false,
     state: {
       ...(props.tableState.sorting ? { sorting: props.tableState.sorting } : {}),
       expanded: props.tableState.expanded ?? {},
@@ -98,17 +96,18 @@ export function TuTable<T extends Record<string, unknown>>({ ...props }: PropsWi
       ...(props.tableState.grouping ? { grouping: props.tableState.grouping } : {}),
       globalFilter
     },
-    enableRowSelection: true,
-    enableMultiRowSelection: true,
-    enableSubRowSelection: true,
+    // enableRowSelection: true,
+    // enableMultiRowSelection: true,
+    // enableSubRowSelection: true,
+    enableExpanding: true,
     onGlobalFilterChange: setGlobalFilter,
     globalFilterFn: fuzzyFilter,
+
     onColumnFiltersChange: updateColumnFilters,
     onGroupingChange: updateGrouping,
     onColumnVisibilityChange: updateVisibility,
     onExpandedChange: updateExpanded,
     onSortingChange: updateSorting,
-
     getExpandedRowModel: getExpandedRowModel(),
     getGroupedRowModel: getGroupedRowModel(),
 
@@ -116,8 +115,7 @@ export function TuTable<T extends Record<string, unknown>>({ ...props }: PropsWi
     getSortedRowModel: getSortedRowModel(),
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
-    getFacetedMinMaxValues: getFacetedMinMaxValues(),
-    debugTable: import.meta.env.DEV
+    getFacetedMinMaxValues: getFacetedMinMaxValues()
   });
 
   function getRowClassName(row: Row<T>) {

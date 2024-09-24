@@ -3,7 +3,7 @@ import type { ColumnDef, Row, TableState } from '@tanstack/react-table';
 export type TableProperties<T extends Record<string, unknown>> = {
   columns: ColumnDef<T, unknown>[];
   data: T[];
-  isLoading: boolean;
+  isLoading?: boolean;
   children?: React.ReactNode;
 
   getRowStyling?: (row: Row<T>) => string | undefined;
@@ -11,20 +11,26 @@ export type TableProperties<T extends Record<string, unknown>> = {
 
   tableState: TableState;
   setTableState: (value: TableState | ((val: TableState) => TableState)) => void;
+  debugTable?: boolean;
 } & (
   | {
-      enableSelection: boolean;
-      setSelected?: never;
-      selectedIds?: never;
-    }
-  | {
-      enableSelection: boolean;
+      enableSelection: true;
       setSelected: (rows: Row<T>[]) => void;
       selectedIds: number[] | undefined;
     }
   | {
-      enableSelection?: never;
-      selectedIds?: never;
+      enableSelection?: false;
       setSelected?: never;
+      selectedIds?: never;
     }
-);
+) &
+  (
+    | {
+        enableExpanding: true;
+        getSubRows: (originalRow: T, index: number) => T[] | undefined;
+      }
+    | {
+        enableExpanding?: false;
+        getSubRows?: never;
+      }
+  );

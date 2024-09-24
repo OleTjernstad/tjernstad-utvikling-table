@@ -6,7 +6,7 @@ module.exports = {
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
-    "../../packages/table2/dist/tu-table.{js,ts,jsx,tsx}",
+    "../../packages/table/dist/tu-table.{js,ts,jsx,tsx}",
   ],
   theme: {
     container: {

@@ -1,33 +1,56 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { StatusCell } from "./status";
 
-export type Columns = {
-  id: number;
-  name: string;
-  email: string;
-  phone: string;
-  isLocked: boolean;
+type DataItem = {
+  GPSnr: string;
+  nick: string;
+  payedDate: string;
+  sum: string;
+  subRows?: DataItem[];
 };
 
-export const columns: ColumnDef<Columns>[] = [
+export type Columns = DataItem;
+
+export const columns: ColumnDef<DataItem>[] = [
   {
-    header: "#",
-    accessorKey: "id",
-    enableGrouping: false,
+    accessorKey: "GPSnr",
+    header: "GPS Nr.",
   },
   {
-    header: "Name",
-    accessorKey: "name",
-    enableGrouping: false,
+    accessorKey: "nick",
+    header: "Geocaching Nick",
+    cell: ({ row, getValue }) => (
+      <div
+        className="flex items-center"
+        style={{
+          // Since rows are flattened by default,
+          // we can use the row.depth property
+          // and paddingLeft to visually indicate the depth
+          // of the row
+          paddingLeft: `${row.depth * 2}rem`,
+        }}
+      >
+        {row.getCanExpand() ? (
+          <button
+            {...{
+              onClick: row.getToggleExpandedHandler(),
+              style: { cursor: "pointer" },
+            }}
+          >
+            {row.getIsExpanded() ? "👇" : "👉"}
+          </button>
+        ) : (
+          "🔵"
+        )}{" "}
+        {getValue() as string}
+      </div>
+    ),
   },
   {
-    header: "Email",
-    accessorKey: "email",
-    enableGrouping: false,
+    accessorKey: "payedDate",
+    header: "Betalt Dato",
   },
   {
-    header: "Locked User",
-    accessorKey: "isLocked",
-    cell: ({ cell }) => <StatusCell isLocked={cell.getValue<boolean>()} />,
+    accessorKey: "sum",
+    header: "Betalt Kontingent",
   },
 ];
