@@ -14,12 +14,12 @@ export type TableProperties<T extends Record<string, unknown>> = {
   debugTable?: boolean;
 } & (
   | {
-      enableSelection: true;
+      enableSelection: boolean;
       setSelected: (rows: Row<T>[]) => void;
       selectedIds: number[] | undefined;
     }
   | {
-      enableSelection?: boolean;
+      enableSelection?: false;
       setSelected?: never;
       selectedIds?: never;
     }
