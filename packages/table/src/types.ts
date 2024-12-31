@@ -16,7 +16,7 @@ export type TableProperties<T extends Record<string, unknown>> = {
   | {
       enableSelection: boolean;
       setSelected: (rows: Row<T>[]) => void;
-      selectedIds: number[] | undefined;
+      selectedIds: number[] | string[] | undefined;
     }
   | {
       enableSelection?: false;

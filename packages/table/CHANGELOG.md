@@ -1,5 +1,11 @@
 # @tjernstad-utvikling/table-tw
 
+## 0.4.2
+
+### Patch Changes
+
+- type fix
+
 ## 0.4.1
 
 ### Patch Changes

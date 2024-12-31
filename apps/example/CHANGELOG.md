@@ -1,5 +1,12 @@
 # example
 
+## 0.0.30
+
+### Patch Changes
+
+- Updated dependencies
+  - @tjernstad-utvikling/table-tw@0.4.2
+
 ## 0.0.29
 
 ### Patch Changes
