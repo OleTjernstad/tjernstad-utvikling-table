@@ -1,5 +1,11 @@
 # @tjernstad-utvikling/table-tw
 
+## 0.4.3
+
+### Patch Changes
+
+- engnine
+
 ## 0.4.2
 
 ### Patch Changes
