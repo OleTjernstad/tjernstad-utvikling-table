@@ -1,5 +1,11 @@
 # @tjernstad-utvikling/table-tw
 
+## 0.4.4
+
+### Patch Changes
+
+- deps upgrade
+
 ## 0.4.3
 
 ### Patch Changes
