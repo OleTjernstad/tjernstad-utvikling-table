@@ -28,6 +28,12 @@
   "engines": {
     "node": ">=18"
   },
+  "pnpm": {
+    "overrides": {
+      "@types/react": "19.0.7",
+      "@types/react-dom": "19.0.3"
+    }
+  },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "access": "public"

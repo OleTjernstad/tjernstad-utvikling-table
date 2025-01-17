@@ -1,5 +1,11 @@
 # @tjernstad-utvikling/table-tw
 
+## 0.5.0
+
+### Minor Changes
+
+- react 19
+
 ## 0.4.4
 
 ### Patch Changes

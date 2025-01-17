@@ -10,7 +10,7 @@ interface UseRowSelectionProps<T> {
 }
 
 export function useRowSelection<T>({ selectedRows, table, setSelectedRows, setSelected, enableSelection }: UseRowSelectionProps<T>) {
-  const lastSelectedRow = useRef<Row<T>>();
+  const lastSelectedRow = useRef<Row<T> | undefined>(undefined);
   const lastRowUnchecked = useRef<boolean>(false);
 
   /**
